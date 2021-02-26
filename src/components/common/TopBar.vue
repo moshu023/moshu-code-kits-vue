@@ -17,6 +17,10 @@
         <div class="screen" @click="exitScreen" v-else>
           <i class="iconfont">&#xe8fa;</i>
         </div>
+        <div class="notice" @click="visibleNotice">
+          <i class="iconfont">&#xe628;</i>
+          <span class="count"></span>
+        </div>
         <div class="user">
           <el-dropdown @command="goPage">
             <div>
@@ -56,11 +60,13 @@
       </div>
     </div>
     <slot></slot>
+    <notice :show="showNotice" @closeNotice="closeNotice"></notice>
   </div>
 </template>
 
 <script>
   import Breadcrumb from "@/components/common/Breadcrumb"
+  import Notice from "@/components/common/Notice"
   import { menuLeftOpenWidth, menuLeftShrinkWidth } from "@/config/menu/menu"
   import { fullScreen, exitScreen } from "@/utils/util.js"
   import { mapState } from 'vuex'
@@ -68,7 +74,8 @@
   export default {
     name: 'TopBar',
     components: {
-      Breadcrumb
+      Breadcrumb,
+      Notice
     },
     props: {
       menuOpen: Boolean
@@ -100,7 +107,8 @@
         showMenuButton: '',
         showRefreshButton: '',
         showCrumbs: '',
-        isFullScreen: false
+        isFullScreen: false,
+        showNotice: false
       }
     },
     mounted() {
@@ -170,6 +178,13 @@
           return
         }
         this.$router.push({path})
+      },
+      visibleNotice() {
+        this.showNotice = !this.showNotice
+      },
+      // 关闭通知
+      closeNotice() {
+        this.showNotice = false
       }
     }
   }
@@ -237,12 +252,39 @@
 
         .screen {
           cursor: pointer;
-          padding: 0 10px;
+          padding: 0 15px;
           transition: background-color .3s;
 
           i {
             color: #777;
             font-size: 20px;
+          }
+
+          &:hover {
+            background: $hover-color;
+          }
+        }
+
+        .notice {
+          cursor: pointer;
+          padding: 0 15px;
+          transition: background-color .3s;
+          position: relative;
+
+          i {
+            color: #777;
+            font-size: 17px;
+          }
+
+          .count {
+            display: block;
+            width: 6px;
+            height: 6px;
+            background: red;
+            border-radius: 50%;
+            position: absolute;
+            top: 20px;
+            right: 15px;
           }
 
           &:hover {

@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "18724138",
+      "name": "通知",
+      "font_class": "tongzhi",
+      "unicode": "e628",
+      "unicode_decimal": 58920
+    },
+    {
       "icon_id": "979220",
       "name": "多语言",
       "font_class": "duoyuyan",
@@ -354,6 +361,13 @@
       "font_class": "zhaopian",
       "unicode": "e615",
       "unicode_decimal": 58901
+    },
+    {
+      "icon_id": "19238160",
+      "name": "照片",
+      "font_class": "zhaopian-copy-copy",
+      "unicode": "eeac",
+      "unicode_decimal": 61100
     },
     {
       "icon_id": "15798135",
