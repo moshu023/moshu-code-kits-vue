@@ -3,7 +3,6 @@ import store from '../store'
 import router from '../router'
 import { baseUrl } from "./config.js"
 import { Message } from "element-ui"
-import { delCookie } from "@/utils/utils.js"
 let cancel, promiseArr = {}
 const CancelToken = axios.CancelToken
 const source = CancelToken.source()
@@ -50,8 +49,7 @@ axios.interceptors.response.use(
     // token验证失败，重新登录
     if(code === 7) {
       setTimeout(() => {
-        delCookie('userName')
-        delCookie('userPwd')
+        store.dispatch('user/setLoginStatus', false)
         router.replace('/login')
         this.$router.go(0)
       }, 1500)

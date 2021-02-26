@@ -211,6 +211,12 @@
       goPage(path, params, item) {
         let currentPath = this.$route.path
         let arr = currentPath.split('/')
+        let isNewSite = item.path.indexOf('http') !== -1 ? true : false
+
+        if(isNewSite) {
+          window.open(item.path, "_blank");
+          return
+        }
 
         if(this.isMobileModel) {
           this.collapse = true

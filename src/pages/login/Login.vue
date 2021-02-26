@@ -47,9 +47,7 @@
 </template>
 
 <script>
-  import CryptoJS from "crypto-js";
   import setting from '@/config/setting'
-  import { setCookie, getCookie, encrypt } from '@/utils/utils'
   import { getCaptchaApi, loginApi } from '@/api/loginApi'
 
   export default {
@@ -109,9 +107,7 @@
             this.loading = true
             this.btnText = '登录中...'
             this.$store.dispatch('user/setUserInfo', res.data)
-
-            setCookie('userName', account, 1)
-            setCookie('userPwd', encrypt(password), 1) // 加密
+            this.$store.dispatch('user/setLoginStatus', true)
 
             setTimeout(() => {
               this.$router.push('/')

@@ -4,8 +4,9 @@
 
 const state = {
   user: {
+    isLogin: false, // 是否登录
     info: {},       // 用户信息
-    worktab: {         // 选项卡
+    worktab: {      // 选项卡
       current: {},  // 当前
       opened: []    // 打开的
     },
@@ -23,6 +24,7 @@ const mutations = {
     let sys = JSON.parse(localStorage.getItem("sys"))
     if(sys && sys.user.info.ID) {
       state.user.info = sys.user.info
+      state.user.isLogin = sys.user.isLogin
     }
   },
   // 用户数据持久化存储
@@ -31,12 +33,22 @@ const mutations = {
     state.user.setting = rootState.setting.setting
     localStorage.setItem("sys",  JSON.stringify(state))
   },
+  // 设置登录状态
+  setLoginStatus(state, isLogin) {
+    state.user.isLogin = isLogin
+
+    let sys = JSON.parse(localStorage.getItem("sys"))
+    if(sys) {
+      sys.user.isLogin = isLogin
+      localStorage.setItem("sys",  JSON.stringify(sys))
+    }
+  },
+  // 设置用户信息
   setUserInfo(state, e) {
     state.user.info = e.user
     state.user.info.token = e.token
 
     let sys = JSON.parse(localStorage.getItem("sys"))
-
     if(sys) {
       sys.user.info = e.user
       sys.user.info.token = e.token
@@ -51,6 +63,9 @@ const actions = {
   },
   storeStorage({commit, rootState}) {
     commit('storeStorage', rootState)
+  },
+  setLoginStatus({commit}, e) {
+    commit('setLoginStatus', e)
   },
   setUserInfo({commit}, e) {
     commit('setUserInfo', e)

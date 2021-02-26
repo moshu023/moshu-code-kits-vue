@@ -102,36 +102,10 @@
       "id": 5,
       "title": "组件中心",
       "icon": "\ue61c",
-      "children": [
-        {
+      "children": [{
           "id": 501,
-          "title": "按钮",
-          "path": "/widget/button"
-        },
-        {
-          "id": 502,
-          "title": "链接",
-          "path": "/widget/link"
-        },
-        {
-          "id": 503,
-          "title": "文件上传",
-          "path": "/widget/upload"
-        },
-        {
-          "id": 504,
-          "title": "评分",
-          "path": "/widget/rate"
-        },
-        {
-          "id": 505,
-          "title": "颜色选择器",
-          "path": "/widget/color-picker"
-        },
-        {
-          "id": 506,
-          "title": "表单",
-          "path": "/widget/form"
+          "title": "Element",
+          "path": "https://element.eleme.cn/#/zh-CN"
         }
       ]
     },

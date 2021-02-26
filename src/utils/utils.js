@@ -358,19 +358,3 @@ export function decrypt(word) {
   let decryptedStr = decrypt.toString(CryptoJS.enc.Utf8);
   return decryptedStr.toString();
 }
-
-// 是否登录
-export function isLoginFun() {
-  let isLogin = false
-  let { username, password } = setting.login
-  let uName = getCookie('userName')
-  let uPwd = getCookie('userPwd') && decrypt(getCookie('userPwd'))
-
-  if(!uName || !uPwd || username !== uName || password !== uPwd) {
-    isLogin = false
-  }else {
-    isLogin = true
-  }
-
-  return isLogin
-}

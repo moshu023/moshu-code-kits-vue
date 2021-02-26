@@ -63,7 +63,6 @@
   import Breadcrumb from "@/components/common/Breadcrumb"
   import { menuLeftOpenWidth, menuLeftShrinkWidth } from "@/config/menu/menu"
   import { fullScreen, exitScreen } from "@/utils/util.js"
-  import { delCookie } from "@/utils/utils.js"
   import { mapState } from 'vuex'
 
   export default {
@@ -123,8 +122,7 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          delCookie('userName')
-          delCookie('userPwd')
+          this.$store.dispatch('user/setLoginStatus', false)
           this.$router.push('/login')
         }).catch(() => {});
       },

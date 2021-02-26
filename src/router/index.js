@@ -3,7 +3,6 @@ import store from '@/store'
 import Router from 'vue-router'
 import Home from '@/pages/home/Home.vue'
 import Console from '@/pages/dashboard/Console'
-import { isLoginFun } from '@/utils/utils'
 
 Vue.use(Router)
 
@@ -166,50 +165,7 @@ export const allowRouters = [
     meta: {
       title: '组件中心'
     },
-    children: [
-      {
-        path: 'button',
-        component: () => import('@/pages/widget/button'),
-        meta: {
-          title: '按钮'
-        }
-      },
-      {
-        path: 'link',
-        component: () => import('@/pages/widget/link'),
-        meta: {
-          title: '链接'
-        }
-      },
-      {
-        path: 'upload',
-        component: () => import('@/pages/widget/upload'),
-        meta: {
-          title: '文件上传'
-        }
-      },
-      {
-        path: 'rate',
-        component: () => import('@/pages/widget/rate'),
-        meta: {
-          title: '评分'
-        }
-      },
-      {
-        path: 'color-picker',
-        component: () => import('@/pages/widget/ColorPicker'),
-        meta: {
-          title: '颜色选择器'
-        }
-      },
-      {
-        path: 'form',
-        component: () => import('@/pages/widget/form'),
-        meta: {
-          title: '表单'
-        }
-      }
-    ]
+    children: []
   },{
     path: '/safeguard',
     component: Home,
@@ -317,7 +273,9 @@ export const allowRouters = [
 router.beforeEach((to, from, next) => {
   let { meta, matched } = to
   let { title, newPage, keepAlive } = meta
-  let isLogin = isLoginFun()
+  let sys = JSON.parse(localStorage.getItem("sys"))
+  let isLogin = sys.user.isLogin
+
   to.params.keepAlive = keepAlive
 
   if(!isLogin && to.path !== '/login') {
