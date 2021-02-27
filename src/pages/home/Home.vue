@@ -49,12 +49,6 @@
         return this.menuOpen ? menuLeftOpenWidth : menuLeftShrinkWidth
       }
     },
-    beforeCreate() {
-      // 初始化State
-      this.$store.dispatch('user/initState')
-      this.$store.dispatch('worktab/initState')
-      this.$store.dispatch('setting/initState')
-    },
     mounted() {
       this.refreshSaveUserData()
     },

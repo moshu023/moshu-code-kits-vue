@@ -31,7 +31,7 @@ const mutations = {
   storeStorage(state, rootState) {
     state.user.worktab = rootState.worktab.worktab
     state.user.setting = rootState.setting.setting
-    localStorage.setItem("sys",  JSON.stringify(state))
+    saveStoreStorage(state)
   },
   // 设置登录状态
   setLoginStatus(state, isLogin) {
@@ -40,19 +40,24 @@ const mutations = {
     let sys = JSON.parse(localStorage.getItem("sys"))
     if(sys) {
       sys.user.isLogin = isLogin
-      localStorage.setItem("sys",  JSON.stringify(sys))
+      saveStoreStorage(sys)
     }
   },
   // 设置用户信息
   setUserInfo(state, e) {
     state.user.info = e.user
     state.user.info.token = e.token
-
     let sys = JSON.parse(localStorage.getItem("sys"))
+
     if(sys) {
       sys.user.info = e.user
       sys.user.info.token = e.token
-      localStorage.setItem("sys",  JSON.stringify(sys))
+      saveStoreStorage(sys)
+    }else {
+      sys = {
+        user: state.user
+      }
+      saveStoreStorage(sys)
     }
   }
 }
@@ -78,4 +83,8 @@ export default {
   getters,
   mutations,
   actions
+}
+
+function saveStoreStorage(sys) {
+  localStorage.setItem("sys",  JSON.stringify(sys))
 }

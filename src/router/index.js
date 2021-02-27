@@ -271,12 +271,12 @@ export const allowRouters = [
 ]
 
 router.beforeEach((to, from, next) => {
+  let isLogin = false
   let { meta, matched } = to
   let { title, newPage, keepAlive } = meta
   let sys = JSON.parse(localStorage.getItem("sys"))
-  let isLogin = false
 
-  if(sys && sys.user) {
+  if(sys) {
     isLogin = sys.user.isLogin
   }
 
