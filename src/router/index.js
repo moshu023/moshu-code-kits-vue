@@ -274,7 +274,11 @@ router.beforeEach((to, from, next) => {
   let { meta, matched } = to
   let { title, newPage, keepAlive } = meta
   let sys = JSON.parse(localStorage.getItem("sys"))
-  let isLogin = sys.user.isLogin
+  let isLogin = false
+
+  if(sys && sys.user) {
+    isLogin = sys.user.isLogin
+  }
 
   to.params.keepAlive = keepAlive
 
