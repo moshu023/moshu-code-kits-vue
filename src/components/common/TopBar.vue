@@ -17,9 +17,9 @@
         <div class="screen" @click="exitScreen" v-else>
           <i class="iconfont">&#xe8fa;</i>
         </div>
-        <div class="notice" @click="visibleNotice">
-          <i class="iconfont">&#xe628;</i>
-          <span class="count"></span>
+        <div class="notice notice-btn" @click="visibleNotice">
+          <i class="iconfont notice-btn">&#xe628;</i>
+          <span class="count notice-btn"></span>
         </div>
         <div class="user">
           <el-dropdown @command="goPage">
@@ -113,7 +113,10 @@
     },
     mounted() {
       this.initSetting()
-      
+      document.addEventListener("click", this.bodyCloseNotice)
+    },
+    beforeDestroy() {
+      document.removeEventListener("click", this.bodyCloseNotice)
     },
     methods: {
       // 初始化个性设置
@@ -185,6 +188,11 @@
       // 关闭通知
       closeNotice() {
         this.showNotice = false
+      },
+      bodyCloseNotice(e) {
+        if(this.showNotice && e.target.className.indexOf('notice-btn') === -1) {
+          this.showNotice = false
+        }
       }
     }
   }

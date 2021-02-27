@@ -1,5 +1,5 @@
 <template>
-  <div class="notice" :style="{height: show ? '450px' :'0', opacity: show ? 1 : 0}">
+  <div class="notice" :style="{height: show ? '450px' :'0', opacity: show ? 1 : 0}" @click.stop="">
     <ul class="bar">
       <li v-for="(item, index) in barList" :key="index" :class="{'active': barActiveIndex === index}"
         @click="changeBar(index)"
@@ -137,6 +137,7 @@
         cursor: pointer;
         transition: color .3s;
         margin-right: 20px;
+        @include userSelect;
 
         &:last-of-type {
           margin-right: 0;
