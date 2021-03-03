@@ -3,6 +3,7 @@ import store from '@/store'
 import Router from 'vue-router'
 import Home from '@/pages/home/Home.vue'
 import Console from '@/pages/dashboard/Console'
+import setting from '@/config/setting'
 
 Vue.use(Router)
 
@@ -133,7 +134,7 @@ export const allowRouters = [
         path: 'message',
         component: () => import('@/pages/message/Message'),
         meta: {
-          title: '留言'
+          title: '系统消息'
         }
       }
     ]
@@ -320,7 +321,7 @@ router.beforeEach((to, from, next) => {
 
   // 设置网页title
   if(title) {
-    document.title = title
+    document.title = `${title} - ${setting.systemName}`
   }
   return
 })

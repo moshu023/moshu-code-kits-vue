@@ -15,6 +15,13 @@
       <el-table-column label="拥有权限" prop="allow"/>
       <el-table-column label="描述" prop="des"/>
       <el-table-column label="创建时间" prop="date"/>
+      <el-table-column label="状态" prop="status">
+        <template slot-scope="scope">
+          <el-tag size="mini" :type="scope.row.status ? '' : 'info'">
+            {{scope.row.status ? '启用' : '禁用'}}
+          </el-tag>
+        </template>
+      </el-table-column>
       <el-table-column fixed="right" label="操作" width="150px">
         <template slot-scope="scope">
           <el-button type="text" icon="el-icon-edit" @click="showDialog('edit')">
@@ -78,79 +85,92 @@
             name: '超级管理员',
             allow: '全部权限',
             des: '拥有系统全部权限',
-            date: '2021-01-08'
+            date: '2021-01-08',
+            status: true
           },
           {
             name: '董事会部',
             allow: '自定义',
             des: '负责董事会部相关工作的管理者',
-            date: '2021-01-08'
+            date: '2021-01-08',
+            status: true
           },
           {
             name: '监事会部',
             allow: '自定义',
             des: '负责监事会部相关工作的管理者',
-            date: '2021-01-08'
+            date: '2021-01-08',
+            status: false
           },
           {
             name: '市场部',
             allow: '自定义',
             des: '负责市场部相关工作的管理者',
-            date: '2021-01-08'
+            date: '2021-01-08',
+            status: true
           },
           {
             name: '人力资源部',
             allow: '自定义',
             des: '负责人力资源部相关工作的管理者',
-            date: '2021-01-08'
+            date: '2021-01-08',
+            status: true
           },
           {
             name: '财务部',
             allow: '自定义',
             des: '负责财务部相关工作的管理者',
-            date: '2021-01-08'
+            date: '2021-01-08',
+            status: true
           },
           {
             name: '公关部',
             allow: '自定义',
             des: '负责公关部相关工作的管理者',
-            date: '2021-01-08'
+            date: '2021-01-08',
+            status: false
           },
           {
             name: '广告部',
             allow: '自定义',
             des: '负责广告部相关工作的管理者',
-            date: '2021-01-08'
+            date: '2021-01-08',
+            status: true
           },
           {
             name: '营销',
             allow: '自定义',
             des: '负责营销相关工作的管理者',
-            date: '2021-01-08'
+            date: '2021-01-08',
+            status: true
           },
           {
             name: '设计部',
             allow: '自定义',
             des: '负责设计部相关工作的管理者',
-            date: '2021-01-08'
+            date: '2021-01-08',
+            status: true
           },
           {
             name: '开发部',
             allow: '自定义',
             des: '负责开发部相关工作的管理者',
-            date: '2021-01-08'
+            date: '2021-01-08',
+            status: true
           },
           {
             name: '测试部',
             allow: '自定义',
             des: '负责测试部相关工作的管理者',
-            date: '2021-01-08'
+            date: '2021-01-08',
+            status: true
           },
           {
             name: '安保部',
             allow: '自定义',
             des: '负责安保部相关工作的管理者',
-            date: '2021-01-08'
+            date: '2021-01-08',
+            status: true
           },
           
         ]

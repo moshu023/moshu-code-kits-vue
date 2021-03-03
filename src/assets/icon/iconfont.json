@@ -6,6 +6,55 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "8652825",
+      "name": "通知",
+      "font_class": "tongzhi1",
+      "unicode": "e64a",
+      "unicode_decimal": 58954
+    },
+    {
+      "icon_id": "17692251",
+      "name": "空状态",
+      "font_class": "kongzhuangtai",
+      "unicode": "e707",
+      "unicode_decimal": 59143
+    },
+    {
+      "icon_id": "15143",
+      "name": "主页",
+      "font_class": "zhuye",
+      "unicode": "e62b",
+      "unicode_decimal": 58923
+    },
+    {
+      "icon_id": "579828",
+      "name": "暂无数据",
+      "font_class": "zanwushuju",
+      "unicode": "e62e",
+      "unicode_decimal": 58926
+    },
+    {
+      "icon_id": "5651537",
+      "name": "邮件",
+      "font_class": "youjian",
+      "unicode": "e697",
+      "unicode_decimal": 59031
+    },
+    {
+      "icon_id": "6966930",
+      "name": "收藏",
+      "font_class": "shoucang",
+      "unicode": "e62c",
+      "unicode_decimal": 58924
+    },
+    {
+      "icon_id": "15685366",
+      "name": "群组",
+      "font_class": "qunzu",
+      "unicode": "e6da",
+      "unicode_decimal": 59098
+    },
+    {
       "icon_id": "18724138",
       "name": "通知",
       "font_class": "tongzhi",

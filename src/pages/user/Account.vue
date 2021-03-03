@@ -78,7 +78,7 @@
       <el-table-column label="部门" prop="dep"/>
       <el-table-column label="状态" prop="status">
         <template slot-scope="scope">
-          <el-tag :type="scope.row.status === 1 ? 'success' : 'info'">
+          <el-tag size="mini" :type="scope.row.status === 1 ? '' : 'info'">
             {{scope.row.status === 1 ? '启用' : '禁用'}}
           </el-tag>
         </template>

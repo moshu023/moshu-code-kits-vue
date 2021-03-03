@@ -60,7 +60,7 @@
       </div>
     </div>
     <slot></slot>
-    <notice :show="showNotice" @closeNotice="closeNotice"></notice>
+    <notice :show="showNotice" ref="notice"></notice>
   </div>
 </template>
 
@@ -183,16 +183,24 @@
         this.$router.push({path})
       },
       visibleNotice() {
-        this.showNotice = !this.showNotice
-      },
-      // 关闭通知
-      closeNotice() {
-        this.showNotice = false
+        if(!this.showNotice) {
+          this.showNoticeFunc(true)
+        }else {
+          this.showNoticeFunc(false)
+        }
+        
+        setTimeout(() => {
+          this.showNotice = !this.showNotice
+        }, 50)
       },
       bodyCloseNotice(e) {
         if(this.showNotice && e.target.className.indexOf('notice-btn') === -1) {
           this.showNotice = false
+          this.showNoticeFunc(false)
         }
+      },
+      showNoticeFunc(show) {
+        this.$refs.notice.showNoticeFunc(show)
       }
     }
   }

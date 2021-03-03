@@ -2,25 +2,25 @@
   <div class='page-content'>
     <table-bar :showTop="false">
       <div slot="top">
-        <el-form label-width="70px">
+        <el-form label-width="auto">
           <el-row :gutter="20">
-            <el-col :span="4">
+            <el-col :xs="24" :sm="12" :lg="6">
               <el-form-item label="路径：">
                 <el-input placeholder="路径" v-model.trim="search.path" clearable/>
               </el-form-item>
             </el-col>
-            <el-col :span="4">
+            <el-col :xs="24" :sm="12" :lg="6">
               <el-form-item label="描述：">
                 <el-input placeholder="描述" v-model.trim="search.description" clearable/>
               </el-form-item>
             </el-col>
-            <el-col :span="4">
-              <el-form-item label="API组：">
+            <el-col :xs="24" :sm="12" :lg="6">
+              <el-form-item label="组：">
                 <el-input placeholder="API组" v-model.trim="search.apiGroup" clearable/>
               </el-form-item>
             </el-col>
             
-            <el-row :span="4" style="float: right; margin-right: 10px;">
+            <el-row :xs="24" :sm="12" :lg="6" style="float: right; margin-right: 10px;">
               <el-button type="primary" @click="getApiList">搜索</el-button>
               <el-button @click="resetSearchForm()">重置</el-button>
             </el-row>
@@ -37,7 +37,14 @@
       <el-table-column label="路径" prop="path"/>
       <el-table-column label="分组" prop="apiGroup"/>
       <el-table-column label="描述" prop="description"/>
-      <el-table-column label="请求" prop="method"/>
+      <el-table-column label="请求" prop="method">
+        <template slot-scope="scope">
+          <el-tag size="mini" type="success" v-if="scope.row.method === 'GET'">{{scope.row.method}}</el-tag>
+          <el-tag size="mini" v-if="scope.row.method === 'POST'">{{scope.row.method}}</el-tag>
+          <el-tag size="mini" type="info" v-if="scope.row.method === 'PUT'">{{scope.row.method}}</el-tag>
+          <el-tag size="mini" type="danger" v-if="scope.row.method === 'DELETE'">{{scope.row.method}}</el-tag>
+        </template>
+      </el-table-column>
       <el-table-column fixed="right" label="操作" width="150px">
         <template slot-scope="scope">
           <el-button type="text" icon="el-icon-edit" @click="showDialog('edit')">

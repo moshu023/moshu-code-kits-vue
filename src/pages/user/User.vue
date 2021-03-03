@@ -28,43 +28,45 @@
     <div class="info">
       <h1 class="title">基本设置</h1>
 
-      <el-form :model="ruleForm" class="form" :rules="rules" ref="ruleForm" 
+      <el-form :model="form" class="form" :rules="rules" ref="ruleForm" 
         label-width="86px"
         label-position="top"
       >
-        <el-form-item label="昵称" prop="name">
+        <el-form-item label="昵称" prop="nikeName">
           <el-col :xs="24" :sm="12" :lg="6">
-            <el-input v-model="ruleForm.name"></el-input>
+            <el-input v-model="form.nikeName" :disabled="!isEdit"/>
           </el-col>
         </el-form-item>
         <el-form-item label="邮箱" prop="email">
           <el-col :xs="24" :sm="12" :lg="6">
-            <el-input v-model="ruleForm.name"></el-input>
+            <el-input v-model="form.email" :disabled="!isEdit"/>
           </el-col>
         </el-form-item>
-        <el-form-item label="手机" prop="phone">
+        <el-form-item label="手机" prop="mobile">
           <el-col :xs="24" :sm="12" :lg="6">
-            <el-input v-model="ruleForm.name"></el-input>
+            <el-input v-model="form.mobile" :disabled="!isEdit"/>
           </el-col>
         </el-form-item>
         <el-form-item label="公司" prop="company">
           <el-col :xs="24" :sm="12" :lg="6">
-            <el-input v-model="ruleForm.name"></el-input>
+            <el-input v-model="form.company" :disabled="!isEdit"/>
           </el-col>
         </el-form-item>
         <el-form-item label="性别" prop="sex">
-          <el-radio-group v-model="ruleForm.resource">
-            <el-radio label="男"></el-radio>
-            <el-radio label="女"></el-radio>
+          <el-radio-group v-model="form.sex" :disabled="!isEdit">
+            <el-radio label="1">男</el-radio>
+            <el-radio label="0">女</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="个人介绍" prop="desc">
+        <el-form-item label="个人介绍" prop="des">
           <el-col :xs="24" :sm="12" :lg="6">
-            <el-input type="textarea" rows="4" v-model="ruleForm.desc"></el-input>
+            <el-input type="textarea" rows="4" v-model="form.des" :disabled="!isEdit"/>
           </el-col>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="submitForm('ruleForm')">保存</el-button>
+          <el-button type="primary" style="width: 90px" @click="edit">
+            {{isEdit ? '保存' : '编辑'}}
+          </el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -75,28 +77,29 @@
   export default {
     data () {
       return {
+        isEdit: false,
         date: '',
-        ruleForm: {
-          name: '',
-          email: '',
-          phone: '',
-          company: '',
-          sex: false,
-          sesc: '',
+        form: {
+          nikeName: '琢磨先生',
+          email: '12345678@qq.com',
+          mobile: '18888888888',
+          company: 'CJ',
+          sex: '1',
+          des: '',
         },
         rules: {
-          name: [
+          nikeName: [
             { required: true, message: '请输入昵称', trigger: 'blur' },
             { min: 2, max: 50, message: '长度在 2 到 30 个字符', trigger: 'blur' }
           ],
           email: [
             { required: true, message: '请输入昵称', trigger: 'blur' }
           ],
-          phone: [
-            { type: 'date', required: true, message: '请输入手机号码', trigger: 'blur' }
+          mobile: [
+            { required: true, message: '请输入手机号码', trigger: 'blur' }
           ],
           company: [
-            { type: 'date', required: true, message: '请输入公司', trigger: 'blur' }
+            { required: true, message: '请输入公司', trigger: 'blur' }
           ],
           sex: [
             { type: 'array', required: true, message: '请选择性别', trigger: 'blur' }
@@ -128,6 +131,9 @@
         }
 
         this.date = date
+      },
+      edit() {
+        this.isEdit = !this.isEdit
       },
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {

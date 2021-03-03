@@ -107,6 +107,16 @@
     }
   }
 
+  .el-dialog__header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #F0F0F0;
+  }
+
+  .el-dialog__footer {
+    padding: 15px 20px;
+    border-top: 1px solid #F0F0F0;
+  }
+
   // 处理移动端组件兼容性
   @media screen and (max-width: $device-phone){
     * {

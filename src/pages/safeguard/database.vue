@@ -2,7 +2,7 @@
   <div class='page-content'>
     <table-bar :showTop="false">
       <div slot="top">
-        <el-form label-width="70px">
+        <el-form label-width="auto">
           <el-row :gutter="20">
             <el-col :xs="24" :sm="12" :lg="6">
               <el-form-item label="名称：">
@@ -10,8 +10,8 @@
               </el-form-item>
             </el-col>
             <el-col :xs="24" :sm="12" :lg="6">
-              <el-form-item label="连接地址：">
-                <el-input placeholder="连接地址"></el-input>
+              <el-form-item label="地址：">
+                <el-input placeholder="地址"></el-input>
               </el-form-item>
             </el-col>
             

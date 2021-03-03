@@ -67,10 +67,7 @@
 
 <script>
   import setting from '@/config/setting'
-  import axios from 'axios'
-  import { flatten } from '@/utils/utils'
   import { mapState } from 'vuex'
-  import { allowRouters } from '@/router/index.js'
 
   export default {
     name: "MenuLeft",

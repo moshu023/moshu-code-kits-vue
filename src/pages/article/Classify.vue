@@ -46,6 +46,13 @@
 
       <el-table-column prop="number" label="文章数量" show-overflow-tooltip />
       <el-table-column prop="date" label="创建时间" show-overflow-tooltip />
+      <el-table-column label="状态" prop="status">
+        <template slot-scope="scope">
+          <el-tag size="mini" :type="scope.row.status === 1 ? '' : 'info'">
+            {{scope.row.status === 1 ? '启用' : '禁用'}}
+          </el-tag>
+        </template>
+      </el-table-column>
       <el-table-column fixed="right" label="操作" width="150px">
         <template>
           <el-button type="text" icon="el-icon-edit" @click="showDialog('edit')">
@@ -87,78 +94,91 @@
             icon: '#iconVue',
             title: 'Vue',
             number: 20,
+            status: 1,
             date: '2020-03-12'
           },
           {
             icon: '#iconReact',
             title: 'React',
             number: 20,
+            status: 1,
             date: '2020-03-12'
           },
           {
             icon: '#iconflutter-fill',
             title: 'Flutter',
             number: 20,
+            status: 1,
             date: '2020-03-12'
           },
           {
             icon: '#iconhtml',
             title: 'HTML',
             number: 20,
+            status: 1,
             date: '2020-03-12'
           },
           {
             icon: '#iconCSS',
             title: 'CSS',
             number: 20,
+            status: 1,
             date: '2020-03-12'
           },
           {
             icon: '#iconjs',
             title: 'js',
             number: 20,
+            status: 1,
             date: '2020-03-12'
           },
           {
             icon: '#iconjava',
             title: 'java',
             number: 20,
+            status: 1,
             date: '2020-03-12'
           },
           {
             icon: '#iconxiaoxiong',
             title: 'Golang',
             number: 20,
+            status: 1,
             date: '2020-03-12'
           },
           {
             icon: '#iconsikao',
             title: '总结',
             number: 20,
+            status: 1,
             date: '2020-03-12'
           },
           {
             icon: '#iconMySQL',
             title: 'MySQL',
             number: 20,
+            status: 1,
             date: '2020-03-12'
           },
           {
             icon: '#icongit',
             title: 'Git',
             number: 20,
+            status: 1,
             date: '2020-03-12'
           },
           {
             icon: '#iconlinux',
             title: 'Linux',
             number: 20,
+            status: 1,
             date: '2020-03-12'
           },
           {
             icon: '#iconnginx',
             title: 'Nginx',
             number: 20,
+            status: 1,
             date: '2020-03-12'
           },
         ],
