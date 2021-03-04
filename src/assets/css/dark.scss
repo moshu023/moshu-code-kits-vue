@@ -172,4 +172,14 @@ $background-color:#22252A;
   .el-dialog {
     border: 1px solid $border-color !important;
   }
+
+  .notice .bar,
+  .notice .content .scroll .notice-list li,
+  .user-list li {
+    border-bottom: 1px solid $border-color !important;
+  }
+
+  .notice .load {
+    border-top: 1px solid $border-color !important;
+  }
 }

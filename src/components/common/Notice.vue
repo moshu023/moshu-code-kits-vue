@@ -13,7 +13,7 @@
       <vue-scroll :ops="ops" ref="scroll" class="scroll">
         <ul class="notice-list" v-show="barActiveIndex === 0">
           <li v-for="(item, index) in noticeList" :key="index">
-            <div class="icon" :style="{background: getIcon(item.type)[0]}">
+            <div class="icon" :style="{background: getIcon(item.type)[0] + '!important'}">
               <i class="iconfont">{{getIcon(item.type)[1]}}</i>
             </div>
             <div class="text">
@@ -269,7 +269,7 @@
         }
 
         &.active {
-          color: #2d8cf0;
+          color: #2d8cf0 !important;
           border-bottom: 2px solid #2d8cf0;
         }
       }
@@ -302,8 +302,9 @@
               text-align: center;
 
               i {
-                color: #fff;
+                color: #fff !important;
                 font-size: 17px;
+                background: transparent !important;
               }
             }
 
@@ -398,6 +399,7 @@
           position: relative;
           top: 150px;
           color: #999;
+          background: transparent !important;
 
           i {
             font-size: 35px;
@@ -405,6 +407,7 @@
 
           p {
             margin-top: 5px;
+            background: transparent !important;
           }
         }
       }
