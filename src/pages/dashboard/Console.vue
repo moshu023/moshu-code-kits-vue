@@ -62,6 +62,8 @@
       padding-right: 20px;
       padding: 10px 0;
       border-bottom: 1px solid #F0F0F0;
+      position: relative;
+      z-index: 999;
 
       .line-title {
         padding: 0 13px;

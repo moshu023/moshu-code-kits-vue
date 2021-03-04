@@ -2,7 +2,7 @@
   <div class="his chart">
     <div class="head">
       <p class="line-title">
-        <i class="iconfont">&#xe75e;</i>
+        <i class="iconfont" style="color: #1890FF; background-color: rgb(230, 247, 255)">&#xe75e;</i>
         <span>访问量</span>
       </p>
     </div>
@@ -48,10 +48,6 @@ export default {
         itemStyle: {    // 图形的形状
           barBorderRadius: [2, 2, 0 ,0],
         }
-      },
-      // ---- gird区域 ---
-      gird: {
-        show: false
       },
       //  ------  X轴 ------
       xAxis: {
