@@ -49,6 +49,7 @@ axios.interceptors.response.use(
     // token验证失败，重新登录
     if(code === 7) {
       setTimeout(() => {
+        document.getElementsByTagName("html")[0].removeAttribute('class') // 移除暗黑主题
         store.dispatch('user/setLoginStatus', false)
         router.replace('/login')
         this.$router.go(0)

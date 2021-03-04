@@ -133,6 +133,7 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
+          document.getElementsByTagName("html")[0].removeAttribute('class') // 移除暗黑主题
           this.$store.dispatch('user/setLoginStatus', false)
           this.$router.push('/login')
         }).catch(() => {});
