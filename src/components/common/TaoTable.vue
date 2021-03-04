@@ -5,7 +5,7 @@
       :data="data || tableData"
       :height="height"
       :row-class-name="tableRowClassName"
-      :header-cell-style="{ background: '#F8F8F9', color: '#666' }"
+      :header-cell-style="{ background: headBg, color: '#666' }"
       :fit="true"
       :size="size"
       :style="{ marginBottom: Bottom + 'px' }"
@@ -135,6 +135,10 @@ export default {
     size: {
       type: String,
       default: 'medium'
+    },
+    headBg: {
+      type: String,
+      default: '#F8F8F9'
     }
   },
   data() {

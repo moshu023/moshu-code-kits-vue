@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "1281472",
+      "name": "区域访问趋势",
+      "font_class": "quyufangwenqushi",
+      "unicode": "e817",
+      "unicode_decimal": 59415
+    },
+    {
+      "icon_id": "19009823",
+      "name": "趋势-trend",
+      "font_class": "qushi-trend",
+      "unicode": "e640",
+      "unicode_decimal": 58944
+    },
+    {
       "icon_id": "8652825",
       "name": "通知",
       "font_class": "tongzhi1",

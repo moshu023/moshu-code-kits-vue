@@ -1,8 +1,13 @@
 <template>
   <div class="pro chart">
-    <p class="line-title">计划</p>
+    <div class="head">
+      <p class="line-title">
+        <i class="iconfont" style="color: #95DE64; background: rgba(149, 222, 100, 0.15)">&#xe60a;</i>
+        <span>计划</span>
+      </p>
+    </div>
     <div class="table-box">
-      <tao-table ref="tables" :data="tableData" :showPage="false" height="100%" :hideScrollBar="true">
+      <tao-table ref="tables" :data="tableData" :showPage="false" height="100%" :hideScrollBar="true" headBg="">
         <el-table-column prop="title" label="计划事项" />
         <el-table-column label="进度" width="200px" >
           <template slot-scope="scope">
@@ -23,52 +28,45 @@
       return {
         tableData: [
           {
-            title: '学习英语',
-            startDate: '2020-1-1',
-            endDate: '2020-12-31',
-            percentage: 10,
-            color: '#19BE6B !important'
-          },
-          {
             title: '学习Flutter',
             startDate: '2020-1-1',
             endDate: '2020-12-31',
-            percentage: 100,
-            color: '#64B6F5 !important'
-          },
-          {
-            title: '六块腹肌',
-            startDate: '2020-1-1',
-            endDate: '2020-12-31',
-            percentage: 10,
-            color: '#E6A23C !important'
+            percentage: 30,
+            color: '#69C0FF !important'
           },
           {
             title: '网站重构',
             startDate: '2020-1-1',
             endDate: '2020-12-31',
-            percentage: 100,
-            color: '#FF9C80 !important'
+            percentage: 70,
+            color: '#FFC069 !important'
+          },
+          {
+            title: '减肥',
+            startDate: '2020-1-1',
+            endDate: '2020-12-31',
+            percentage: 50,
+            color: '#95DE64 !important'
           },
           {
             title: 'Golang',
             startDate: '2020-1-1',
             endDate: '2020-12-31',
-            percentage: 100,
+            percentage: 80,
             color: '#B7CBE2 !important'
           },
           {
             title: 'TypeScript',
             startDate: '2020-1-1',
             endDate: '2020-12-31',
-            percentage: 70,
+            percentage: 50,
             color: '#909399 !important'
           },
           {
-            title: 'HTTP',
+            title: 'JS深度指南',
             startDate: '2020-1-1',
             endDate: '2020-12-31',
-            percentage: 10,
+            percentage: 60,
             color: '#9BB4F3 !important'
           },
           {
@@ -79,26 +77,12 @@
             color: '#F2B985 !important'
           },
           {
-            title: '算法',
+            title: '高级程序设计',
             startDate: '2020-1-1',
             endDate: '2020-12-31',
             percentage: 5,
             color: '#F5B7CE !important'
-          },
-          {
-            title: 'Node.js',
-            startDate: '2020-1-1',
-            endDate: '2020-12-31',
-            percentage: 10,
-            color: '#7CC6DD !important'
-          },
-          {
-            title: 'Vue深入学习',
-            startDate: '2020-1-1',
-            endDate: '2020-12-31',
-            percentage: 30,
-            color: '#F06B7C !important'
-          },
+          }
         ],
       }
     },
@@ -134,7 +118,6 @@
 
     .table-box {
       padding: 0 8px;
-      margin-top: -10px;
       height: calc(100% - 30px);
     }
   }

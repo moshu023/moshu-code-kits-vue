@@ -121,7 +121,7 @@
         justify-content: space-between;
         padding: 0 40px;
         position: relative;
-        border-radius: 8px;
+        border-radius: 3px;
         box-shadow: 0 0px 7px rgba(28,76,186,.08);
         transition: box-shadow .3s;
 

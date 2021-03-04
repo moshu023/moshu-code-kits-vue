@@ -55,20 +55,37 @@
       width: 0px !important;
     }
 
-    >>> .line-title {
-      color: #555;
-      font-size: 15px;
-      font-weight: bold;
-      padding: 0 13px;
-      margin: 20px 0;
-      border-left: 4px solid $theme-color;
-    }
-    
     >>> .head {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding-right: 20px;
+      padding: 10px 0;
+      border-bottom: 1px solid #F0F0F0;
+
+      .line-title {
+        padding: 0 13px;
+        display: flex;
+        align-items: center;
+
+        i {
+          display: inline-block;
+          width: 24px;
+          height: 24px;
+          line-height: 24px;
+          text-align: center;
+          border-radius: 50%;
+          color: #1890FF;
+          background-color: rgb(230, 247, 255);
+          font-size: 15px;
+        }
+
+        span {
+          color: #555;
+          font-size: 15px;
+          margin-left: 10px;
+        }
+      }
     }
 
     .row {
@@ -80,13 +97,8 @@
         margin-right: 15px;
         overflow: hidden;
         background: #fff;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(28,76,186,.08);
+        border-radius: 3px;
         transition: box-shadow .3s;
-
-        &:hover {
-          box-shadow: 0 5px 10px rgba(28,76,186,.12);
-        }
 
         &:last-of-type {
           margin-right: 0 !important;
@@ -95,7 +107,7 @@
     }
 
     .row1, .row2 {
-      height: 410px;
+      height: 365px;
     }
   }
 

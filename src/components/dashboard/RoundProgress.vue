@@ -1,6 +1,11 @@
 <template>
    <div class="card chart" :style="styles">
-     <p class="line-title">{{title}}</p>
+     <div class="head">
+      <p class="line-title">
+        <i class="iconfont" style="font-size: 13px; color: #FEB062; background: rgba(254, 176, 98, 0.15)">&#xe6de;</i>
+        <span>{{title}}</span>
+      </p>
+     </div>
      <div class="progress">
       <svg v-for="(item, index) in showList" :key="index"  :style="'width: '+item.width+'px;height: '+item.height+'px;left: '+item.left+'px;top: '+item.top+'px;z-index: '+item.zIndex+';'" viewBox="0 0 100 100">
         <path d="

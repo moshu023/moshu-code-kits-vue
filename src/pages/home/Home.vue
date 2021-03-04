@@ -108,6 +108,7 @@
         padding: 16px;
         position: relative;
         box-sizing: border-box;
+        border-radius: 3px;
 
         >>> .open-head-btn {
           width: 100%;
