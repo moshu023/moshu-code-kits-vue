@@ -14,6 +14,7 @@
       :unique-opened="uniqueOpened"
       :background-color="theme.menuLeftBc"
       :active-text-color="theme.activeColor"
+      :default-openeds="defaultOpenedsArray"
     >
       <submenu :list="menuList" :isMobile="isMobileModel" @close="closeMenu"/>
     </el-menu>
@@ -47,6 +48,12 @@
         let { current } = this.worktab
         let { path, params } = current
         let { status } = current.params
+
+        // 个人中心折叠菜单
+        if(path === '/user/user') {
+          this.defaultOpenedsArray = []
+        }
+
         return status ? path + params.status : path
       }
     },
@@ -77,7 +84,8 @@
         isMobileModel: false,
         showMenuMobile: false,
         showMobileModel: false,
-        resizeList: [0, 0]
+        resizeList: [0, 0],
+        defaultOpenedsArray: []
       }
     },
     mounted() {
