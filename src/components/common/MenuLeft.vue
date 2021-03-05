@@ -1,77 +1,42 @@
 <template>
-  <div class="menu" v-if="showMenuMobile">
-    <router-link tag="div" class="el-menu-header"
-      :style="{background: theme.menuLeftBc}" to="/"
-    >
-      <div class="pc-header">
-        <svg class="svg-icon" aria-hidden="true">
-          <use xlink:href="#iconzhaopian-copy"></use>
-        </svg>
-        <p :style="{color: theme.textColor, width: collapse ? '0' : '190px'}">{{systemName}}</p>
-      </div>
-      <div class="phone-header" :style="{width: collapseMobile ? '0' : '100%'}">
-        <svg class="svg-icon" aria-hidden="true">
-          <use xlink:href="#iconzhaopian-copy"></use>
-        </svg>
-        <!-- <p :style="{color: theme.textColor, width: collapseMobile ? '0' : '100%'}" >{{systemName}}</p> -->
-      </div>
-    </router-link>
-     
+  <div class="menu-left" v-if="showMenuMobile">
+    <div class="header" :style="{background: theme.menuLeftBc}" @click="goPage('/dashboard/console')">
+      <svg class="svg-icon" aria-hidden="true">
+        <use xlink:href="#iconzhaopian-copy"></use>
+      </svg>
+      <p :style="{color: theme.textColor, width: collapse ? '0' : '190px'}">{{systemName}}</p>
+    </div>
+
     <el-menu class="el-menu" :class="'el-menu-'+ theme.theme"
-      :unique-opened="uniqueOpened"
       :collapse="collapse" 
       :default-active="routerPath"
-      :background-color="theme.menuLeftBc"
       :text-color="theme.textColor"
+      :unique-opened="uniqueOpened"
+      :background-color="theme.menuLeftBc"
       :active-text-color="theme.activeColor"
     >
-      <el-submenu :index="item1.title" v-for="item1 in menuList" :key="item1.title">
-        <template slot="title">
-          <i class="iconfont"
-            :style="{
-              color: routerPath !== item1.route ? theme.iconColor : theme.iconColorActive
-            }" 
-          >{{item1.icon}}</i>
-          <span>
-            {{item1.title}}
-          </span>
-        </template>
-
-        <div v-for="item2 in item1.children" :key="item2.title">
-          <el-submenu :index="item2.title" v-if="!item2.path">
-            <template slot="title">
-              {{item2.title}}
-            </template>
-            <el-menu-item 
-              :index="routerPathCihld(item3)"
-              v-for="item3 in item2.children" 
-              :key="item3.title" @click="goPage(item3.path, item3.params, item3)"
-            >
-              {{item3.title}}
-            </el-menu-item>
-          </el-submenu>
-
-          <el-menu-item :index="item2.path" v-else @click="goPage(item2.path, item2.params, item2)"
-            v-show="!item2.noMenu"
-          >
-            <span slot="title">{{item2.title}}</span>
-          </el-menu-item>
-        </div>
-      </el-submenu>
+      <submenu :list="menuList" :isMobile="isMobileModel" @close="closeMenu"/>
     </el-menu>
-    <div class="menu-model" @click="visibleMenu()" 
-      :style="{opacity: collapse ? 0 : 1, transform: showMobileModel ? 'scale(1)' : 'scale(0)'}">
+
+    <div class="menu-model" @click="visibleMenu()" :style="{
+      opacity: collapse ? 0 : 1, 
+      transform: showMobileModel ? 'scale(1)' : 'scale(0)'
+    }">
     </div>
   </div>
 </template>
 
 <script>
   import setting from '@/config/setting'
+  import Submenu from './Submenu.vue';
   import { mapState } from 'vuex'
 
   export default {
     name: "MenuLeft",
     inject: ['reload'],
+    components: {
+      Submenu
+    },
     computed: {
       ...mapState({
         worktab: state => state.worktab.worktab,
@@ -116,48 +81,11 @@
       }
     },
     mounted() {
-      this.lisenterWindowResize()
-      this.initUserSetting()
       this.getMenuList()
+      this.initUserSetting()
+      this.listenerWindowResize()
     },
     methods: {
-      lisenterWindowResize() {
-        this.screenWidth = document.body.clientWidth;
-        this.setMenuModel()
-
-        window.onresize = () => {
-          return (() => {
-            this.screenWidth = document.body.clientWidth;
-            this.setMenuModel()
-          })();
-        };
-      },
-      setMenuModel() {
-        let { screenWidth, resizeList } = this
-
-        if(screenWidth > 800) {
-          if(resizeList[0] === 0) {
-            this.isMobileModel = false
-            this.collapse = false
-            this.collapseMobile = false
-            this.showMenuMobile = true
-            this.$emit('topBarCollapse', true)
-          }
-          
-          this.$set(this.resizeList, 0, 1)
-        }else {
-          this.isMobileModel = true
-          this.collapse = true
-          this.$emit('topBarCollapse', false)
-          this.collapseMobile = true
-          this.showMobileModel = false
-          this.$set(this.resizeList, 0, 0)
-        }
-
-        setTimeout(() => {
-          this.showMenuMobile = true
-        }, 10)
-      },
       // 获取菜单列表|权限列表
       getMenuList() {
         this.menuList = this.$store.state.menu.menuList
@@ -192,49 +120,51 @@
           }, 200)
         }
       },
-      // 返回子菜单路径
-      routerPathCihld(item) {
-        let { params, path } = item
+      listenerWindowResize() {
+        this.screenWidth = document.body.clientWidth;
+        this.setMenuModel()
 
-        if(params) {
-          if(params.status) {
-            return path + params.status
-          }
-        }else {
-          return path
-        }
+        window.onresize = () => {
+          return (() => {
+            this.screenWidth = document.body.clientWidth;
+            this.setMenuModel()
+          })();
+        };
       },
-      // 切换页面
-      goPage(path, params, item) {
-        let currentPath = this.$route.path
-        let arr = currentPath.split('/')
-        let isNewSite = item.path.indexOf('http') !== -1 ? true : false
+      setMenuModel() {
+        let { screenWidth, resizeList } = this
 
-        if(isNewSite) {
-          window.open(item.path, "_blank");
-          return
-        }
-
-        if(this.isMobileModel) {
+        if(screenWidth > 800) {
+          if(resizeList[0] === 0) {
+            this.isMobileModel = false
+            this.collapse = false
+            this.collapseMobile = false
+            this.showMenuMobile = true
+            this.$emit('topBarCollapse', true)
+          }
+          
+          this.$set(this.resizeList, 0, 1)
+        }else {
+          this.isMobileModel = true
           this.collapse = true
+          this.$emit('topBarCollapse', false)
           this.collapseMobile = true
           this.showMobileModel = false
+          this.$set(this.resizeList, 0, 0)
         }
 
-        if(currentPath === path) { // 当前页跳转
-          if(params) {
-            let { status } = params;
-            
-            if(status) {
-              this.$store.dispatch('worktab/worktabRoute', {
-                to: { name, params },
-                from: { name, params }
-              })
-              this.reload()
-            }
-          }
-        }else { // 跳转其它页
-          this.$router.push({path, params})
+        setTimeout(() => {
+          this.showMenuMobile = true 
+        }, 10)
+      },
+      closeMenu() {
+        this.collapse = true
+        this.collapseMobile = true
+        this.showMobileModel = false
+      },
+      goPage(path) {
+        if(this.$route.path !== path) {
+          this.$router.push(path)
         }
       }
     }
@@ -242,7 +172,7 @@
 </script>
 
 <style lang="scss">
-  .menu {
+  .menu-left {
     // 黑色主题
     .el-menu-dark {
       // 选中颜色
@@ -313,7 +243,7 @@
 </style>
 
 <style lang="scss" scoped>
-  .menu {
+  .menu-left {
     height: 100vh;
     user-select: none;
     -moz-user-select: none;
@@ -324,39 +254,38 @@
     left: 0;
     box-shadow: 5px 5px 8px 0 rgba(29,35,41,.05);
 
-    .el-menu-header {
-      
-      > div {
-        height: 45px;
-        line-height: 45px;
-        box-sizing: border-box;
-        cursor: pointer;
-        display: flex;
+    .el-menu--collapse {
+      >>> .el-submenu__title span,
+      >>> .el-submenu__icon-arrow {
+        display: none;
+      }
+    }
+
+    .header {
+      height: 45px;
+      line-height: 45px;
+      box-sizing: border-box;
+      cursor: pointer;
+      display: flex;
+      overflow: hidden;
+
+      .svg-icon {
+        width: 22px;
+        vertical-align: -0.15em;
+        fill: currentColor;
         overflow: hidden;
-        // padding-left: 25px;
-
-        .svg-icon {
-          width: 22px;
-          vertical-align: -0.15em;
-          fill: currentColor;
-          overflow: hidden;
-          margin-left: -2px;
-          margin-top: 10px;
-          margin-left: 25px;
-        }
-
-        p {
-          color: #C3C3C3;
-          font-size: 15px;
-          margin-left: 10px;
-          margin-top: 5px;
-          overflow: hidden;
-          transition: width .3s ease-in-out;
-        }
+        margin-left: -2px;
+        margin-top: 10px;
+        margin-left: 25px;
       }
 
-      .phone-header {
-        display: none;
+      p {
+        color: #C3C3C3;
+        font-size: 15px;
+        margin-left: 10px;
+        margin-top: 5px;
+        overflow: hidden;
+        transition: width .3s ease-in-out;
       }
     }
 
@@ -381,20 +310,13 @@
   }
 
   @media only screen and (max-width: $device-ipad) { 
-    .menu {
+    .menu-left {
+      .header {
+        display: none;
+      }
 
-      .el-menu-header { 
-        padding: 0;
-
-        .pc-header {
-          display: none;
-        }
-
-        .phone-header {
-          display: flex;
-          overflow: hidden;
-          box-sizing: border-box;
-        }
+      .el-menu {
+        height: 100vh;
       }
 
       .el-menu--collapse {

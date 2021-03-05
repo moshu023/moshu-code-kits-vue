@@ -2,7 +2,7 @@
   <div class='page-content'>
     <table-bar :showTop="false">
       <div slot="top">
-        <el-form label-width="auto">
+        <el-form label-width="55px">
           <el-row :gutter="20">
             <el-col :xs="24" :sm="12" :lg="6">
               <el-form-item label="路径：">
