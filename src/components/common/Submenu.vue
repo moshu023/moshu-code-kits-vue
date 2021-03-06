@@ -6,7 +6,7 @@
           <i class="iconfont" v-if="item.icon">{{item.icon}}</i>
           <span>{{item.title}}</span>
         </template>
-        <submenu :list="item.children"/>
+        <submenu :list="item.children" :isMobile="isMobile" @close="closeMenu"/>
       </el-submenu>
 
       <el-menu-item v-if="!isNotEmpty(item.children) && !item.noMenu" 
@@ -41,12 +41,15 @@
           return
         }
 
-        if(this.isMobile) {
-          this.$emit('close')
-        }
+        this.closeMenu()
 
         if(currentPath !== path) { 
           this.$router.push({path, params})
+        }
+      },
+      closeMenu() {
+        if(this.isMobile) {
+          this.$emit('close')
         }
       },
       isNotEmpty(children) {
