@@ -2,7 +2,7 @@
   <div class="pie chart">
     <div class="head">
       <p class="line-title">
-        <i class="iconfont" style="color: #F26D5B; background: rgba(242, 109, 91, 0.15)">&#xe61c;</i>
+        <i class="iconfont" style="color: #FF9592; background: rgba(242, 109, 91, 0.15)">&#xe61c;</i>
         <span>分类统计</span>
       </p>
     </div>

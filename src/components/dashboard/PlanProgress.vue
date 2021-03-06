@@ -14,7 +14,7 @@
             <el-progress :percentage="scope.row.pro" :color="scope.row.color"/>
           </template>
         </el-table-column>
-        <el-table-column width="100px"/>
+        <el-table-column width="55px"/>
         <el-table-column prop="startDate" label="开始时间"  />
         <el-table-column prop="endDate" label="结束时间"  />
       </tao-table>

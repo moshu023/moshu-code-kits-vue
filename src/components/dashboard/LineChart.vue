@@ -2,7 +2,7 @@
   <div class="line-chart chart">
     <div class="head">
       <p class="line-title">
-        <i class="iconfont" style="color: #C3BEFF; background: rgba(195, 190, 255, 0.15)">&#xe817;</i>
+        <i class="iconfont" style="color: #7E3AD5; background: rgba(249, 240, 255, 1)">&#xe817;</i>
         <span>流量趋势</span>
       </p>
     </div>

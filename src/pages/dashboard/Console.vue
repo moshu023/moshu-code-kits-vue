@@ -109,7 +109,19 @@
     }
 
     .row1, .row2 {
-      height: 365px;
+      height: 380px;
+    }
+  }
+
+  @media only screen and (max-width: $device-notebook)  {
+    .console {
+      .row1{
+        height: 350px;
+      }
+
+      .row2 {
+        height: 300px;
+      }
     }
   }
 

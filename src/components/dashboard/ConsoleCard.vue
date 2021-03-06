@@ -34,7 +34,7 @@
             icon: '#iconfabujishu',
             startVal: 0,
             duration: 1000,
-            endVal: 9520,
+            endVal: 9120,
             width: 24,
             height: 26,
           },
@@ -45,6 +45,15 @@
             duration: 1000,
             endVal: 182,
             width: 24,
+            height: 25
+          },
+          {
+            des: '点击量',
+            icon: '#icondaeyidonggenjin',
+            startVal: 0,
+            duration: 1000,
+            endVal: 9520,
+            width: 27,
             height: 25
           },
           {
@@ -61,7 +70,7 @@
             icon: '#iconsheet_',
             startVal: 0,
             duration: 1000,
-            endVal: 1024,
+            endVal: 820,
             width: 24,
             height: 24
           },
@@ -110,7 +119,7 @@
       background: transparent !important;
 
       li {
-        width: calc(20% - 15px);
+        width: calc(16.666% - 15px);
         height: 125px;
         line-height: 125px;
         text-align: center;
@@ -156,7 +165,7 @@
 
         .des {
           color: #999999;
-          font-size: 12px;
+          font-size: 13px;
           line-height: 14px;
           height: 14px;
 
@@ -175,6 +184,16 @@
   @media only screen and (max-width: $device-notebook)  {
     .card {
       padding-top: 0 !important;
+
+      ul {
+        li {
+          height: 100px;
+
+          .des {
+            font-size: 12px;
+          }
+        }
+      }
 
       .iconfont {
         left: 15px !important;
