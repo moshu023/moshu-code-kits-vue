@@ -2,7 +2,7 @@
   <div class="topbar" :style="{width: topWidth}">
     <div class="menu">
       <div class="left" style="display: flex">
-        <svg class="svg-icon" aria-hidden="true">
+        <svg class="svg-icon" aria-hidden="true" @click="goPage('/')">
           <use xlink:href="#iconzhaopian-copy"></use>
         </svg>
         <i class="iconfont" @click="visibleMenu" v-if="showMenuButton">&#xe6af;</i>

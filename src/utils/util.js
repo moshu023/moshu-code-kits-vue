@@ -1,4 +1,3 @@
-// import { listData } from './moveData'
 import {Message} from "element-ui";
 
 // 退出登录

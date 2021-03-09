@@ -109,21 +109,6 @@ export const allowRouters = [
       },
     ]
   },{
-    path: '/widget',
-    component: Home,
-    meta: {
-      title: '组件中心'
-    },
-    children: [
-      {
-        path: 'widget',
-        component: () => import('@/pages/widget/Widget'),
-        meta: {
-          title: '组件市场',
-        }
-      }
-    ]
-  },{
     path: '/message',
     component: Home,
     meta: {
@@ -160,13 +145,6 @@ export const allowRouters = [
         }
       }
     ]
-  },{
-    path: '/widget',
-    component: Home,
-    meta: {
-      title: '组件中心'
-    },
-    children: []
   },{
     path: '/safeguard',
     component: Home,

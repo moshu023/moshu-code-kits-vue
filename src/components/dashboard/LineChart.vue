@@ -320,4 +320,11 @@
       height: 100%;
     }
   }
+
+  @media only screen and (max-width: $device-ipad) { 
+    .line-chart {
+      width: 100%;
+      margin-top: 15px;
+    }
+  }
 </style>

@@ -9,40 +9,28 @@
 
     <div class="row row2">
       <line-chart/>
-      
-      <round-progress 
-        color="#6EB2F4" 
-        iconBg="#CAE2FA" 
-        title="代办事项" 
-        title2="本月待办事项：20" 
-        styles="flex: 1"
-      />
+      <round-progress/>
       <pie-chart/>
     </div>
   </div>
 </template>
 
 <script>
-  import Histogram from "@/components/dashboard/Histogram"
-  import RoundProgress from "@/components/dashboard/RoundProgress"
-  import PlanProgress from "@/components/dashboard/PlanProgress"
-  import PieChart from "@/components/dashboard/PieChart"
   import ConsoleCard from "@/components/dashboard/ConsoleCard"
+  import Histogram from "@/components/dashboard/Histogram"
+  import PlanProgress from "@/components/dashboard/PlanProgress"
   import LineChart from "@/components/dashboard/LineChart"
+  import RoundProgress from "@/components/dashboard/RoundProgress"
+  import PieChart from "@/components/dashboard/PieChart"
 
   export default {
     components: { 
-      RoundProgress,
-      PlanProgress,
-      Histogram,
-      PieChart,
       ConsoleCard,
-      LineChart
-    },
-    data () {
-      return {
-        
-      }
+      Histogram,
+      PlanProgress,
+      LineChart,
+      RoundProgress,
+      PieChart
     }
   }
 </script>
@@ -131,6 +119,10 @@
       .row {
         display: block;
         height: auto !important;
+
+        > div {
+          height: 370px;
+        }
       }
 
       .row1 {

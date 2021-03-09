@@ -166,7 +166,6 @@ export default {
   @media only screen and (max-width: $device-ipad) { 
     .his {
       width: 100%;
-      height: 370px;
       margin-right: 0px !important;
 
       .histogram {

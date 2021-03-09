@@ -25,26 +25,35 @@
         <i class="iconfont" :style="{color: color, background: iconBg}">&#xe6de;</i>
         <p :style="{color: color}">16</p>
       </div>
-      <p class="bottom-title">{{title2}}</p>
+      <p class="bottom-title">{{title2}}{{total}}</p>
     </div>
    </div>
 </template>
 <script>
 export default {
   props: {
-    title: String,
-    title2: String,
+    title: {
+      type: String,
+      default: '代办事项'
+    },
+    title2: {
+      type: String,
+      default: '本月待办事项：'
+    },
     color: {
       type: String,
-      default: '#409EFF'
+      default: '#6EB2F4'
     },
     icon: String,
-    iconBg: String,
+    iconBg: {
+      type: String,
+      default: '#CAE2FA'
+    },
     styles: String
   },
   data() {
     return {
-      totel: 20, // 总的数据
+      total: 20, // 总的数据
       list: [15], // 每一个环形的数据
       dasharrayList: [5], // 每个环形的宽度
       detailShow: true, // 鼠标滑到环形上的提示文字
@@ -69,8 +78,8 @@ export default {
     // 页面刷新加载圆环数据，从无到有体现动画效果
     setTimeout((e) => {
       for (let x = 0; x < this.showList.length; x++) {
-        this.$set(this.showList[x], 'dasharray', this.list[x] / this.totel * 255)
-        if (this.list[x] / this.totel * 255 === 0) {
+        this.$set(this.showList[x], 'dasharray', this.list[x] / this.total * 255)
+        if (this.list[x] / this.total * 255 === 0) {
           this.$set(this.showList[x], 'strokeWidth', 0)
         } else {
           this.$set(this.showList[x], 'strokeWidth', this.dasharrayList[x])
@@ -86,7 +95,7 @@ export default {
 <style lang="scss" scoped>
 
   .card {
-    width: 25%;
+    flex: 1;
     position: relative;
   }
   
@@ -172,7 +181,6 @@ export default {
   @media only screen and (max-width: $device-ipad) { 
     .card {
       width: 100%;
-      height: 370px;
       margin-top: 15px;
     }
   }
@@ -180,7 +188,6 @@ export default {
   @media only screen and (max-width: $device-phone) { 
     .card {
       width: 100%;
-      height: 300px;
       margin-top: 15px;
 
       .progress {

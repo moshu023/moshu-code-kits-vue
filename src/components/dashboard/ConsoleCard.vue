@@ -2,17 +2,9 @@
   <div class="card">
     <ul>
       <li v-for="(item, index) in dataList" :key="index" :style="dataListStyle">
-        <svg class="svg-icon " aria-hidden="true">
-          <use :xlink:href="item.icon"></use>
-        </svg>
+        <svg class="svg-icon " aria-hidden="true"><use :xlink:href="item.icon"></use></svg>
         <span class="des">{{item.des}}</span>
-        <count-to 
-          class="number" 
-          :startVal='item.startVal' 
-          :endVal='item.endVal' 
-          :duration='1500' 
-          separator=''
-        />
+        <count-to class="number" :startVal='item.startVal' :endVal='item.endVal' :duration='1500' separator='' />
       </li>
     </ul>
   </div>

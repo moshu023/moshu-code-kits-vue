@@ -4,21 +4,9 @@
       <div slot="top">
         <el-form label-width="55px">
           <el-row :gutter="20">
-            <el-col :xs="24" :sm="12" :lg="6">
-              <el-form-item label="路径：">
-                <el-input placeholder="路径" v-model.trim="search.path" clearable/>
-              </el-form-item>
-            </el-col>
-            <el-col :xs="24" :sm="12" :lg="6">
-              <el-form-item label="描述：">
-                <el-input placeholder="描述" v-model.trim="search.description" clearable/>
-              </el-form-item>
-            </el-col>
-            <el-col :xs="24" :sm="12" :lg="6">
-              <el-form-item label="组：">
-                <el-input placeholder="API组" v-model.trim="search.apiGroup" clearable/>
-              </el-form-item>
-            </el-col>
+            <form-input v-model="search.path" label="路径"></form-input>
+            <form-input v-model="search.description" label="描述"></form-input>
+            <form-input v-model="search.apiGroup" label="分组"></form-input>
             
             <el-row :xs="24" :sm="12" :lg="6" style="float: right; margin-right: 10px;">
               <el-button type="primary" @click="getApiList">搜索</el-button>

@@ -54,20 +54,6 @@
       removeNotice(_name) {
         let index = this.notices.findIndex(item => item._name === _name);
         this.notices.splice(index, 1);
-
-        // let el = this.$refs.msg[index]
-        // let elBottom = 15
-        // let elHeight = el.offsetHeight
-
-        // if(index > 0) {
-        //   elHeight += elBottom
-        // }
-
-        // el.style.cssText = `margin-top: -${elHeight}px; opacity: 0`;
-
-        // setTimeout(() => {
-        //   this.notices.splice(index, 1);
-        // }, 500)
       }
     }
   };

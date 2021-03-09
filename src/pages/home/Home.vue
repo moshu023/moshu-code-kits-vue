@@ -4,11 +4,7 @@
     <menu-left ref="menuLeft" @topBarCollapse="topBarCollapse" />
 
     <!-- 顶栏、选项卡 -->
-    <top-bar 
-      :menuOpen="menuOpen"
-      @click="visibleMenu" 
-      @personalityShow="personalityShow" 
-    >
+    <top-bar :menuOpen="menuOpen" @click="visibleMenu" @personalityShow="personalityShow">
       <work-tab />
     </top-bar>
 

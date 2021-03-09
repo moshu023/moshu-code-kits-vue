@@ -22,17 +22,7 @@
         
       }
     },
-    mounted() {
-      
-    },
     methods: {
-      showNotice() {
-        this.$notice({
-          type: 'success',
-          content: '成功信息提示',
-          duration: 3000
-        })
-      },
       goHomePage() {
         this.$router.push('/')
       }

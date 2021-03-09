@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <div class="left-wrap" :style="{backgroundImage: `url(${lfBg})`}">
+    <div class="left-wrap" :style="{backgroundImage: `url(${leftBg})`}">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#iconzhaopian-copy"></use>
       </svg>
@@ -56,8 +56,7 @@
         account: setting.login.username,
         password: setting.login.password,
         code: '',
-        backgroundImage: require('@img/login_form_bg.jpg'),
-        lfBg: require('@img/lf_bg.png'),
+        leftBg: require('@img/lf_bg.png'),
         loading: false,
         btnText: '登录',
         captcha: {
