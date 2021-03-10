@@ -65,15 +65,6 @@
         isEdit: false
       };
     },
-    mounted() {
-      // this.$message({
-      //   message: '警告哦，这是一条警告消息',
-      //   type: 'warning',
-      //   duration: 0
-      // });
-
-      this.$message.success('这是一条消息提示');
-    },
     methods: {
       edit() {
         this.isEdit = !this.isEdit
