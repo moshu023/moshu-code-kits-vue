@@ -3,7 +3,9 @@ import App from './App'
 import router from './router'
 import store from './store'
 import 'default-passive-events'
-import "@css/reset.scss"               // 重置HTML样式
+import "@css/reset.scss"               // 重置HTML样式、
+import "@css/app.scss"                 // 全局样式
+import "@css/el-ui.scss"               // 优化element样式
 import '@css/dark.scss'                // 暗黑主题
 import "@/assets/icon/iconfont.css"    // 图标库
 import "@/assets/icon/iconfont.js"     // 彩色图标

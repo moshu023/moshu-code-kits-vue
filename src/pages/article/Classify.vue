@@ -1,6 +1,6 @@
 <template>
   <div class="page-content">
-    <table-bar :showTop="false">
+    <table-bar :showTop="false" :columns="columns" @changeColumn="changeColumn">
       <div slot="top">
         <el-form label-width="82px">
           <el-row :gutter="20">
@@ -20,8 +20,8 @@
       </div>
     </table-bar>
 
-    <tao-table :showPage="false" :data="tableData">
-      <el-table-column label="分类" style="display: flex;">
+    <tao-table :showPage="false" :data="tableData" ref="table">
+      <el-table-column v-if="columns[0].show" label="分类" style="display: flex;">
         <template slot-scope="scope" >
           <svg class="svg-icon" aria-hidden="true">
             <use :xlink:href="scope.row.icon"></use>
@@ -31,10 +31,9 @@
           </span>
         </template>
       </el-table-column>
-
-      <el-table-column prop="number" label="文章数量" show-overflow-tooltip />
-      <el-table-column prop="date" label="创建时间" show-overflow-tooltip />
-      <el-table-column label="状态" prop="status">
+      <el-table-column v-if="columns[1].show" prop="number" label="文章数量" />
+      <el-table-column v-if="columns[2].show" prop="date" label="创建时间" />
+      <el-table-column v-if="columns[3].show" label="状态" prop="status">
         <template slot-scope="scope">
           <el-tag size="mini" :type="scope.row.status === 1 ? '' : 'info'">
             {{scope.row.status === 1 ? '启用' : '禁用'}}
@@ -170,10 +169,15 @@
             date: '2020-03-12'
           },
         ],
-      };
+        columns: [
+          { name: "分类", show: true },
+          { name: "文章数量", show: true },
+          { name: "创建时间", show: true },
+          { name: "状态", show: true }
+        ]
+      }
     },
-    mounted() {
-    },
+    mounted() {},
     methods: {
       showDialog(type) {
         this.dvEdit = true
@@ -190,6 +194,10 @@
         }).then(() => {
           
         }).catch(() => {})
+      },
+      changeColumn(columns) {
+        this.columns = columns
+        this.$refs.table.doLayout()
       }
     }
   };

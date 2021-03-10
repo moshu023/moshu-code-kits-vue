@@ -1,6 +1,6 @@
 <template>
   <div class='page-content'>
-    <table-bar :showTop="false">
+    <table-bar :showTop="false" :columns="columns" @changeColumn="changeColumn">
       <div slot="top">
         <el-form label-width="55px">
           <el-row :gutter="20">
@@ -20,12 +20,12 @@
       </div>
     </table-bar>
     
-    <tao-table :data="list" :page="page" @changePage="getApiList">
-      <el-table-column label="ID" prop="ID" width="100"/>
-      <el-table-column label="路径" prop="path"/>
-      <el-table-column label="分组" prop="apiGroup"/>
-      <el-table-column label="描述" prop="description"/>
-      <el-table-column label="请求" prop="method">
+    <tao-table :data="list" :page="page" @changePage="getApiList" ref="table">
+      <el-table-column v-if="columns[0].show" label="ID" prop="ID" width="100"/>
+      <el-table-column v-if="columns[1].show" label="路径" prop="path"/>
+      <el-table-column v-if="columns[2].show" label="分组" prop="apiGroup"/>
+      <el-table-column v-if="columns[3].show" label="描述" prop="description"/>
+      <el-table-column v-if="columns[4].show" label="请求" prop="method">
         <template slot-scope="scope">
           <el-tag size="mini" type="success" v-if="scope.row.method === 'GET'">{{scope.row.method}}</el-tag>
           <el-tag size="mini" v-if="scope.row.method === 'POST'">{{scope.row.method}}</el-tag>
@@ -94,7 +94,14 @@
           page: 1,
           pageSize: 14,
           total: 0
-        }
+        },
+        columns: [
+          { name: "ID", show: true },
+          { name: "路径", show: true },
+          { name: "分组", show: true },
+          { name: "描述", show: true },
+          { name: "请求", show: true }
+        ]
       };
     },
     mounted() {
@@ -147,6 +154,10 @@
         }).then(() => {
           
         }).catch(() => {})
+      },
+      changeColumn(columns) {
+        this.columns = columns
+        this.$refs.table.doLayout()
       }
     },
   }

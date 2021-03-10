@@ -1,6 +1,6 @@
 <template>
   <div class='page-content'>
-    <table-bar :showTop="false">
+    <table-bar :showTop="false" :columns="columns" @changeColumn="changeColumn">
       <div slot="top">
         <el-form label-width="55px">
           <el-row :gutter="20">
@@ -27,19 +27,19 @@
       </div>
     </table-bar>
     
-    <tao-table :data="serverList" :showPage="false">
-      <el-table-column label="名称" prop="name"/>
-      <el-table-column label="ip" prop="ip"/>
-      <el-table-column label="端口" prop="port"/>
-      <el-table-column label="账号" prop="account"/>
-      <el-table-column label="状态" prop="status">
+    <tao-table :data="serverList" :showPage="false" ref="table">
+      <el-table-column v-if="columns[0].show" label="名称" prop="name"/>
+      <el-table-column v-if="columns[1].show" label="ip" prop="ip"/>
+      <el-table-column v-if="columns[2].show" label="端口" prop="port"/>
+      <el-table-column v-if="columns[3].show" label="账号" prop="account"/>
+      <el-table-column v-if="columns[4].show" label="状态" prop="status">
         <template slot-scope="scope">
           <el-tag :type="scope.row.status === 1 ? 'success' : 'info'">
             {{scope.row.status === 1 ? '启用' : '禁用'}}
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="创建日期" prop="create_time"/>
+      <el-table-column v-if="columns[5].show" label="创建日期" prop="create_time"/>
       <el-table-column fixed="right" label="操作" width="150px">
         <template slot-scope="scope">
           <el-button type="text" icon="el-icon-edit" @click="showDialog('edit')">
@@ -100,11 +100,16 @@
             status: 1,
             create_time: '2021-1-5'
           }
+        ],
+        columns: [
+          { name: "名称", show: true },
+          { name: "IP", show: true },
+          { name: "端口", show: true },
+          { name: "账号", show: true },
+          { name: "状态", show: true },
+          { name: "创建日期", show: true }
         ]
       };
-    },
-    mounted() {
-      
     },
     methods: {
       showDialog(type) {
@@ -122,8 +127,12 @@
         }).then(() => {
           this.serverList.splice(scope.$index, 1)
         }).catch(() => {})
+      },
+      changeColumn(columns) {
+        this.columns = columns
+        this.$refs.table.doLayout()
       }
-    },
+    }
   }
 </script>
 

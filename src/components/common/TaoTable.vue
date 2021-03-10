@@ -209,6 +209,11 @@ export default {
     tableRowClassName({ row, rowIndex }) {
       return (rowIndex + 1) % 2 === 0 ? "even-row" : "odd-row";
     },
+    doLayout() {
+      this.$nextTick(() => {
+        this.$refs.table.doLayout()
+      })
+    },
   },
   watch: {
     data: {

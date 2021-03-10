@@ -1,6 +1,6 @@
 <template>
   <div class='page-content'>
-    <table-bar :showTop="false">
+    <table-bar :showTop="false" :columns="columns" @changeColumn="changeColumn">
       <div slot="top">
         <el-form label-width="70px">
           <el-row :gutter="20">
@@ -61,29 +61,29 @@
       </div>
     </table-bar>
     
-    <tao-table :data="userList" :showPage="false">
-      <el-table-column label="头像" prop="avatar">
+    <tao-table :data="userList" :showPage="false" ref="table">
+      <el-table-column label="头像" prop="avatar" v-if="columns[0].show">
         <template slot-scope="scope">
           <img class="avatar" :src="scope.row.avatar"/>
         </template>
       </el-table-column>
-      <el-table-column label="用户名" prop="username"/>
-      <el-table-column label="手机号" prop="mobile"/>
-      <el-table-column label="邮箱" prop="email"/>
-      <el-table-column label="性别" prop="sex">
+      <el-table-column label="用户名" prop="username" v-if="columns[1].show"/>
+      <el-table-column label="手机号" prop="mobile" v-if="columns[2].show"/>
+      <el-table-column label="邮箱" prop="email" v-if="columns[3].show"/>
+      <el-table-column label="性别" prop="sex" v-if="columns[4].show">
         <template slot-scope="scope">
           {{scope.row.sex === 1 ? '男' : '女'}}
         </template>
       </el-table-column>
-      <el-table-column label="部门" prop="dep"/>
-      <el-table-column label="状态" prop="status">
+      <el-table-column label="部门" prop="dep" v-if="columns[5].show"/>
+      <el-table-column label="状态" prop="status" v-if="columns[6].show">
         <template slot-scope="scope">
           <el-tag size="mini" :type="scope.row.status === 1 ? '' : 'info'">
             {{scope.row.status === 1 ? '启用' : '禁用'}}
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="创建日期" prop="create_time"/>
+      <el-table-column label="创建日期" prop="create_time" v-if="columns[7].show"/>
       <el-table-column fixed="right" label="操作" width="150px">
         <template slot-scope="scope">
           <el-button type="text" icon="el-icon-edit" @click="showDialog('edit')">
@@ -247,11 +247,18 @@
             create_time: '2020-11-14',
             avatar: require('@img/avatar/avatar10.jpg')
           },
+        ],
+        columns: [
+          { name: "头像", show: true },
+          { name: "用户名", show: true },
+          { name: "手机号", show: true },
+          { name: "邮箱", show: true },
+          { name: "性别", show: true },
+          { name: "部门", show: true },
+          { name: "状态", show: true },
+          { name: "创建日期", show: true },
         ]
       };
-    },
-    mounted() {
-      
     },
     methods: {
       showDialog(type) {
@@ -269,8 +276,12 @@
         }).then(() => {
           this.userList.splice(scope.$index, 1)
         }).catch(() => {})
+      },
+      changeColumn(columns) {
+        this.columns = columns
+        this.$refs.table.doLayout()
       }
-    },
+    }
   }
 </script>
 
