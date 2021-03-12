@@ -32,6 +32,13 @@
       return {
         list: [
           {
+            title: '新增国际化',
+            level: '普通',
+            type: '公告',
+            userName: '超级管理员',
+            sendTime: '2021-3-13 0:10'
+          },
+          {
             title: '新增通知中心',
             level: '普通',
             type: '公告',

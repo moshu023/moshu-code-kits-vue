@@ -1,9 +1,12 @@
 <template>
   <div class="login">
     <div class="left-wrap" :style="{backgroundImage: `url(${leftBg})`}">
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#iconzhaopian-copy"></use>
-      </svg>
+      <div class="logo">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#iconzhaopian-copy"></use>
+        </svg>
+        <h1 class="title">Tao Admin</h1>
+      </div>
 
       <img class="left-img" src="@img/lf_icon.svg"/>
     </div>
@@ -16,20 +19,20 @@
       </div>
       <div class="login-wrap">
         <div class="form">
-          <h3>登 录</h3>
+          <h3>{{$t('login.title')}}</h3>
           <el-col style="margin-top: 30px">
-            <span class="input-label">账号</span>
+            <span class="input-label">{{$t('login.label[0]')}}</span>
             <el-input placeholder="admin" size="medium" v-model.trim="account"/>
           </el-col>
           <el-col style="margin-top: 15px">
-            <span class="input-label">密码</span>
+            <span class="input-label">{{$t('login.label[1]')}}</span>
             <el-input placeholder="123456" size="medium" v-model.trim="password" type="password"
               autocomplete="off"
               @keyup.enter.native="login"
             />
           </el-col>
           <el-col style="margin-top: 15px">
-            <span class="input-label">验证码</span>
+            <span class="input-label">{{$t('login.label[2]')}}</span>
             <el-col class="code">
               <el-input size="medium" v-model.trim="code" @keyup.enter.native="login"/>
               <img :src="captcha.picPath" @click="getCaptcha()"/>
@@ -37,7 +40,7 @@
           </el-col>
           <el-col style="margin-top: 30px">
             <el-button class="login-btn" @click="login" :loading="loading">
-              {{btnText}}
+              {{$t('login.btn')}}
             </el-button>
           </el-col>
         </div>
@@ -58,7 +61,6 @@
         code: '',
         leftBg: require('@img/lf_bg.png'),
         loading: false,
-        btnText: '登录',
         captcha: {
           captchaId: '',
           picPath: ''
@@ -66,6 +68,7 @@
       }
     },
     mounted() {
+      this.initLanguage()
       this.getCaptcha()
     },
     methods: {
@@ -82,17 +85,17 @@
         let {account, password, code, captcha} = this
 
         if(!account) {
-          this.$message.error('请输入账号')
+          this.$message.error(this.$t('login.tips[0]'))
           return
         }
 
         if(!password) {
-          this.$message.error('请输入密码')
+          this.$message.error(this.$t('login.tips[1]'))
           return
         }
 
         if(!code) {
-          this.$message.error('请输入验证码')
+          this.$message.error(this.$t('login.tips[2]'))
           return
         }
 
@@ -104,7 +107,6 @@
         }).then(res => {
           if(res.code === 0) {
             this.loading = true
-            this.btnText = '登录中...'
             this.$store.dispatch('user/setUserInfo', res.data)
             this.$store.dispatch('user/setLoginStatus', true)
 
@@ -117,7 +119,17 @@
             this.getCaptcha()
           }
         })
-      }
+      },
+      initLanguage() {
+        let sys = JSON.parse(localStorage.getItem("sys"))
+        if(sys) {
+          let { language } = sys.user
+          if(language) {
+            this.$i18n.locale = language
+            this.$store.dispatch('user/setLanguage', language)
+          }
+        }
+      },
     }
   }
 </script>
@@ -152,6 +164,19 @@
       background-size: cover;
       padding: 20px;
       box-sizing: border-box;
+
+      .logo {
+        display: flex;
+        align-items: center;
+
+        .title {
+          color: #555;
+          font-size: 20px;
+          font-weight: 500;
+          // font-size: ;
+          margin-left: 5px;
+        }
+      }
 
       .left-img {
         display: block;

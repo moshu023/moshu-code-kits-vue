@@ -30,11 +30,11 @@
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item command="/user/user">
                 <i class="menu-icon iconfont">&#xe725;</i>
-                <span class="menu-txt">个人中心</span>
+                <span class="menu-txt">{{$t('topBar.user[0]')}}</span>
               </el-dropdown-item>
               <el-dropdown-item command="loginOut">
                 <i class="menu-icon iconfont">&#xe678;</i>
-                <span class="menu-txt">退出登录</span>
+                <span class="menu-txt">{{$t('topBar.user[1]')}}</span>
               </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
@@ -45,10 +45,10 @@
               <i class="iconfont">&#xe618;</i>
             </div>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item command="zh_CN">
+              <el-dropdown-item command="cn">
                 <span class="menu-txt">中文</span>
               </el-dropdown-item>
-              <el-dropdown-item command="en_US">
+              <el-dropdown-item command="en">
                 <span class="menu-txt">English</span>
               </el-dropdown-item>
             </el-dropdown-menu>
@@ -111,6 +111,9 @@
         showNotice: false
       }
     },
+    created() {
+      this.initLanguage()
+    },
     mounted() {
       this.initSetting()
       document.addEventListener("click", this.bodyCloseNotice)
@@ -128,9 +131,9 @@
       },
       // 退出登录
       loginOut() {
-        this.$confirm('您确定退出登录当前账户吗？打开的标签页和个人设置将会保存。', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
+        this.$confirm(this.$t('common.logOutTips'), this.$t('common.tips'), {
+          confirmButtonText: this.$t('common.define'),
+          cancelButtonText: this.$t('common.cancel'),
           type: 'warning'
         }).then(() => {
           document.getElementsByTagName("html")[0].removeAttribute('class') // 移除暗黑主题
@@ -148,24 +151,28 @@
         exitScreen()
         this.isFullScreen = false
       },
-      // 获取多语言
-      getLanguage() {
-        let {locale} = this.$i18n
-        let language = '';
-
-        switch(locale) {
-          case 'zh_CN':
-            language = '中文';
-            break;
-          case 'en_US':
-            language = 'English';
-            break;
+      // 初始化语言
+      initLanguage() {
+        let sys = JSON.parse(localStorage.getItem("sys"))
+        if(sys) {
+          let { language } = sys.user
+          if(language) {
+            this.changeLanguage(language)
+          }else {
+            this.$message.error('Switch failed')
+          }
         }
-        // this.language = language
       },
       // 改变语言
       changeLanguage(lang) {
+        let { locale } = this.$i18n
+
+        if(lang === locale) {
+          return
+        }
+
         this.$i18n.locale = lang
+        this.$store.dispatch('user/setLanguage', lang)
       },
       // 左侧菜单展开|缩小
       visibleMenu() {

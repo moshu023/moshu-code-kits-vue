@@ -3,7 +3,7 @@
     <div class="head">
       <p class="line-title">
         <i class="iconfont" style="color: #7E3AD5; background: rgba(249, 240, 255, 1)">&#xe817;</i>
-        <span>流量趋势</span>
+        <span>{{$t('console.lingChart.title')}}</span>
       </p>
     </div>
     

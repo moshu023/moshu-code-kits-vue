@@ -6,7 +6,7 @@
       <li v-for="(item, index) in barList" :key="index" :class="{'active': barActiveIndex === index}"
         @click="changeBar(index)"
       >
-        {{item.name}} ({{item.num}})
+        {{$t(`notice.bar[${index}]`)}} ({{item.num}})
       </li>
     </ul>
     <div class="content">
@@ -42,22 +42,22 @@
 
         <div class="empty-tips" v-show="barActiveIndex === 0 && noticeList.length === 0">
           <i class="iconfont">&#xe707;</i>
-          <p>暂无{{barList[barActiveIndex].name}}</p>
+          <p>{{$t('notice.text[0]')}} {{$t(`notice.bar[${barActiveIndex}]`)}}</p>
         </div>
         <div class="empty-tips" v-show="barActiveIndex === 1 && msgList.length === 0">
           <i class="iconfont">&#xe707;</i>
-          <p>暂无{{barList[barActiveIndex].name}}</p>
+          <p>{{$t('notice.text[0]')}} {{$t(`notice.bar[${barActiveIndex}]`)}}</p>
         </div>
         <div class="empty-tips" v-show="barActiveIndex === 2 && pendingList.length === 0">
           <i class="iconfont">&#xe707;</i>
-          <p>暂无{{barList[barActiveIndex].name}}</p>
+          <p>{{$t('notice.text[0]')}} {{$t(`notice.bar[${barActiveIndex}]`)}}</p>
         </div>
       </vue-scroll>
     </div>
 
     <div class="load" @click="loadMore">
       <i :style="{opacity: isLoading ? 1 : 0}" class="el-icon-loading"></i>
-      <span>加载更多</span>
+      <span>{{$t('notice.btn[0]')}}</span>
     </div>
   </div>
 </template>
@@ -113,6 +113,10 @@
         },
         noticeList: [
           {
+            title: '新增国际化',
+            time: '2021-3-13 0:10',
+            type: 'notice'
+          },{
             title: '新增通知中心',
             time: '2021-2-26 23:50',
             type: 'notice'
@@ -246,7 +250,7 @@
       display: flex;
       justify-content: space-between;
       border-bottom: 1px solid #F0F0F0;
-      padding: 0 20px;
+      padding: 0 10px;
       box-sizing: border-box;
       
       li {
@@ -257,8 +261,9 @@
         font-size: 14px;
         cursor: pointer;
         transition: color .3s;
-        margin-right: 20px;
+        margin-right: 10px;
         @include userSelect;
+        overflow: hidden;
 
         &:last-of-type {
           margin-right: 0;

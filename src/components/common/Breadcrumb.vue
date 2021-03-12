@@ -2,7 +2,7 @@
   <div class="breadcrumb">
     <ul>
       <li v-for="(item, index) in breadList" :key="index">
-        <span>{{item.meta.title}}</span>
+        <span>{{switchLanguage(item.meta.title, item.meta.title_en)}}</span>
         <i v-if="index+1 !== breadList.length">/</i>
       </li>
     </ul>
@@ -10,6 +10,7 @@
 </template>
 
 <script>
+  import  { switchLanguage } from '@/utils/lang'
   export default {
     name: 'Breadcrumb',
     data() {
@@ -19,19 +20,19 @@
     },
     watch: {
       $route() {
-        this.getBreadcrumb();
+        this.getBreadcrumb()
       }
     },
     created() {
-      this.getBreadcrumb();
+      this.getBreadcrumb()
     },
     methods: {
       isHome(route) {
         return route.name === "/";
       },
       getBreadcrumb() {
-        let matched = this.$route.matched;
-        let list = [];
+        let matched = this.$route.matched
+        let list = []
 
         //如果不是首页
         if (!this.isHome(matched[0])) {
@@ -46,7 +47,10 @@
           })
         }
         this.breadList = list;
-      }
+      },
+      switchLanguage(cn, en) {
+        return switchLanguage(cn, en)
+      },
     }
   };
 </script>

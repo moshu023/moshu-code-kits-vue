@@ -6,19 +6,19 @@
     :before-close="close"
   >
     <div class="drawer-con">
-      <p class="title">主题风格</p>
+      <p class="title">{{$t("setting.theme.title")}}</p>
       <div class="theme-wrap">
         <div class="item" v-for="(item, index) in dayThemeList" :key="item.theme" @click="setDarkTheme(item.theme)">
           <div class="box">
             <div :style="{background: item.color[0] + '!important'}"></div>
             <div :style="{background: index === 2 ? item.color[1] : item.color[0] + '!important'}"></div>
           </div>
-          <p class="name">{{item.name}}</p>
+          <p class="name">{{$t(`setting.theme.list[${index}]`)}}</p>
           <div class="active" v-show="item.theme === currentView"></div>
         </div>
       </div>
 
-      <p class="title" style="margin-top: 35px">菜单风格</p>
+      <p class="title" style="margin-top: 35px">{{$t("setting.menu.title")}}</p>
       <div class="menu-theme-wrap">
         <div class="item" v-for="item in themeList" :key="item.theme" @click="setUpTheme(item.theme)">
           <div class="box">
@@ -29,10 +29,10 @@
         </div>
       </div>
 
-      <p class="title" style="margin-top: 40px">基础配置</p>
+      <p class="title" style="margin-top: 40px">{{$t("setting.basics.title")}}</p>
       <div class="basic-box">
         <div class="item" style="display: flex">
-          <span>侧边栏开启手风琴模式</span>
+          <span>{{$t("setting.basics.list[0]")}}</span>
           <el-switch
             v-model="uniqueOpened"
             active-color="#1F8CEB"
@@ -42,7 +42,7 @@
           </el-switch>
         </div>
         <div class="item">
-          <span>显示折叠侧边栏按钮</span>
+          <span>{{$t("setting.basics.list[1]")}}</span>
           <el-switch
             v-model="showMenuButton"
             active-color="#1F8CEB"
@@ -52,7 +52,7 @@
           </el-switch>
         </div>
         <div class="item">
-          <span>显示重载页面按钮</span>
+          <span>{{$t("setting.basics.list[2]")}}</span>
           <el-switch
             v-model="showRefreshButton"
             active-color="#1F8CEB"
@@ -62,7 +62,7 @@
           </el-switch>
         </div>
         <div class="item mobile-hide">
-          <span>显示全局面包屑导航</span>
+          <span>{{$t("setting.basics.list[3]")}}</span>
           <el-switch
             v-model="showCrumbs"
             active-color="#1F8CEB"
@@ -72,7 +72,7 @@
           </el-switch>
         </div>
         <div class="item">
-          <span>自动关闭个性化设置</span>
+          <span>{{$t("setting.basics.list[4]")}}</span>
           <el-switch
             v-model="autoClose"
             active-color="#1F8CEB"
@@ -112,17 +112,14 @@
         themeList: setting.themeList,
         dayThemeList: [
           {
-            name: '浅色',
             theme: 'white',
             color: ['#fff', '#fff']
           },
           {
-            name: '深色',
             theme: 'dark',
             color: ['#22252A']
           },
           {
-            name: '自动',
             theme: 'auto',
             color: ['#fff', '#22252A'],
           }

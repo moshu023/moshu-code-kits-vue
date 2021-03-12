@@ -4,7 +4,7 @@
       <el-submenu v-if="isNotEmpty(item.children)" :index="item.path || item.title">
         <template slot="title">
           <i class="iconfont" v-if="item.icon">{{item.icon}}</i>
-          <span>{{item.title}}</span>
+          <span>{{switchLanguage(item.title, item.title_en)}}</span>
         </template>
         <submenu :list="item.children" :isMobile="isMobile" @close="closeMenu"/>
       </el-submenu>
@@ -15,7 +15,7 @@
       >
         <template slot="title">
           <i class="iconfont" v-if="item.icon">{{item.icon}}</i>
-          <span>{{item.title}}</span>
+          <span>{{switchLanguage(item.title, item.title_en)}}</span>
         </template>
       </el-menu-item>
     </div>
@@ -23,6 +23,7 @@
 </template>
 
 <script>
+  import  { switchLanguage } from '@/utils/lang'
   export default {
     name: "Submenu",
     props: {
@@ -30,6 +31,9 @@
       isMobile: Boolean
     },
     methods: {
+      switchLanguage(cn, en) {
+        return switchLanguage(cn, en)
+      },
       goPage(item) {
         let { path, params } = item
         let { path: currentPath } = this.$route

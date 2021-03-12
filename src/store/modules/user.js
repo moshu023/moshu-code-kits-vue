@@ -4,6 +4,7 @@
 
 const state = {
   user: {
+    language: 'cn', // 语言
     isLogin: false, // 是否登录
     info: {},       // 用户信息
     worktab: {      // 选项卡
@@ -43,6 +44,16 @@ const mutations = {
       saveStoreStorage(sys)
     }
   },
+  // 设置语言
+  setLanguage(state, lang) {
+    state.user.language = lang
+
+    let sys = JSON.parse(localStorage.getItem("sys"))
+    if(sys) {
+      sys.user.language = lang
+      saveStoreStorage(sys)
+    }
+  },
   // 设置用户信息
   setUserInfo(state, e) {
     state.user.info = e.user
@@ -71,6 +82,9 @@ const actions = {
   },
   setLoginStatus({commit}, e) {
     commit('setLoginStatus', e)
+  },
+  setLanguage({commit}, e) {
+    commit('setLanguage', e)
   },
   setUserInfo({commit}, e) {
     commit('setUserInfo', e)

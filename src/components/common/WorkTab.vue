@@ -7,7 +7,7 @@
           :class="{'activ-tab' : i.path === activeTab}"
           @click="clickWorktab(i.path)"
         >
-          {{i.title}}
+          {{switchLanguage(i.title, i.title_en)}}
           <i class="el-icon-close" @click.stop="closeWorktab('current', i.path)" v-if="index !== 0"></i>
         </li>
       </ul>
@@ -18,16 +18,16 @@
         <div class="btn el-icon-arrow-down"/>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item icon="el-icon-arrow-left" command="left">
-            <span style="menu-txt">关闭左侧</span>
+            <span style="menu-txt">{{$t('worktab.btn[0]')}}</span>
           </el-dropdown-item>
           <el-dropdown-item icon="el-icon-arrow-right" command="right">
-            <span style="menu-txt">关闭右侧</span>
+            <span style="menu-txt">{{$t('worktab.btn[1]')}}</span>
           </el-dropdown-item>
           <el-dropdown-item icon="el-icon-close" command="other">
-            <span style="menu-txt">关闭其它</span>
+            <span style="menu-txt">{{$t('worktab.btn[2]')}}</span>
           </el-dropdown-item>
           <el-dropdown-item icon="el-icon-error" command="all">
-            <span style="menu-txt">关闭全部</span>
+            <span style="menu-txt">{{$t('worktab.btn[3]')}}</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -37,6 +37,7 @@
 
 <script>
   import { mapState } from 'vuex'
+  import  { switchLanguage } from '@/utils/lang'
 
   export default {
     name: 'Worktab',
@@ -44,7 +45,7 @@
     computed: {
       ...mapState({
         worktab: state => state.worktab.worktab,
-        menu: state => state.menu
+        menu: state => state.menu,
       }),
       worktabs() {
         return this.worktab.opened
@@ -231,6 +232,9 @@
           x = offsetLeft - labelWidth - labelRight
         }
         scroll.scrollTo({x})
+      },
+      switchLanguage(cn, en) {
+        return switchLanguage(cn, en)
       }
     }
   }

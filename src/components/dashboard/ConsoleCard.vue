@@ -3,7 +3,7 @@
     <ul>
       <li v-for="(item, index) in dataList" :key="index" :style="dataListStyle">
         <svg class="svg-icon " aria-hidden="true"><use :xlink:href="item.icon"></use></svg>
-        <span class="des">{{item.des}}</span>
+        <span class="des">{{$t(`console.card[${index}]`)}}</span>
         <count-to class="number" :startVal='item.startVal' :endVal='item.endVal' :duration='1500' separator='' />
       </li>
     </ul>

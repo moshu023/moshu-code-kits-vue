@@ -8,7 +8,7 @@ import setting from '@/config/setting'
 Vue.use(Router)
 
 // 不需要权限的路由
-const routes = [
+export const routes = [
   {
     path: '/',
     redirect: '/dashboard/console'
@@ -228,7 +228,7 @@ export const allowRouters = [
         path: 'menu',
         component: () => import('@/pages/menu/Menu'),
         meta: {
-          title: '权限设置'
+          title: '菜单权限'
         }
       },
       {
@@ -249,10 +249,12 @@ export const allowRouters = [
   }
 ]
 
+export const allRoutes = routes.concat(allowRouters);
+
 router.beforeEach((to, from, next) => {
   let isLogin = false
   let { meta, matched } = to
-  let { title, newPage, keepAlive } = meta
+  let { title, title_en, newPage, keepAlive } = meta
   let sys = JSON.parse(localStorage.getItem("sys"))
 
   if(sys) {
@@ -286,12 +288,14 @@ router.beforeEach((to, from, next) => {
     to: {
       name: to.name ? to.name : '',
       title: (to.meta && title) ? title : '',
+      title_en: (to.meta && title_en) ? title_en : '',
       path: to.path,
       params: to.params
     },
     from: {
       name: from.name ? from.name : '',
       title: (from.meta && from.meta.title) ? from.meta.title : '',
+      title_en: (from.meta && from.meta.title_en) ? from.meta.title_en : '',
       path: from.path,
       params: to.params
     }

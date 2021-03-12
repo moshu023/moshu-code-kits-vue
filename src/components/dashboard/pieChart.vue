@@ -3,7 +3,7 @@
     <div class="head">
       <p class="line-title">
         <i class="iconfont" style="color: #FF9592; background: rgba(242, 109, 91, 0.15)">&#xe61c;</i>
-        <span>分类统计</span>
+        <span>{{$t('console.pieChart.title')}}</span>
       </p>
     </div>
     <div class="pie-chart">

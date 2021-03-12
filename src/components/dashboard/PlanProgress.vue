@@ -3,7 +3,7 @@
     <div class="head">
       <p class="line-title">
         <i class="iconfont" style="color: #95DE64; background: rgba(149, 222, 100, 0.15)">&#xe60a;</i>
-        <span>计划</span>
+        <span>{{$t('console.plan.title')}}</span>
       </p>
     </div>
     <div class="table-box">

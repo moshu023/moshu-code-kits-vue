@@ -3,7 +3,7 @@
      <div class="head">
       <p class="line-title">
         <i class="iconfont" style="font-size: 13px; color: #FEB062; background: rgba(254, 176, 98, 0.15)">&#xe6de;</i>
-        <span>{{title}}</span>
+        <span>{{$t('console.todo.title')}}</span>
       </p>
      </div>
      <div class="progress">

@@ -3,7 +3,7 @@
     <div class="head">
       <p class="line-title">
         <i class="iconfont" style="color: #1890FF; background-color: rgb(230, 247, 255)">&#xe75e;</i>
-        <span>访问量</span>
+        <span>{{$t('console.histogram.title')}}</span>
       </p>
     </div>
     
