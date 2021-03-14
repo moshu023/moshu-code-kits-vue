@@ -121,12 +121,18 @@
       "title": "组件中心",
       "title_en": "Components",
       "icon": "\ue61c",
-      "path": "",
-      "children": [{
+      "path": "/widget",
+      "children": [
+        {
           "id": 501,
           "title": "Element UI",
           "title_en": "Element UI",
           "path": "https://element.eleme.cn/#/zh-CN"
+        },{
+          "id": 502,
+          "title": "Excel",
+          "title_en": "Excel",
+          "path": "/widget/excel"
         }
       ]
     },

@@ -52,7 +52,7 @@
       <!-- 没有数据 -->
       <div slot="empty" class="empty" style="padding: 20px 0">
         <div v-if="showEmptyTips">
-          <i class="el-icon-box"></i>
+          <i class="iconfont">&#xe707;</i>
           <p>{{ emptyText }}</p>
         </div>
       </div>
