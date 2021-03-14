@@ -46,15 +46,14 @@
       }),
       routerPath() {
         let { current } = this.worktab
-        let { path, params } = current
-        let { status } = current.params
+        let { path } = current
 
         // 个人中心折叠菜单
         if(path === '/user/user') {
           this.defaultOpenedsArray = []
         }
 
-        return status ? path + params.status : path
+        return path
       }
     },
     watch: { 
@@ -73,7 +72,6 @@
     },
     data() {
       return {
-        status: '',
         systemName: setting.systemName, // 系统名称
         menuList: [],                   // 菜单数据
         collapse: false,                // 是否水平折叠收起菜单
