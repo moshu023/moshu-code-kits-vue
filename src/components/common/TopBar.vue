@@ -158,8 +158,6 @@
           let { language } = sys.user
           if(language) {
             this.changeLanguage(language)
-          }else {
-            this.$message.error('Switch failed')
           }
         }
       },
