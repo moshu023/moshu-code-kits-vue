@@ -16,6 +16,11 @@
   }
 }
 
+// 顶部进度条颜色
+#nprogress .bar {
+  background: rgba($color: #409EFF, $alpha: 0.8);
+}
+
 // 处理移动端组件兼容性
 @media screen and (max-width: $device-phone){
   * {

@@ -65,25 +65,8 @@ Tao Admin 是一套企业级的高颜值、高体验、高性能的通用型后�
 ### 兼容性
 - 支持 Chrome、Safari、Firefox 等现代主流浏览器。
 
-### 技术支持（QQ群）
-![avatar](https://www.qiniu.lingchen.kim/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20210225154424.png)
-
-### 更新
-**2020-12-17 22:06：**
-- 菜单列表mock本地真实数据
-- 如何修改菜单权限？
-- 修改static/mock/menu.json文件
-- 如何修改按钮权限？
-- 请找到文件下permission（存储页面按钮相关权限）
-**2020-12-20 0:15：**
-- 新增暗黑主题
-**2021-01-14 0:20：**
-- 新增使用文档
-**2020-1-17 21:12：**
-- 前后端由https访问改为http访问
-- 登录、API管理接入接口
-**2021-2-21 8:04：**
-- 移动端自适应
+### 技术支持
+- 595234664（QQ群）
 
 ### 安装运行
 ``` bash
@@ -100,4 +83,16 @@ npm run build
 npm run build --report
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+### 常见问题
+
+**安装失败:**
+
+如果使用npm安装失败，建议使用淘宝npm镜像库来安装依赖
+
+``` bash
+npm i -g cnpm --registry=https://registry.npm.taobao.org
+
+cnpm install
+
+npm run dev
+```

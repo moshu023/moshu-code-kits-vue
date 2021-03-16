@@ -1,3 +1,5 @@
+// 导出全局组件
+
 import MenuLeft from '@/components/common/MenuLeft'
 import TopBar from '@/components/common/TopBar'
 import WorkTab from '@/components/common/WorkTab'

@@ -10,6 +10,9 @@ const state = {
     showRefreshButton: true,  // 是否显示页面刷新按钮
     showCrumbs: true,         // 是否显示全局面包屑
     autoClose: false,         // 设置后是否自动关闭窗口
+    showWorkTab: true,        // 是否显示多标签
+    showLanguage: true,       // 是否显示多语言选择
+    showNprogress: false,     // 是否显示顶部进度条
     themeModel: '',           // 主题模式
   }
 }
@@ -50,6 +53,18 @@ const mutations = {
   setLeftMenuCrumbs(state, e) {
     state.setting.showCrumbs = e.show
   },
+  // 是否显示多标签
+  setWorkTab(state, e) {
+    state.setting.showWorkTab = e.show
+  },
+  // 是否显示多语言选择
+  setLanguage(state, e) {
+    state.setting.showLanguage = e.show
+  },
+  // 是否显示顶部进度条
+  setNprogress(state, e) {
+    state.setting.showNprogress = e.show
+  },
   // 主题模式
   setThemeModel(state, theme) {
     state.setting.themeModel = theme
@@ -77,6 +92,15 @@ const actions = {
   },
   setLeftMenuCrumbs({commit}, e) {
     commit('setLeftMenuCrumbs', e)
+  },
+  setWorkTab({commit}, e) {
+    commit('setWorkTab', e)
+  },
+  setLanguage({commit}, e) {
+    commit('setLanguage', e)
+  },
+  setNprogress({commit}, e) {
+    commit('setNprogress', e)
   },
   setThemeModel({commit}, e) {
     commit('setThemeModel', e)

@@ -4,7 +4,10 @@ import Router from 'vue-router'
 import Home from '@/pages/home/Home.vue'
 import Console from '@/pages/dashboard/Console'
 import setting from '@/config/setting'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 
+NProgress.configure({ showSpinner: false, easing: 'ease', speed: 500 })
 Vue.use(Router)
 
 // 不需要权限的路由
@@ -270,7 +273,12 @@ router.beforeEach((to, from, next) => {
   let isLogin = false
   let { meta, matched } = to
   let { title, title_en, newPage, keepAlive } = meta
+  let { showNprogress } = store.state.setting.setting
   let sys = JSON.parse(localStorage.getItem("sys"))
+
+  if(showNprogress) {
+    NProgress.start()
+  }
 
   if(sys) {
     isLogin = sys.user.isLogin
@@ -321,6 +329,14 @@ router.beforeEach((to, from, next) => {
     document.title = `${title} - ${setting.systemName}`
   }
   return
+})
+
+router.afterEach(() => {
+  let { showNprogress } = store.state.setting.setting
+
+  if(showNprogress) {
+    NProgress.done()
+  }
 })
 
 export default router

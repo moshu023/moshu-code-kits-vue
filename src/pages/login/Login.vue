@@ -5,7 +5,7 @@
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#iconzhaopian-copy"></use>
         </svg>
-        <h1 class="title">Tao Admin</h1>
+        <h1 class="title">{{systemName}}</h1>
       </div>
 
       <img class="left-img" src="@img/lf_icon.svg"/>
@@ -15,7 +15,7 @@
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#iconzhaopian-copy"></use>
         </svg>
-        <h1>Tao Admin</h1>
+        <h1>{{systemName}}</h1>
       </div>
       <div class="login-wrap">
         <div class="form">
@@ -56,10 +56,11 @@
   export default {
     data () {
       return {
+        systemName: setting.systemName,
         account: setting.login.username,
         password: setting.login.password,
-        code: '',
         leftBg: require('@img/lf_bg.png'),
+        code: '',
         loading: false,
         captcha: {
           captchaId: '',
@@ -85,18 +86,15 @@
         let {account, password, code, captcha} = this
 
         if(!account) {
-          this.$message.error(this.$t('login.tips[0]'))
-          return
+          this.showTips(0); return;
         }
 
         if(!password) {
-          this.$message.error(this.$t('login.tips[1]'))
-          return
+          this.showTips(1); return;
         }
 
         if(!code) {
-          this.$message.error(this.$t('login.tips[2]'))
-          return
+          this.showTips(2); return;
         }
 
         loginApi({
@@ -130,6 +128,9 @@
           }
         }
       },
+      showTips(index) {
+        this.$message.error(this.$t(`login.tips[${index}]`))
+      }
     }
   }
 </script>

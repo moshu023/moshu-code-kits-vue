@@ -39,7 +39,7 @@
             </el-dropdown-menu>
           </el-dropdown>
         </div>
-        <div class="lang">
+        <div class="lang" v-if="showLanguage">
           <el-dropdown @command="changeLanguage">
             <div class="btn">
               <i class="iconfont">&#xe618;</i>
@@ -100,6 +100,12 @@
       },
       'setting.showCrumbs'(show) {
         this.showCrumbs = show
+      },
+      'setting.showLanguage': {
+        handler(show) {
+          this.showLanguage = show
+        },
+        immediate: true
       }
     },
     data () {
@@ -108,7 +114,8 @@
         showRefreshButton: '',
         showCrumbs: '',
         isFullScreen: false,
-        showNotice: false
+        showNotice: false,
+        showLanguage: true
       }
     },
     created() {

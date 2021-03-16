@@ -1,3 +1,5 @@
+// 自定义指令
+
 export default (Vue)=>{
   // 按钮权限（可见性）
   Vue.directive('allow', {

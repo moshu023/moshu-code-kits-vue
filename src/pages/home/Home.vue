@@ -1,17 +1,17 @@
 <template>
-  <div class="frame" :style="{paddingLeft}">
+  <div class="frame" :style="{paddingLeft, paddingTop}">
     <!-- 左侧菜单 -->
     <menu-left ref="menuLeft" @topBarCollapse="topBarCollapse" />
 
     <!-- 顶栏、选项卡 -->
     <top-bar :menuOpen="menuOpen" @click="visibleMenu" @personalityShow="personalityShow">
-      <work-tab />
+      <work-tab v-if="showWorkTab"/>
     </top-bar>
 
     <!-- 内容区 -->
     <div class="container">
       <keep-alive v-if="isRouterAlive">
-        <router-view></router-view>
+        <router-view :style="{minHeight}"></router-view>
       </keep-alive>
     </div>
 
@@ -26,6 +26,7 @@
 
 <script>
   import { menuLeftOpenWidth, menuLeftShrinkWidth } from "@/config/menu/menu"
+  import { mapState } from 'vuex'
 
   export default {
     provide () {
@@ -35,24 +36,42 @@
     },
     data() {
       return {
-        menuOpen: true,  //菜单是否展开
-        isRouterAlive: true,  // KeepAlive
+        menuOpen: true,         //菜单是否展开
+        isRouterAlive: true,    // KeepAlive
         personalityOpen: false, // 个性化可见性
+        showWorkTab: true,      // 显示多标签
       };
     },
     computed: {
+      ...mapState({
+        setting: state => state.setting.setting
+      }),
       paddingLeft() {
         return this.menuOpen ? menuLeftOpenWidth : menuLeftShrinkWidth
+      },
+      paddingTop() {
+        return this.showWorkTab ? '108px' : '75px'
+      },
+      minHeight() {
+        return `calc(100vh - ${this.showWorkTab ? '120px' : '90px'})`
+      }
+    },
+    watch: {
+      'setting.showWorkTab': {
+        handler(show) {
+          this.showWorkTab = show
+        },
+        immediate: true
       }
     },
     mounted() {
       this.refreshSaveUserData()
     },
     methods: {
-      // 刷新页面保存用户数据到localStorage
+      // Vuex中的数据保存到localStorage，在即将离开当前页面(刷新或关闭)时执行
       refreshSaveUserData() {
         let _self = this
-        window.addEventListener('beforeunload', e => {
+        window.addEventListener('beforeunload', () => {
           _self.$store.dispatch('user/storeStorage')
         })
       },
@@ -84,12 +103,12 @@
 <style lang="scss" scoped>
   .frame {
     width: 100%;
+    min-height: 100vh;
     padding: 108px 0 15px 0;
     box-sizing: border-box;
     transition: padding .3s ease-in-out;
-    min-height: 100vh;
-    overflow: hidden;
     background: $default-background;
+    overflow: hidden;
 
     .container {
       width: calc(100% - 30px);
@@ -99,7 +118,6 @@
 
       // 子页面默认style
       >>> .page-content {
-        min-height: calc(100vh - 120px);
         background: #fff;
         padding: 16px;
         position: relative;

@@ -1,9 +1,6 @@
-import {Message} from "element-ui";
-
-// 退出登录
-export function logOut() {
-  localStorage.removeItem('token')
-}
+import { Message } from "element-ui"
+import setting from '@/config/setting'
+import CryptoJS from "crypto-js";
 
 // 上传文件校验
 export function uploadFileCheck(file, optionFiles, imageMaxSize) {
@@ -59,4 +56,26 @@ export function exitScreen(){
       wscript.SendKeys("{F11}");
     }
   }
+}
+
+// 加密方法
+export function encrypt(word) {
+  let key = CryptoJS.enc.Utf8.parse(setting.cryptojs.key);
+  let iv = CryptoJS.enc.Utf8.parse(setting.cryptojs.iv);
+  
+  let srcs = CryptoJS.enc.Utf8.parse(word);
+  let encrypted = CryptoJS.AES.encrypt(srcs, key, { iv: iv, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7 });
+  return encrypted.ciphertext.toString().toUpperCase();
+}
+
+// 解密方法
+export function decrypt(word) {
+  let key = CryptoJS.enc.Utf8.parse(setting.cryptojs.key);
+  let iv = CryptoJS.enc.Utf8.parse(setting.cryptojs.iv);
+
+  let encryptedHexStr = CryptoJS.enc.Hex.parse(word);
+  let srcs = CryptoJS.enc.Base64.stringify(encryptedHexStr);
+  let decrypt = CryptoJS.AES.decrypt(srcs, key, { iv: iv, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7 });
+  let decryptedStr = decrypt.toString(CryptoJS.enc.Utf8);
+  return decryptedStr.toString();
 }

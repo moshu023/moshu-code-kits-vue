@@ -24,6 +24,9 @@ module.exports = {
         'Show sidebar button',
         'Show reload page button',
         'Show crumb navigation',
+        'Show work tab',
+        'Show multilingual selection',
+        'Show top progress bar',
         'Auto close settings center'
       ]
     }
