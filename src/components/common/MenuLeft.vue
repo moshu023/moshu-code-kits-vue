@@ -66,8 +66,11 @@
       'setting.uniqueOpened' (uniqueOpened) {
         this.uniqueOpened = uniqueOpened
       },
-      'menu.menuList' (list) {
-        this.menuList = list
+      'menu.menuList': {
+        handler(list) {
+          this.menuList = list
+        },
+        immediate: true
       }
     },
     data() {
@@ -86,16 +89,11 @@
         defaultOpenedsArray: []
       }
     },
-    mounted() {
-      this.getMenuList()
+    created() {
       this.initUserSetting()
       this.listenerWindowResize()
     },
     methods: {
-      // 获取菜单列表|权限列表
-      getMenuList() {
-        this.menuList = this.$store.state.menu.menuList
-      },
       // 获取主题
       getTheme(theme) {
         if(theme) {

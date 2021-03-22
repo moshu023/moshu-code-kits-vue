@@ -51,6 +51,7 @@
 
 <script>
   import setting from '@/config/setting'
+  import { getMenuList } from '@/api/menuApi.js'
   import { getCaptchaApi, loginApi } from '@/api/loginApi'
 
   export default {
@@ -68,7 +69,7 @@
         }
       }
     },
-    mounted() {
+    created() {
       this.initLanguage()
       this.getCaptcha()
     },
@@ -107,6 +108,7 @@
             this.loading = true
             this.$store.dispatch('user/setUserInfo', res.data)
             this.$store.dispatch('user/setLoginStatus', true)
+            getMenuList()
 
             setTimeout(() => {
               this.$router.push('/')
