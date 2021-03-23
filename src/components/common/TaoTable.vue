@@ -79,7 +79,16 @@ export default {
   name: "TaoTable",
   props: {
     data: Array,
-    page: Object,
+    page: {
+      type: Object,
+      default: function() {
+        return {
+          page: 1,
+          pageSize: 14,
+          total: 0
+        }
+      }
+    },
     defaultData: Boolean,
     statusTitle: {
       type: String,
