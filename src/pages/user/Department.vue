@@ -206,7 +206,7 @@
 </script>
 
 <style lang='scss' scoped>
-  @import "@css/tree.scss";
+  @import "@styles/tree.scss";
 
   .page-content {
     width: 100%;

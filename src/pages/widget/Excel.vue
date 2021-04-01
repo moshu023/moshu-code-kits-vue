@@ -14,8 +14,8 @@
 </template>
 
 <script>
-  import ExcelExport from "@/components/common/ExcelExport";
-  import ExcelImport from "@/components/common/ExcelImport";
+  import ExcelExport from "@/components/Form/ExcelExport";
+  import ExcelImport from "@/components/Form/ExcelImport";
   export default {
     components: {
       ExcelExport,

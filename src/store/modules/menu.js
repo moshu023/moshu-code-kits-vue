@@ -3,7 +3,8 @@
  */
 
 const state = {
-  menuList: []
+  menuList: [],
+  menuWidth: ''
 }
 
 const getters = {
@@ -13,12 +14,18 @@ const getters = {
 const mutations = {
   setMenuList(state, list) {
     state.menuList = list
+  },
+  setMenuWidth(state, e) {
+    state.menuWidth = e
   }
 }
 
 const actions = {
   setMenuList({commit}, e) {
     commit('setMenuList', e)
+  },
+  setMenuWidth({commit}, e) {
+    commit('setMenuWidth', e)
   }
 }
 

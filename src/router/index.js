@@ -229,7 +229,7 @@ export const allowRouters = [
     children: [
       {
         path: 'menu',
-        component: () => import('@/pages/menu/Menu'),
+        component: () => import('@/pages/menu/menu'),
         meta: {
           title: '菜单权限'
         }
@@ -261,6 +261,13 @@ export const allowRouters = [
         component: () => import('@/pages/widget/excel'),
         meta: {
           title: 'Excel'
+        }
+      },
+      {
+        path: 'icon',
+        component: () => import('@/pages/widget/icon'),
+        meta: {
+          title: 'Icon'
         }
       }
     ]

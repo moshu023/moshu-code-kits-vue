@@ -16,12 +16,12 @@
 </template>
 
 <script>
-  import ConsoleCard from "@/components/dashboard/ConsoleCard"
-  import Histogram from "@/components/dashboard/Histogram"
-  import PlanProgress from "@/components/dashboard/PlanProgress"
-  import LineChart from "@/components/dashboard/LineChart"
-  import RoundProgress from "@/components/dashboard/RoundProgress"
-  import PieChart from "@/components/dashboard/PieChart"
+  import ConsoleCard from "@/components/Views/Dashboard/ConsoleCard"
+  import Histogram from "@/components/Views/Dashboard/Histogram"
+  import PlanProgress from "@/components/Views/Dashboard/PlanProgress"
+  import LineChart from "@/components/Views/Dashboard/LineChart"
+  import RoundProgress from "@/components/Views/Dashboard/RoundProgress"
+  import PieChart from "@/components/Views/Dashboard/PieChart"
 
   export default {
     components: { 

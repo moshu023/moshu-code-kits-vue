@@ -53,7 +53,7 @@ const menuData = [
         title: "个人中心",
         title_en: "User center",
         path: "/user/user",
-        "noMenu": true
+        noMenu: true
       },
       {
         id: 302,
@@ -87,22 +87,22 @@ const menuData = [
         title: "菜单权限",
         title_en: "Menu permissions",
         path: "/menu/menu",
-        "permission": [
+        permission: [
           {
             id: 4011,
             title: "新增",
-            "keep_alive": 1,
-            "permission_mark": "menu/add"
+            keep_alive: 1,
+            permission_mark: "menu/add"
           },{
             id: 4012,
             title: "编辑",
-            "keep_alive": 1,
-            "permission_mark": "menu/edit"
+            keep_alive: 1,
+            permission_mark: "menu/edit"
           },{
             id: 4013,
             title: "删除",
-            "keep_alive": 1,
-            "permission_mark": "menu/delete"
+            keep_alive: 1,
+            permission_mark: "menu/delete"
           }
         ]
       },
@@ -131,6 +131,11 @@ const menuData = [
         title: "Excel",
         title_en: "Excel",
         path: "/widget/excel"
+      },{
+        id: 503,
+        title: "Icon 图标",
+        title_en: "Icon",
+        path: "/widget/icon"
       }
     ]
   },

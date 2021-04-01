@@ -1,13 +1,13 @@
 // 导出全局组件
 
-import MenuLeft from '@/components/common/MenuLeft'
-import TopBar from '@/components/common/TopBar'
-import WorkTab from '@/components/common/WorkTab'
-import Personality from '@/components/common/Personality'
-import TaoTable from '@/components/common/TaoTable'
-import TableBar from '@/components/common/TableBar'
-import FormInput from '@/components/common/FormInput'
-import FormSelect from '@/components/common/FormSelect'
+import MenuLeft from '@/components/Layout/MenuLeft'
+import TopBar from '@/components/Layout/TopBar'
+import WorkTab from '@/components/Layout/WorkTab'
+import Personality from '@/components/Layout/Personality'
+import TaoTable from '@/components/Table/TaoTable'
+import TableBar from '@/components/Table/TableBar'
+import FormInput from '@/components/Form/FormInput'
+import FormSelect from '@/components/Form/FormSelect'
 
 export default (Vue)=>{
   Vue.component("menu-left", MenuLeft)

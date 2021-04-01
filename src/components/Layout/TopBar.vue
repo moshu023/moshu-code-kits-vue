@@ -65,9 +65,9 @@
 </template>
 
 <script>
-  import Breadcrumb from "@/components/common/Breadcrumb"
-  import Notice from "@/components/common/Notice"
-  import { menuLeftOpenWidth, menuLeftShrinkWidth } from "@/config/menu/menu"
+  import Breadcrumb from "@/components/Layout/Breadcrumb"
+  import Notice from "@/components/Layout/Notice"
+  import { menuLeftOpenWidth, menuLeftShrinkWidth } from "@/config/menu"
   import { fullScreen, exitScreen } from "@/utils/util.js"
   import { mapState } from 'vuex'
 

@@ -18,16 +18,16 @@
         <div class="btn el-icon-arrow-down"/>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item icon="el-icon-arrow-left" command="left">
-            <span style="menu-txt">{{$t('worktab.btn[0]')}}</span>
+            <span>{{$t('worktab.btn[0]')}}</span>
           </el-dropdown-item>
           <el-dropdown-item icon="el-icon-arrow-right" command="right">
-            <span style="menu-txt">{{$t('worktab.btn[1]')}}</span>
+            <span>{{$t('worktab.btn[1]')}}</span>
           </el-dropdown-item>
           <el-dropdown-item icon="el-icon-close" command="other">
-            <span style="menu-txt">{{$t('worktab.btn[2]')}}</span>
+            <span>{{$t('worktab.btn[2]')}}</span>
           </el-dropdown-item>
           <el-dropdown-item icon="el-icon-error" command="all">
-            <span style="menu-txt">{{$t('worktab.btn[3]')}}</span>
+            <span>{{$t('worktab.btn[3]')}}</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>

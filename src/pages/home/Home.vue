@@ -25,7 +25,7 @@
 </template>
 
 <script>
-  import { menuLeftOpenWidth, menuLeftShrinkWidth } from "@/config/menu/menu"
+  import { menuLeftOpenWidth, menuLeftShrinkWidth } from "@/config/menu"
   import { mapState } from 'vuex'
 
   export default {
@@ -47,7 +47,9 @@
         setting: state => state.setting.setting
       }),
       paddingLeft() {
-        return this.menuOpen ? menuLeftOpenWidth : menuLeftShrinkWidth
+        let width = this.menuOpen ? menuLeftOpenWidth : menuLeftShrinkWidth
+        this.$store.dispatch('menu/setMenuWidth', width)
+        return width
       },
       paddingTop() {
         return this.showWorkTab ? '108px' : '75px'

@@ -4,7 +4,7 @@
       <svg class="svg-icon" aria-hidden="true">
         <use xlink:href="#iconzhaopian-copy"></use>
       </svg>
-      <p :style="{color: theme.textColor, width: collapse ? '0' : '190px'}">{{systemName}}</p>
+      <p :style="{color: theme.textColor, width: collapse ? '0' : '140px' }">{{systemName}}</p>
     </div>
 
     <el-menu class="el-menu" :class="'el-menu-'+ theme.theme"
@@ -45,8 +45,7 @@
         menu: state => state.menu
       }),
       routerPath() {
-        let { current } = this.worktab
-        let { path } = current
+        let { path } = this.$route
 
         // 个人中心折叠菜单
         if(path === '/user/user') {
@@ -192,8 +191,6 @@
 
     // 白色主题
     .el-menu-white  {
-      
-      // box-shadow: 5px 5px 8px 0 red;
 
       // 选中颜色
       .el-menu-item.is-active {
@@ -266,6 +263,7 @@
     }
 
     .header {
+      width: 100%;
       height: 45px;
       line-height: 45px;
       box-sizing: border-box;
