@@ -269,6 +269,13 @@ export const allowRouters = [
         meta: {
           title: 'Icon'
         }
+      },
+      {
+        path: 'icon-selector',
+        component: () => import('@/pages/widget/IconSelector'),
+        meta: {
+          title: 'IconSelector'
+        }
       }
     ]
   }

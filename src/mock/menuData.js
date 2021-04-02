@@ -136,6 +136,11 @@ const menuData = [
         title: "Icon 图标",
         title_en: "Icon",
         path: "/widget/icon"
+      },{
+        id: 504,
+        title: "图标选择器",
+        title_en: "Icon selector",
+        path: "/widget/icon-selector"
       }
     ]
   },
