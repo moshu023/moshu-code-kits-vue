@@ -111,11 +111,18 @@
       }
 
       .text {
+        height: calc(100% - 2px);
+        display: flex;
+        align-items: center;
         color: #888;
         font-size: 13px;
       }
 
       .arrow {
+        height: calc(100% - 2px);
+        height: calc(100% - 2px);
+        display: flex;
+        align-items: center;
         font-size: 13px;
       }
     }

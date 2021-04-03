@@ -187,4 +187,25 @@ $background-color:#22252A;
   .notice .load {
     border-top: 1px solid $border-color !important;
   }
+
+  .icon-selector .select {
+    border: 1px solid $border-color !important;
+  }
+
+  .page-content .el-tabs-content {
+    border-color: $border-color !important;
+  }
+
+  .el-tabs--card>.el-tabs__header .el-tabs__nav {
+    border-color: $border-color;
+  }
+
+  .el-tabs--card>.el-tabs__header .el-tabs__item.is-active {
+    border-bottom-color: transparent;
+  }
+
+  .el-tabs--card>.el-tabs__header .el-tabs__item {
+    border-left-color: $border-color;
+    border-bottom-color: $border-color;
+  }
 }
