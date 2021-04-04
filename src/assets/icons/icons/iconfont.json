@@ -30,8 +30,8 @@
       "icon_id": "8479682",
       "name": "MSDS",
       "font_class": "MSDS1",
-      "unicode": "e64c",
-      "unicode_decimal": 58956
+      "unicode": "e74c",
+      "unicode_decimal": 59212
     },
     {
       "icon_id": "8479685",
@@ -65,8 +65,8 @@
       "icon_id": "8479695",
       "name": "化工订购",
       "font_class": "huagongdinggou",
-      "unicode": "e651",
-      "unicode_decimal": 58961
+      "unicode": "e951",
+      "unicode_decimal": 59729
     },
     {
       "icon_id": "8479696",
@@ -139,13 +139,6 @@
       "unicode_decimal": 58972
     },
     {
-      "icon_id": "9189107",
-      "name": "设计",
-      "font_class": "sheji",
-      "unicode": "e65d",
-      "unicode_decimal": 58973
-    },
-    {
       "icon_id": "9189108",
       "name": "合同",
       "font_class": "hetong",
@@ -177,8 +170,8 @@
       "icon_id": "9189112",
       "name": "后端开发",
       "font_class": "houduankaifa",
-      "unicode": "e662",
-      "unicode_decimal": 58978
+      "unicode": "e962",
+      "unicode_decimal": 59746
     },
     {
       "icon_id": "9234826",
@@ -198,8 +191,8 @@
       "icon_id": "9234828",
       "name": "已完成",
       "font_class": "yiwancheng",
-      "unicode": "e665",
-      "unicode_decimal": 58981
+      "unicode": "e765",
+      "unicode_decimal": 59237
     },
     {
       "icon_id": "9234830",
@@ -629,25 +622,18 @@
       "unicode_decimal": 59042
     },
     {
-      "icon_id": "16618968",
-      "name": "优惠券",
-      "font_class": "youhuiquan1",
-      "unicode": "e6b1",
-      "unicode_decimal": 59057
-    },
-    {
       "icon_id": "16618969",
       "name": "待付 款",
       "font_class": "daifukuan1",
-      "unicode": "e6b2",
-      "unicode_decimal": 59058
+      "unicode": "e9b2",
+      "unicode_decimal": 59826
     },
     {
       "icon_id": "16618982",
       "name": "领券",
       "font_class": "lingquan",
-      "unicode": "e6b3",
-      "unicode_decimal": 59059
+      "unicode": "e9b3",
+      "unicode_decimal": 59827
     },
     {
       "icon_id": "16619106",
@@ -965,13 +951,6 @@
       "unicode_decimal": 58903
     },
     {
-      "icon_id": "20335794",
-      "name": "聊天_icon",
-      "font_class": "liaotian_icon",
-      "unicode": "e618",
-      "unicode_decimal": 58904
-    },
-    {
       "icon_id": "20335796",
       "name": "退款_icon",
       "font_class": "tuikuan_icon",
@@ -1227,8 +1206,8 @@
       "icon_id": "20654890",
       "name": "b5",
       "font_class": "b5",
-      "unicode": "e61c",
-      "unicode_decimal": 58908
+      "unicode": "e91c",
+      "unicode_decimal": 59676
     },
     {
       "icon_id": "20654891",
@@ -1241,8 +1220,8 @@
       "icon_id": "20654892",
       "name": "b2",
       "font_class": "b2",
-      "unicode": "e61e",
-      "unicode_decimal": 58910
+      "unicode": "e91e",
+      "unicode_decimal": 59678
     },
     {
       "icon_id": "20654893",
@@ -1306,13 +1285,6 @@
       "font_class": "b14",
       "unicode": "e627",
       "unicode_decimal": 58919
-    },
-    {
-      "icon_id": "20654903",
-      "name": "b17",
-      "font_class": "b17",
-      "unicode": "e628",
-      "unicode_decimal": 58920
     },
     {
       "icon_id": "20654904",
@@ -1409,8 +1381,8 @@
       "icon_id": "20654917",
       "name": "b21",
       "font_class": "b21",
-      "unicode": "e636",
-      "unicode_decimal": 58934
+      "unicode": "e936",
+      "unicode_decimal": 59702
     },
     {
       "icon_id": "20655159",
