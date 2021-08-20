@@ -7,7 +7,7 @@
       </p>
     </div>
     <div class="table-box">
-      <tao-table ref="tables" :data="tableData" :showPage="false" height="100%" :hideScrollBar="true" headBg="">
+      <tao-table ref="tables" :data="tableData" :showPage="false" :hideScrollBar="true" headBg="">
         <el-table-column prop="title" label="计划事项" />
         <el-table-column label="进度" width="200px" >
           <template slot-scope="scope">
