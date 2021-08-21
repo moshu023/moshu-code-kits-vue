@@ -1,5 +1,5 @@
 <template>
-  <div class="topbar" :style="{width: topWidth}">
+  <div class="topbar" :style="{width: topBarWidth}">
     <div class="menu">
       <div class="left" style="display: flex">
         <svg class="svg-icon" aria-hidden="true" @click="goPage('/')">
@@ -77,19 +77,19 @@
       Breadcrumb,
       Notice
     },
-    props: {
-      menuOpen: Boolean
-    },
     inject: ['reload'],
     computed: {
       ...mapState({
         userInfo: state => state.user.user.info,
         setting: state => state.setting.setting,
       }),
-      topWidth() {
+      topBarWidth() {
         return this.menuOpen ? `calc(100% - ${menuLeftOpenWidth})` : 
         `calc(100% - ${menuLeftShrinkWidth})`
-      }
+      },
+      menuOpen() {
+        return this.$store.state.menu.menuOpen;
+      },
     },
     watch: {
       'setting.menuButton'(show) {
@@ -181,11 +181,11 @@
       },
       // 左侧菜单展开|缩小
       visibleMenu() {
-        this.$emit('click')
+        this.$store.commit("menu/setMenuOpen", !this.menuOpen);
       },
       // 打开个性化设置
       openSetting() {
-        this.$emit('personalityShow')
+        this.$emit('openSetting')
       },
       // 跳转页面
       goPage(path) {

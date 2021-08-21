@@ -1,104 +1,99 @@
 <template>
-  <div class="frame" :style="{paddingLeft, paddingTop}">
+  <div class="frame" :style="{ paddingLeft, paddingTop }">
     <!-- 左侧菜单 -->
-    <menu-left ref="menuLeft" @topBarCollapse="topBarCollapse" />
+    <menu-left></menu-left>
 
     <!-- 顶栏、选项卡 -->
-    <top-bar :menuOpen="menuOpen" @click="visibleMenu" @personalityShow="personalityShow">
-      <work-tab v-if="showWorkTab"/>
+    <top-bar @openSetting="openSetting">
+      <work-tab v-if="showWorkTab" />
     </top-bar>
 
     <!-- 内容区 -->
     <div class="container">
       <keep-alive v-if="isRouterAlive">
-        <router-view :style="{minHeight}"></router-view>
+        <router-view :style="{ minHeight }"></router-view>
       </keep-alive>
     </div>
 
     <!-- 个性化 -->
-    <personality 
-      :show="personalityOpen" 
-      @click="personalityShow" 
+    <personality
+      :show="personalityOpen"
+      @click="openSetting"
       @closePersonality="closePersonality"
     />
   </div>
 </template>
 
 <script>
-  import { menuLeftOpenWidth, menuLeftShrinkWidth } from "@/config/menu"
-  import { mapState } from 'vuex'
+  import { menuLeftOpenWidth, menuLeftShrinkWidth } from "@/config/menu";
+  import { mapState } from "vuex";
 
   export default {
-    provide () {
+    provide() {
       return {
-        reload: this.reload
-      }
+        reload: this.reload,
+      };
     },
     data() {
       return {
-        menuOpen: true,         //菜单是否展开
-        isRouterAlive: true,    // KeepAlive
+        isRouterAlive: true, // KeepAlive
         personalityOpen: false, // 个性化可见性
-        showWorkTab: true,      // 显示多标签
+        showWorkTab: true, // 显示多标签
       };
     },
     computed: {
       ...mapState({
-        setting: state => state.setting.setting
+        setting: (state) => state.setting.setting,
       }),
+      menuOpen() {
+        return this.$store.state.menu.menuOpen;
+      },
       paddingLeft() {
-        let width = this.menuOpen ? menuLeftOpenWidth : menuLeftShrinkWidth
-        this.$store.dispatch('menu/setMenuWidth', width)
-        return width
+        let width = this.menuOpen ? menuLeftOpenWidth : menuLeftShrinkWidth;
+        this.$store.dispatch("menu/setMenuWidth", width);
+        return width;
       },
       paddingTop() {
-        return this.showWorkTab ? '108px' : '75px'
+        return this.showWorkTab ? "108px" : "75px";
       },
       minHeight() {
-        return `calc(100vh - ${this.showWorkTab ? '120px' : '90px'})`
-      }
+        return `calc(100vh - ${this.showWorkTab ? "120px" : "90px"})`;
+      },
     },
     watch: {
-      'setting.showWorkTab': {
+      "setting.showWorkTab": {
         handler(show) {
-          this.showWorkTab = show
+          this.showWorkTab = show;
         },
-        immediate: true
-      }
+        immediate: true,
+      },
     },
     mounted() {
-      this.refreshSaveUserData()
+      this.saveUserData();
     },
     methods: {
-      // Vuex中的数据保存到localStorage，在即将离开当前页面(刷新或关闭)时执行
-      refreshSaveUserData() {
-        let _self = this
-        window.addEventListener('beforeunload', () => {
-          _self.$store.dispatch('user/storeStorage')
-        })
+      // 讲 vuex 中的数据保存到 localStorage 中（在即将离开页面(刷新或关闭)时执行）
+      saveUserData() {
+        let _self = this;
+        window.addEventListener("beforeunload", () => {
+          _self.$store.dispatch("user/storeStorage");
+        });
       },
       // 刷新页面
-      reload () {
-        this.isRouterAlive = false
-        this.$nextTick(function () {
-          this.isRouterAlive = true
-        })
+      reload() {
+        this.isRouterAlive = false;
+        this.$nextTick(() => {
+          this.isRouterAlive = true;
+        });
       },
-      // 菜单展开 | 收缩
-      visibleMenu() {
-        this.menuOpen = !this.menuOpen
-        this.$refs.menuLeft.visibleMenu();
-      },
-      topBarCollapse(show) {
-        this.menuOpen = show
-      },
-      personalityShow() {
-        this.personalityOpen = !this.personalityOpen
+      // 打开 ｜ 关闭 设置
+      openSetting() {
+        this.personalityOpen = !this.personalityOpen;
       },
       closePersonality() {
-        this.personalityOpen = false
-      }
-    }
+        this.personalityOpen = false;
+      },
+    },
   };
 </script>
 
@@ -108,7 +103,7 @@
     min-height: 100vh;
     padding: 108px 0 15px 0;
     box-sizing: border-box;
-    transition: padding .3s ease-in-out;
+    transition: padding 0.3s ease-in-out;
     background: $default-background;
     overflow: hidden;
 
@@ -147,7 +142,7 @@
     }
   }
 
-  @media only screen and (max-width: $device-ipad) { 
+  @media only screen and (max-width: $device-ipad) {
     .frame {
       width: 100%;
       padding-left: 0 !important;

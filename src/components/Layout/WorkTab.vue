@@ -100,9 +100,9 @@
       },
       // 重载后选项卡默认选中项
       initActiveWorktab() {
-        setTimeout(() => {
+        this.$nextTick(()=> {
           this.activeTab = this.$route.path
-        }, 800)
+        })
       },
       // 点击选项卡
       clickWorktab(path) {

@@ -70,7 +70,10 @@
           this.menuList = list
         },
         immediate: true
-      }
+      },
+      'menu.menuOpen'(val) {
+        this.collapse = !val
+      },
     },
     data() {
       return {
@@ -143,14 +146,14 @@
             this.collapse = false
             this.collapseMobile = false
             this.showMenuMobile = true
-            this.$emit('topBarCollapse', true)
+            this.setMenuOpen(true)
           }
           
           this.$set(this.resizeList, 0, 1)
         }else {
           this.isMobileModel = true
           this.collapse = true
-          this.$emit('topBarCollapse', false)
+          this.setMenuOpen(false)
           this.collapseMobile = true
           this.showMobileModel = false
           this.$set(this.resizeList, 0, 0)
@@ -159,6 +162,9 @@
         setTimeout(() => {
           this.showMenuMobile = true 
         }, 10)
+      },
+      setMenuOpen(show) {
+        this.$store.commit('menu/setMenuOpen', show)
       },
       closeMenu() {
         this.collapse = true
