@@ -1,62 +1,64 @@
 <template>
   <div class="tao-table" :class="{'hide-scroll-bar': hideScrollBar}">
-    <el-table ref="table"
-      row-key="id"
-      :data="data || tableData"
-      :height="height"
-      :row-class-name="tableRowClassName"
-      :header-cell-style="{ background: headBg, color: '#666' }"
-      :fit="true"
-      :size="size"
-      :style="{ marginBottom: Bottom + 'px' }"
-      style="width: 100%; font-size: 14px"
-      tooltip-effect="dark"
-      @selection-change="handleSelectionChange"
-    >
-      <el-table-column label="序号" v-if="isOrder" align="center">
-        <template slot-scope="scope">
-          <span>
-            {{scope.$index + (pageData.current_page - 1) * pageData.per_page + 1 }}
-          </span>
-        </template>
-      </el-table-column>
-
-      <!-- 插槽 -->
-      <slot></slot>
-
-      <!-- 筛选 -->
-      <el-table-column
-        v-if="status"
-        :prop="statusProp"
-        :label="statusTitle"
-        :width="isStatus ? '90' : ''"
-        :filters="[
-          { text: '已启用', value: 1 },
-          { text: '已禁用', value: 0 },
-        ]"
-        :filter-method="filterTag"
-        filter-placement="bottom-end"
+    <vue-scroll :ops="ops">
+      <el-table ref="table"
+        row-key="id"
+        :data="data || tableData"
+        :height="height"
+        :row-class-name="tableRowClassName"
+        :header-cell-style="{ background: headBg, color: '#666' }"
+        :fit="true"
+        :size="size"
+        :style="{ marginBottom: Bottom + 'px' }"
+        style="width: 100%; font-size: 14px;"
+        tooltip-effect="dark"
+        @selection-change="handleSelectionChange"
       >
-        <template slot-scope="scope">
-          <el-tag
-            size="mini"
-            effect="light"
-            :type="scope.row[statusProp] === 1 ? 'success' : 'info'"
-            disable-transitions
-          >
-            {{ scope.row[statusProp] === 1 ? "已启用" : "已禁用" }}
-          </el-tag>
-        </template>
-      </el-table-column>
+        <el-table-column label="序号" v-if="isOrder" align="center">
+          <template slot-scope="scope">
+            <span>
+              {{scope.$index + (pageData.current_page - 1) * pageData.per_page + 1 }}
+            </span>
+          </template>
+        </el-table-column>
 
-      <!-- 没有数据 -->
-      <div slot="empty" class="empty" style="padding: 20px 0">
-        <div v-if="showEmptyTips">
-          <i class="iconfont">&#xe707;</i>
-          <p>{{ emptyText }}</p>
+        <!-- 插槽 -->
+        <slot></slot>
+
+        <!-- 筛选 -->
+        <el-table-column
+          v-if="status"
+          :prop="statusProp"
+          :label="statusTitle"
+          :width="isStatus ? '90' : ''"
+          :filters="[
+            { text: '已启用', value: 1 },
+            { text: '已禁用', value: 0 },
+          ]"
+          :filter-method="filterTag"
+          filter-placement="bottom-end"
+        >
+          <template slot-scope="scope">
+            <el-tag
+              size="mini"
+              effect="light"
+              :type="scope.row[statusProp] === 1 ? 'success' : 'info'"
+              disable-transitions
+            >
+              {{ scope.row[statusProp] === 1 ? "已启用" : "已禁用" }}
+            </el-tag>
+          </template>
+        </el-table-column>
+
+        <!-- 没有数据 -->
+        <div slot="empty" class="empty" style="padding: 20px 0">
+          <div v-if="showEmptyTips">
+            <i class="iconfont">&#xe707;</i>
+            <p>{{ emptyText }}</p>
+          </div>
         </div>
-      </div>
-    </el-table>
+      </el-table>
+    </vue-scroll>
 
     <!-- 分页 -->
     <el-pagination
@@ -148,7 +150,7 @@ export default {
     headBg: {
       type: String,
       default: '#F8F8F9'
-    }
+    },
   },
   data() {
     return {
@@ -161,6 +163,31 @@ export default {
         last_page: 1,
       },
       showEmptyTips: false,
+      ops: {          // 滚动条
+        rail: {
+          opacity: '0',
+          background: undefined,
+          size: '0'
+        },
+        bar: {
+          background: 'rgba(0,0,0,.5)',
+          keepShow: false,
+          size: '0',
+          minSize: 0
+        },
+        scrollButton: {
+          enable: false,
+          background: '#cecece'
+        },
+        scrollPanel: {
+          easing: 'easeOutQuad',
+          speed: 800
+        },
+        vuescroll: {
+          wheelScrollDuration: 600,
+          wheelDirectionReverse: true
+        }
+      },
     };
   },
   updated() {

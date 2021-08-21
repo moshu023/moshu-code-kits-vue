@@ -31,14 +31,14 @@
             title: '学习Flutter',
             startDate: '2020-1-1',
             endDate: '2020-12-31',
-            percentage: 30,
+            percentage: 100,
             color: '#69C0FF !important'
           },
           {
             title: '网站重构',
             startDate: '2020-1-1',
             endDate: '2020-12-31',
-            percentage: 70,
+            percentage: 100,
             color: '#FFC069 !important'
           },
           {
