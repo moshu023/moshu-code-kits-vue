@@ -121,6 +121,7 @@
 <script>
   import setting from '@/config/setting'
   import { mapState } from 'vuex'
+  import { scrollBarOpstion } from '@/config/scrollbar.js'
 
   export default {
     props: {
@@ -167,31 +168,7 @@
         showNprogress: false,
         currentView: setting.themeModel,
         dayList: [6, 18],
-        ops: {          // 滚动条
-          rail: {
-            opacity: '0',
-            background: undefined,
-            size: '0'
-          },
-          bar: {
-            background: 'rgba(0,0,0,.5)',
-            keepShow: false,
-            size: '0',
-            minSize: 0
-          },
-          scrollButton: {
-            enable: false,
-            background: '#cecece'
-          },
-          scrollPanel: {
-            easing: 'easeOutQuad',
-            speed: 800
-          },
-          vuescroll: {
-            wheelScrollDuration: 600,
-            wheelDirectionReverse: true
-          }
-        },
+        ops: scrollBarOpstion,
       }
     },
     mounted() {

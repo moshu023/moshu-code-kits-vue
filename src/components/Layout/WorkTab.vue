@@ -38,6 +38,7 @@
 <script>
   import { mapState } from 'vuex'
   import  { switchLanguage } from '@/utils/lang'
+  import { scrollBarOpstion } from '@/config/scrollbar.js'
 
   export default {
     name: 'Worktab',
@@ -80,31 +81,7 @@
     data() {
       return {
         activeTab: '',  // 选中的 tab
-        ops: {          // 滚动条
-          rail: {
-            opacity: '0',
-            background: undefined,
-            size: '0px'
-          },
-          bar: {
-            background: '#999',
-            keepShow: false,
-            size: '0px',
-            minSize: 0
-          },
-          scrollButton: {
-            enable: true,
-            background: '#cecece'
-          },
-          scrollPanel: {
-            easing: 'easeOutQuad',
-            speed: 800
-          },
-          vuescroll: {
-            wheelScrollDuration: 600,
-            wheelDirectionReverse: true
-          }
-        },
+        ops: scrollBarOpstion,
         allowPath: [], // 存储当前用户可访问的路由
       }
     },

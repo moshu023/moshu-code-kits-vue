@@ -77,6 +77,7 @@
 </template>
 
 <script>
+import { scrollBarOpstion } from '@/config/scrollbar.js'
 export default {
   name: "TaoTable",
   props: {
@@ -163,31 +164,7 @@ export default {
         last_page: 1,
       },
       showEmptyTips: false,
-      ops: {          // 滚动条
-        rail: {
-          opacity: '0',
-          background: undefined,
-          size: '0'
-        },
-        bar: {
-          background: 'rgba(0,0,0,.5)',
-          keepShow: false,
-          size: '0',
-          minSize: 0
-        },
-        scrollButton: {
-          enable: false,
-          background: '#cecece'
-        },
-        scrollPanel: {
-          easing: 'easeOutQuad',
-          speed: 800
-        },
-        vuescroll: {
-          wheelScrollDuration: 600,
-          wheelDirectionReverse: true
-        }
-      },
+      ops: scrollBarOpstion,
     };
   },
   updated() {
