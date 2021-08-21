@@ -9,7 +9,7 @@
             <form-input v-model="search.apiGroup" label="分组"></form-input>
             
             <el-row :xs="24" :sm="12" :lg="6" style="float: right; margin-right: 10px;">
-              <el-button type="primary" @click="getApiList">搜索</el-button>
+              <el-button type="primary" @click="query">搜索</el-button>
               <el-button @click="resetSearchForm()">重置</el-button>
             </el-row>
           </el-row>
@@ -109,16 +109,9 @@
     },
     methods: {
       getApiList() {
-        let { page, pageSize } = this.page
-        let { path, description, apiGroup } = this.search
-        
-        getApiListApi({
-          page,
-          pageSize,
-          path,
-          description,
-          apiGroup
-        }).then(res => {
+        let params = Object.assign(this.search, this.page)
+
+        getApiListApi(params).then(res => {
           if(res.code === 0) {
             let { list, page, pageSize, total } = res.data
 
@@ -130,6 +123,10 @@
             }
           }
         })
+      },
+      query() {
+        this.$set(this.page, 'page', 1)
+        this.getApiList()
       },
       resetSearchForm() {
         this.search = {
