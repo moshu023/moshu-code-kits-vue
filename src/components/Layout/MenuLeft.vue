@@ -1,6 +1,6 @@
 <template>
   <div class="menu-left" v-if="showMenuMobile">
-    <div class="header" :style="{background: theme.menuLeftBc}" @click="goPage('/dashboard/console')">
+    <div class="header" :style="{background: theme.menuLeftBc}" @click="toHome">
       <svg class="svg-icon" aria-hidden="true">
         <use xlink:href="#iconzhaopian-copy"></use>
       </svg>
@@ -31,6 +31,7 @@
   import setting from '@/config/setting'
   import Submenu from './Submenu.vue';
   import { mapState } from 'vuex'
+  import { HOME_PAGE } from '../../router'
 
   export default {
     name: "MenuLeft",
@@ -171,10 +172,8 @@
         this.collapseMobile = true
         this.showMobileModel = false
       },
-      goPage(path) {
-        if(this.$route.path !== path) {
-          this.$router.push(path)
-        }
+      toHome() {
+        this.$router.push(HOME_PAGE)
       }
     }
   };

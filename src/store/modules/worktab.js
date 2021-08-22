@@ -4,7 +4,7 @@
  */
 
 const state = {
-  homePage: '/dashboard/console',
+  homePage: '',
   worktab: {
     current: {},  // 当前页
     opened: []    // 打开的页面

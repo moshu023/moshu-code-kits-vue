@@ -39,6 +39,7 @@
   import { mapState } from 'vuex'
   import  { switchLanguage } from '@/utils/lang'
   import { scrollBarOpstion } from '@/config/scrollbar.js'
+  import { HOME_PAGE } from '../../router'
 
   export default {
     name: 'Worktab',
@@ -65,7 +66,7 @@
         }
 
         // 进入控制台刷新页面
-        if(tab.path === '/dashboard/console') {
+        if(tab.path === HOME_PAGE) {
           this.reload()
         }
 

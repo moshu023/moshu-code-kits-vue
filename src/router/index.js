@@ -10,11 +10,14 @@ import 'nprogress/nprogress.css'
 NProgress.configure({ showSpinner: false, easing: 'ease', speed: 500 })
 Vue.use(Router)
 
+// 首页
+export const HOME_PAGE = '/dashboard/console'
+
 // 不需要权限的路由
 export const routes = [
   {
     path: '/',
-    redirect: '/dashboard/console'
+    redirect: HOME_PAGE
   },{
     path: '/dashboard',
     component: Home,
