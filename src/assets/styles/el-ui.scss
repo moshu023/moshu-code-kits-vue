@@ -36,6 +36,10 @@
   }
 }
 
+.el-dropdown-selfdefine:focus {
+  outline: none !important;
+}
+
 // 处理移动端组件兼容性
 @media screen and (max-width: $device-phone){
   .el-message-box,

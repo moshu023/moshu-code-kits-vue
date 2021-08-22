@@ -105,6 +105,10 @@
     }
   }
 
+  .el-button-group {
+    display: flex;
+  }
+
   @media screen and (max-width: $device-phone){
     /deep/ .el-form {
       padding-bottom: 15px;
