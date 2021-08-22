@@ -3,8 +3,10 @@
  * 属于：user.js > worktab
  */
 
+ import { HOME_PAGE } from '../../router'
+
 const state = {
-  homePage: '',
+  homePage: HOME_PAGE,
   worktab: {
     current: {},  // 当前页
     opened: []    // 打开的页面

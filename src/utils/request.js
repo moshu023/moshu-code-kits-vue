@@ -46,7 +46,10 @@ axios.interceptors.response.use(
       Message.error(msg)
     }
 
-    // token验证失败，重新登录
+    /**
+     * oken验证失败，重新登录
+     * 注意：在 utils/request.js => router.beforeEach 方法中也有一个登录判断
+     */
     if(code === 7) {
       setTimeout(() => {
         document.getElementsByTagName("html")[0].removeAttribute('class') // 移除暗黑主题

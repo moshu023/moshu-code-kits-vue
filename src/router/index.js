@@ -2,7 +2,6 @@ import Vue from 'vue'
 import store from '@/store'
 import Router from 'vue-router'
 import Home from '@/pages/home/Home.vue'
-import Console from '@/pages/dashboard/Console'
 import setting from '@/config/setting'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
@@ -18,56 +17,27 @@ export const routes = [
   {
     path: '/',
     redirect: HOME_PAGE
-  },{
+  }, {
     path: '/dashboard',
     component: Home,
     meta: {
       title: '监控中心'
     },
     children: [
-      {
-        path: 'console',
-        component: Console,
-        meta: {
-          title: '工作台'
-        }
-      }
+      buildRoute('console', 'dashboard/Console', { title: '工作台' }),
     ]
-  },{
-    path: '/login',
-    component: () => import('@/pages/login/Login'),
-    meta: {
-      title: '登录',
-      newPage: true
-    }
-  },{
+  },
+  buildRoute('/login', 'login/Login', { title: '登录', newPage: true }),
+  {
     path: '/exception',
     component: Home,
     meta: {
       title: '异常页面'
     },
     children: [
-      {
-        path: '403',
-        component: () => import('@/pages/exception/403'),
-        meta: {
-          title: '403'
-        }
-      },
-      {
-        path: '404',
-        component: () => import('@/pages/exception/404'),
-        meta: {
-          title: '404'
-        }
-      },
-      {
-        path: '500',
-        component: () => import('@/pages/exception/500'),
-        meta: {
-          title: '500'
-        }
-      }
+      buildRoute('403', 'exception/403', { title: '403' }),
+      buildRoute('404', 'exception/404', { title: '404' }),
+      buildRoute('500', 'exception/500', { title: '500' }),
     ]
   }
 ]
@@ -85,201 +55,82 @@ export const allowRouters = [
       title: '文章管理'
     },
     children: [
-      {
-        path: 'article-publish',
-        component: () => import('@/pages/article/ArticlePublish'),
-        meta: {
-          title: '文章发布'
-        }
-      },
-      {
-        path: 'article-edit',
-        component: () => import('@/pages/article/ArticleEdit'),
-        meta: {
-          title: '文章编辑'
-        }
-      },
-      {
-        path: 'article-list',
-        component: () => import('@/pages/article/ArticleList'),
-        meta: {
-          title: '文章列表'
-        }
-      },
-      {
-        path: 'classify',
-        component: () => import('@/pages/article/Classify'),
-        meta: {
-          title: '文章分类'
-        }
-      },
+      buildRoute('article-publish', 'article/ArticlePublish', { title: '文章发布' }),
+      buildRoute('article-edit', 'article/ArticleEdit', { title: '文章编辑' }),
+      buildRoute('article-list', 'article/ArticleList', { title: '文章列表' }),
+      buildRoute('classify', 'article/Classify', { title: '文章分类' }),
     ]
-  },{
+  }, {
     path: '/message',
     component: Home,
     meta: {
       title: '消息中心'
     },
     children: [
-      {
-        path: 'message',
-        component: () => import('@/pages/message/Message'),
-        meta: {
-          title: '系统消息'
-        }
-      }
+      buildRoute('message', 'message/Message', { title: '系统消息' }),
     ]
-  },{
+  }, {
     path: '/system',
     component: Home,
     meta: {
       title: '系统设置'
     },
     children: [
-      {
-        path: 'setting',
-        component: () => import('@/pages/system/Setting'),
-        meta: {
-          title: '系统设置'
-        }
-      },
-      {
-        path: 'log',
-        component: () => import('@/pages/system/Log'),
-        meta: {
-          title: '操作日志'
-        }
-      }
+      buildRoute('setting', 'system/Setting', { title: '系统设置' }),
+      buildRoute('log', 'system/Log', { title: '操作日志' }),
     ]
-  },{
+  }, {
     path: '/safeguard',
     component: Home,
     meta: {
       title: '运维管理'
     },
     children: [
-      {
-        path: 'server',
-        component: () => import('@/pages/safeguard/server'),
-        meta: {
-          title: '服务器管理'
-        }
-      },{
-        path: 'database',
-        component: () => import('@/pages/safeguard/database'),
-        meta: {
-          title: '数据库管理'
-        }
-      }
+      buildRoute('server', 'safeguard/server', { title: '服务器管理' }),
+      buildRoute('database', 'safeguard/database', { title: '数据库管理' }),
     ]
-  },{
+  }, {
     path: '/plan',
     component: Home,
     meta: {
       title: '计划'
     },
     children: [
-      {
-        path: 'year-plan',
-        component: () => import('@/pages/plan/YearPlan'),
-        meta: {
-          title: '年度计划'
-        }
-      }
+      buildRoute('year-plan', 'plan/YearPlan', { title: '年度计划' }),
     ]
-  },{
+  }, {
     path: '/user',
     component: Home,
     meta: {
       title: '用户管理'
     },
     children: [
-      {
-        path: 'user',
-        component: () => import('@/pages/user/User'),
-        meta: {
-          title: '个人中心'
-        }
-      },
-      {
-        path: 'account',
-        component: () => import('@/pages/user/Account'),
-        meta: {
-          title: '账号管理'
-        }
-      },
-      {
-        path: 'department',
-        component: () => import('@/pages/user/Department'),
-        meta: {
-          title: '部门管理'
-        }
-      },
-      {
-        path: 'role',
-        component: () => import('@/pages/user/Role'),
-        meta: {
-          title: '角色权限'
-        }
-      }
+      buildRoute('user', 'user/User', { title: '个人中心' }),
+      buildRoute('account', 'user/Account', { title: '账号管理' }),
+      buildRoute('department', 'user/Department', { title: '部门管理' }),
+      buildRoute('role', 'user/Role', { title: '角色权限' }),
     ]
-  },{
+  }, {
     path: '/menu',
     component: Home,
     meta: {
       title: '菜单管理'
     },
     children: [
-      {
-        path: 'menu',
-        component: () => import('@/pages/menu/menu'),
-        meta: {
-          title: '菜单权限'
-        }
-      },
-      {
-        path: 'api',
-        component: () => import('@/pages/menu/api'),
-        meta: {
-          title: 'API管理'
-        }
-      },
-      {
-        path: 'operation',
-        component: () => import('@/pages/menu/operation'),
-        meta: {
-          title: '操作历史'
-        }
-      }
+      buildRoute('menu', 'menu/Menu', { title: '菜单权限' }),
+      buildRoute('api', 'menu/Api', { title: '角色权限' }),
+      buildRoute('operation', 'menu/Operation', { title: '操作历史' }),
     ]
-  },{
+  }, {
     path: '/widget',
     component: Home,
     meta: {
       title: '组件中心'
     },
     children: [
-      {
-        path: 'excel',
-        component: () => import('@/pages/widget/excel'),
-        meta: {
-          title: 'Excel'
-        }
-      },
-      {
-        path: 'icon',
-        component: () => import('@/pages/widget/icon'),
-        meta: {
-          title: 'Icon'
-        }
-      },
-      {
-        path: 'icon-selector',
-        component: () => import('@/pages/widget/IconSelector'),
-        meta: {
-          title: 'IconSelector'
-        }
-      }
+      buildRoute('excel', 'widget/Excel', { title: 'Excel' }),
+      buildRoute('icon', 'widget/Icon', { title: 'Icon' }),
+      buildRoute('icon-selector', 'widget/IconSelector', { title: 'IconSelector' }),
     ]
   }
 ]
@@ -288,32 +139,31 @@ export const allRoutes = routes.concat(allowRouters);
 
 router.beforeEach((to, from, next) => {
   let isLogin = false
-  let { meta, matched } = to
+  let { meta, matched, name, path, params } = to
   let { title, title_en, newPage, keepAlive } = meta
   let { showNprogress } = store.state.setting.setting
   let sys = JSON.parse(localStorage.getItem("sys"))
 
-  if(showNprogress) {
+  if (showNprogress) {
     NProgress.start()
   }
 
-  if(sys) {
+  if (sys) {
     isLogin = sys.user.isLogin
   }
 
-  to.params.keepAlive = keepAlive
+  params.keepAlive = keepAlive
 
-  if(!isLogin && to.path !== '/login') {
+  if (!isLogin && path !== '/login') {
     next('/login')
     return
-  }else {
+  } else {
     let { menuList } = store.state.menu
-
-    if(menuList.length > 0) { // 菜单数据加载成功
-      if(!matched.length) {   // 打开的页面不存在
-        router.push('/exception/404')
-        return
-      }
+    
+    // 打开的页面不存在
+    if (menuList.length > 0 && !matched.length) {
+      next('/exception/404')
+      return
     }
     next()
   }
@@ -323,26 +173,28 @@ router.beforeEach((to, from, next) => {
     return
   }
 
+  let { name: fName, meta: fMeta, path: fPath } = from
+
   // 路由添加到标签页
   store.dispatch('worktab/worktabRoute', {
     to: {
-      name: to.name ? to.name : '',
-      title: (to.meta && title) ? title : '',
-      title_en: (to.meta && title_en) ? title_en : '',
-      path: to.path,
-      params: to.params
+      name: name || '',
+      title: (meta && title) ? title : '',
+      title_en: (meta && title_en) ? title_en : '',
+      path,
+      params
     },
     from: {
-      name: from.name ? from.name : '',
-      title: (from.meta && from.meta.title) ? from.meta.title : '',
-      title_en: (from.meta && from.meta.title_en) ? from.meta.title_en : '',
-      path: from.path,
-      params: to.params
+      name: fName || '',
+      title: (fMeta && fMeta.title) ? fMeta.title : '',
+      title_en: (fMeta && fMeta.title_en) ? fMeta.title_en : '',
+      path: fPath,
+      params
     }
   })
 
   // 设置网页title
-  if(title) {
+  if (title) {
     document.title = `${title} - ${setting.systemName}`
   }
   return
@@ -351,9 +203,18 @@ router.beforeEach((to, from, next) => {
 router.afterEach(() => {
   let { showNprogress } = store.state.setting.setting
 
-  if(showNprogress) {
+  if (showNprogress) {
     NProgress.done()
   }
 })
+
+// 构建路由
+function buildRoute(path, component, meta) {
+  return {
+    path,
+    component: () => import(`@/pages/${component}`),
+    meta
+  }
+}
 
 export default router
