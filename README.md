@@ -17,7 +17,7 @@ Tao Admin 是一套企业级的高颜值、高体验、高性能的通用型后�
 - 账号：admin
 - 密码：123456
 ### 使用文档
-- [使用文档](http://www.lingchen.kim/tao_admin_doc)
+- [使用文档](https://www.yuque.com/zhuomoxiansheng-se1up/wp2puc/xkinpq#rIdVN)
 
 - [作者博客地址](https://www.lingchen.kim)
 
