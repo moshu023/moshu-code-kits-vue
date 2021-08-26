@@ -69,7 +69,7 @@ const mutations = {
     for(let i = 0; i<list.length; i++) {
       let item = list[i];
       if(item.path === currentPath) {
-        state.worktab.opened.splice(0, i)
+        state.worktab.opened.splice(1, i-1)
         break;
       }
     }
@@ -90,7 +90,8 @@ const mutations = {
   // 关闭其它页面
   worktabRemoveOther(state, e) {
     state.worktab.opened = state.worktab.opened.filter((item) => {
-      return item.path === e.path
+      let { path } = item
+      return path === e.path || path === state.homePage
     })
   },
   // 关闭全部页面

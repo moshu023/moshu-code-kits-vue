@@ -173,6 +173,9 @@
         this.showMobileModel = false
       },
       toHome() {
+        if(this.$route.path === HOME_PAGE) {
+          return
+        }
         this.$router.push(HOME_PAGE)
       }
     }
