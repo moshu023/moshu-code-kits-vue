@@ -21,8 +21,6 @@ const setting = {
       tabbarBackground: '#FFFFFF'
     }
   ],
-  menuLeftOpenWidth: '250px',     // 菜单展开的宽度
-  menuLeftOpenWidth: '70px',      // 菜单收缩的宽度
   login: {                        // 登录默认账号密码
     username: 'admin',
     password: '123456'
