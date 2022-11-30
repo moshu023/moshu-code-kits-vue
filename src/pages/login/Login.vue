@@ -52,7 +52,7 @@
 <script>
   import setting from '@/config/setting'
   import { getMenuList } from '@/api/menuApi.js'
-  import { getCaptchaApi, loginApi } from '@/api/loginApi'
+  import { userLogin } from '@/api/userApi'
 
   export default {
     data () {
@@ -71,17 +71,8 @@
     },
     created() {
       this.initLanguage()
-      this.getCaptcha()
     },
     methods: {
-      // 获取验证码
-      getCaptcha() {
-        getCaptchaApi().then(res => {
-          if(res.code === 0) {
-            this.captcha = res.data
-          }
-        })
-      },
       // 登录
       login() {
         let {account, password, code, captcha} = this
@@ -98,7 +89,7 @@
           this.showTips(2); return;
         }
 
-        loginApi({
+        userLogin({
           username: account,
           password: password,
           captcha: code,
@@ -113,10 +104,6 @@
             setTimeout(() => {
               this.$router.push('/')
             }, 1000)
-          }
-
-          if(res.code === 7) {
-            this.getCaptcha()
           }
         })
       },
@@ -187,7 +174,7 @@
         margin-top: 300px;
       }
     }
-      
+
     .right-wrap {
       width: calc(100% - 520px);
       height: 100%;
@@ -212,7 +199,7 @@
         box-shadow: 0 0 10px rgba(28,76,186,.1);
 
         .form {
-          widows: 100%;
+          width: 100%;
           height: 100%;
           box-sizing: border-box;
           padding: 40px 30px;
@@ -251,7 +238,7 @@
           }
 
           .login-btn {
-            width: 100%; 
+            width: 100%;
             height: 40px;
             border: 0;
             color: #fff;
@@ -262,7 +249,7 @@
     }
   }
 
-  @media only screen and (max-width: $device-ipad-pro) { 
+  @media only screen and (max-width: $device-ipad-pro) {
     .login {
       width: 100%;
       height: 100vh;
@@ -270,7 +257,7 @@
       .left-wrap {
         display: none;
       }
-        
+
       .right-wrap {
         width: 100%;
 
@@ -295,7 +282,7 @@
 
           .form {
             padding: 0px 30px;
-            
+
             h3 {
               display: none;
             }

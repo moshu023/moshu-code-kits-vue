@@ -17,11 +17,13 @@ import VCharts from 'v-charts'         // 图表库
 import components from '@/components'  // 注册全局组件
 import derectives from '@/directives'  // 注册全局指令
 import JsonExcel from 'vue-json-excel' // Excel导出
+import Cookies from 'js-cookie'
 
 Vue.use(components)
 Vue.use(derectives)
 Vue.use(vuescroll)
 Vue.use(VCharts)
+Vue.use(Cookies)
 Vue.component('downloadExcel', JsonExcel)
 Vue.use(ElementUI, { size: 'small', zIndex: 3000 }) // 全局设置element组件默认大小
 

@@ -1,11 +1,10 @@
-import axios from '@/utils/request'
 import store from '../store'
 import router from '../router'
 import { allRoutes } from '@/router/index.js'
 import { routerMatch } from '@/utils/menu.js'
 import { menuData } from '@/mock/menuData.js'
 
-// 模拟获取菜单数据 
+// 模拟获取菜单数据
 export function getMenuList() {
   let sys = JSON.parse(localStorage.getItem("sys"))
   let isLogin = false

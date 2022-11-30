@@ -2,11 +2,12 @@ import Vue from 'vue'
 import store from '@/store'
 import Router from 'vue-router'
 import Home from '@/pages/home/Home.vue'
+import Register from '@/pages/register/Register.vue'
 import setting from '@/config/setting'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
-NProgress.configure({ showSpinner: false, easing: 'ease', speed: 500 })
+NProgress.configure({showSpinner: false, easing: 'ease', speed: 500})
 Vue.use(Router)
 
 // 首页
@@ -17,17 +18,25 @@ export const routes = [
   {
     path: '/',
     redirect: HOME_PAGE
-  }, {
+  },
+  {
+    path: '/register',
+    component: Register,
+    meta: {
+      title: '注册'
+    }
+  },
+  {
     path: '/dashboard',
     component: Home,
     meta: {
       title: '监控中心'
     },
     children: [
-      buildRoute('console', 'dashboard/Console', { title: '工作台' }),
+      buildRoute('console', 'dashboard/Console', {title: '工作台'}),
     ]
   },
-  buildRoute('/login', 'login/Login', { title: '登录', newPage: true }),
+  buildRoute('/login', 'login/Login1', {title: '登录', newPage: true}),
   {
     path: '/exception',
     component: Home,
@@ -35,9 +44,9 @@ export const routes = [
       title: '异常页面'
     },
     children: [
-      buildRoute('403', 'exception/403', { title: '403' }),
-      buildRoute('404', 'exception/404', { title: '404' }),
-      buildRoute('500', 'exception/500', { title: '500' }),
+      buildRoute('403', 'exception/403', {title: '403'}),
+      buildRoute('404', 'exception/404', {title: '404'}),
+      buildRoute('500', 'exception/500', {title: '500'}),
     ]
   }
 ]
@@ -55,10 +64,10 @@ export const allowRouters = [
       title: '文章管理'
     },
     children: [
-      buildRoute('article-publish', 'article/ArticlePublish', { title: '文章发布' }),
-      buildRoute('article-edit', 'article/ArticleEdit', { title: '文章编辑' }),
-      buildRoute('article-list', 'article/ArticleList', { title: '文章列表' }),
-      buildRoute('classify', 'article/Classify', { title: '文章分类' }),
+      buildRoute('article-publish', 'article/ArticlePublish', {title: '文章发布'}),
+      buildRoute('article-edit', 'article/ArticleEdit', {title: '文章编辑'}),
+      buildRoute('article-list', 'article/ArticleList', {title: '文章列表'}),
+      buildRoute('classify', 'article/Classify', {title: '文章分类'}),
     ]
   }, {
     path: '/message',
@@ -67,7 +76,7 @@ export const allowRouters = [
       title: '消息中心'
     },
     children: [
-      buildRoute('message', 'message/Message', { title: '系统消息' }),
+      buildRoute('message', 'message/Message', {title: '系统消息'}),
     ]
   }, {
     path: '/system',
@@ -76,8 +85,8 @@ export const allowRouters = [
       title: '系统设置'
     },
     children: [
-      buildRoute('setting', 'system/Setting', { title: '系统设置' }),
-      buildRoute('log', 'system/Log', { title: '操作日志' }),
+      buildRoute('setting', 'system/Setting', {title: '系统设置'}),
+      buildRoute('log', 'system/Log', {title: '操作日志'}),
     ]
   }, {
     path: '/safeguard',
@@ -86,8 +95,8 @@ export const allowRouters = [
       title: '运维管理'
     },
     children: [
-      buildRoute('server', 'safeguard/server', { title: '服务器管理' }),
-      buildRoute('database', 'safeguard/database', { title: '数据库管理' }),
+      buildRoute('server', 'safeguard/server', {title: '服务器管理'}),
+      buildRoute('database', 'safeguard/database', {title: '数据库管理'}),
     ]
   }, {
     path: '/plan',
@@ -96,7 +105,7 @@ export const allowRouters = [
       title: '计划'
     },
     children: [
-      buildRoute('year-plan', 'plan/YearPlan', { title: '年度计划' }),
+      buildRoute('year-plan', 'plan/YearPlan', {title: '年度计划'}),
     ]
   }, {
     path: '/user',
@@ -105,10 +114,10 @@ export const allowRouters = [
       title: '用户管理'
     },
     children: [
-      buildRoute('user', 'user/User', { title: '个人中心' }),
-      buildRoute('account', 'user/Account', { title: '账号管理' }),
-      buildRoute('department', 'user/Department', { title: '部门管理' }),
-      buildRoute('role', 'user/Role', { title: '角色权限' }),
+      buildRoute('user', 'user/User', {title: '个人中心'}),
+      buildRoute('account', 'user/Account', {title: '账号管理'}),
+      buildRoute('department', 'user/Department', {title: '部门管理'}),
+      buildRoute('role', 'user/Role', {title: '角色权限'}),
     ]
   }, {
     path: '/menu',
@@ -117,9 +126,9 @@ export const allowRouters = [
       title: '菜单管理'
     },
     children: [
-      buildRoute('menu', 'menu/Menu', { title: '菜单权限' }),
-      buildRoute('api', 'menu/Api', { title: '角色权限' }),
-      buildRoute('operation', 'menu/Operation', { title: '操作历史' }),
+      buildRoute('menu', 'menu/Menu', {title: '菜单权限'}),
+      buildRoute('api', 'menu/Api', {title: '角色权限'}),
+      buildRoute('operation', 'menu/Operation', {title: '操作历史'}),
     ]
   }, {
     path: '/widget',
@@ -128,9 +137,9 @@ export const allowRouters = [
       title: '组件中心'
     },
     children: [
-      buildRoute('excel', 'widget/Excel', { title: 'Excel' }),
-      buildRoute('icon', 'widget/Icon', { title: 'Icon' }),
-      buildRoute('icon-selector', 'widget/IconSelector', { title: 'IconSelector' }),
+      buildRoute('excel', 'widget/Excel', {title: 'Excel'}),
+      buildRoute('icon', 'widget/Icon', {title: 'Icon'}),
+      buildRoute('icon-selector', 'widget/IconSelector', {title: 'IconSelector'}),
     ]
   }
 ]
@@ -139,9 +148,9 @@ export const allRoutes = routes.concat(allowRouters);
 
 router.beforeEach((to, from, next) => {
   let isLogin = false
-  let { meta, matched, name, path, params } = to
-  let { title, title_en, newPage, keepAlive } = meta
-  let { showNprogress } = store.state.setting.setting
+  let {meta, matched, name, path, params} = to
+  let {title, title_en, newPage, keepAlive} = meta
+  let {showNprogress} = store.state.setting.setting
   let sys = JSON.parse(localStorage.getItem("sys"))
 
   if (showNprogress) {
@@ -158,8 +167,8 @@ router.beforeEach((to, from, next) => {
     next('/login')
     return
   } else {
-    let { menuList } = store.state.menu
-    
+    let {menuList} = store.state.menu
+
     // 打开的页面不存在
     if (menuList.length > 0 && !matched.length) {
       next('/exception/404')
@@ -173,7 +182,7 @@ router.beforeEach((to, from, next) => {
     return
   }
 
-  let { name: fName, meta: fMeta, path: fPath } = from
+  let {name: fName, meta: fMeta, path: fPath} = from
 
   // 路由添加到标签页
   store.dispatch('worktab/worktabRoute', {
@@ -201,7 +210,7 @@ router.beforeEach((to, from, next) => {
 })
 
 router.afterEach(() => {
-  let { showNprogress } = store.state.setting.setting
+  let {showNprogress} = store.state.setting.setting
 
   if (showNprogress) {
     NProgress.done()

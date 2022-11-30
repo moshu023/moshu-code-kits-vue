@@ -1,1 +1,1 @@
-export const baseUrl = 'http://www.lingchen.kim:8888';
+export const baseUrl = '/api';

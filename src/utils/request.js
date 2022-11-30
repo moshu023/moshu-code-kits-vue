@@ -40,14 +40,14 @@ axios.interceptors.request.use(
 //响应拦截器即异常处理
 axios.interceptors.response.use(
   response => {
-    let { code, msg } = response.data
+    let { code, description } = response.data
 
-    if (code !== 0) {
-      Message.error(msg)
+    if (code !== 200) {
+      Message.error(description)
     }
 
     /**
-     * oken验证失败，重新登录
+     * token验证失败，重新登录
      * 注意：在 utils/request.js => router.beforeEach 方法中也有一个登录判断
      */
     if(code === 7) {
@@ -109,10 +109,10 @@ axios.interceptors.response.use(
       err.message = "连接到服务器失败"
     }
 
-    if (err && err.response) { 
+    if (err && err.response) {
       Message.error(err.message)
     }
-    
+
     return Promise.reject(err)
   }
 )
