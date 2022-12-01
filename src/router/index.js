@@ -2,7 +2,6 @@ import Vue from 'vue'
 import store from '@/store'
 import Router from 'vue-router'
 import Home from '@/pages/home/Home.vue'
-import Register from '@/pages/register/Register.vue'
 import setting from '@/config/setting'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
@@ -19,13 +18,7 @@ export const routes = [
     path: '/',
     redirect: HOME_PAGE
   },
-  {
-    path: '/register',
-    component: Register,
-    meta: {
-      title: '注册'
-    }
-  },
+  {path: '/register', name: 'register', component: () => import( '@/pages/register/Register.vue')},
   {
     path: '/dashboard',
     component: Home,
@@ -164,7 +157,11 @@ router.beforeEach((to, from, next) => {
   params.keepAlive = keepAlive
 
   if (!isLogin && path !== '/login') {
-    next('/login')
+    if (path === '/register') {
+      next()
+    } else {
+      next('/login')
+    }
     return
   } else {
     let {menuList} = store.state.menu

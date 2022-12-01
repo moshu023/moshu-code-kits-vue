@@ -148,7 +148,6 @@ export default {
       })
     },
     login() {
-      // this.$router.push("/login")
       this.$router.push("/login", () => {})
     }
   },
@@ -181,8 +180,8 @@ export default {
 
   .box {
     margin-left: 37%;
-    margin-top: 10%;
-    position: relative;
+    margin-top: 15%;
+    position: fixed;
     width: 400px;
     height: 400px;
     background: rgba(255, 255, 255, 0.1);

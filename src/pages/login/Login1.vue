@@ -55,6 +55,8 @@
 <script>
 import {userLogin} from '@/api/userApi';
 import {getMenuList} from "@/api/menuApi";
+import router from "@/router";
+
 
 export default {
 
@@ -149,7 +151,14 @@ export default {
       })
     },
     register() {
-      this.$router.push("/register", () => {})
+      const that = this;
+      // this.$router.push({name: 'register', params: {}});
+      // this.$router.push('/register').catch(err => {})
+      // this.$router.push("/register", () => {})
+      router.push('/register').catch(err => {})
+      // that.$router.push({
+      //   path: '/register',
+      // }, () => {});
     },
     initLanguage() {
       let sys = JSON.parse(localStorage.getItem("sys"))
@@ -194,7 +203,7 @@ export default {
 
   .box {
     margin-left: 37%;
-    margin-top: 10%;
+    margin-top: 13%;
     position: fixed;
     width: 400px;
     height: 340px;
