@@ -140,9 +140,7 @@ export default {
                   }
                 })
                 // 登录进入主页
-                setTimeout(() => {
-                  this.$router.push('/')
-                }, 1000)
+                this.$router.push('/')
               } else {
                 document.getElementById('verifyCode').click();
                 this.$message.info('验证码已刷新，请重新输入')
@@ -154,6 +152,9 @@ export default {
     },
     register() {
       router.push('/register')
+      setTimeout(() => {
+        window.location.reload();
+      }, 500)
     },
     initLanguage() {
       let sys = JSON.parse(localStorage.getItem("sys"))
@@ -168,14 +169,6 @@ export default {
     showTips(index) {
       this.$message.error(this.$t(`login.tips[${index}]`))
     }
-  },
-  watch: {
-    // 监听路由变化，如果是切换到注册页，则需要刷新一次，清除UI样式缓存
-    $route(to) {
-      if (to.path === '/register') {
-        location.reload();
-      }
-    },
   }
 }
 </script>

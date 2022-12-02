@@ -47,7 +47,7 @@
           <el-button class="btn center" @click="login"
                      style="background-color: #67bfe5; color: #fff;display: inline-block">登录
           </el-button>
-          <el-button class="btn center" @click="register"
+          <el-button class="btn center" @click="register" :loading="loading"
                      style="margin-left: 120px;background-color: #AEEDBF;color: #fff;display: inline-block">注册
           </el-button>
         </div>
@@ -62,6 +62,7 @@
 import {userRegister} from "@/api/userApi";
 
 export default {
+
   data() {
     // 验证用户账号
     const checkUserAccount = (rule, value, callback) => {
@@ -120,7 +121,9 @@ export default {
         userPassword: [{required: true, validator: checkUserPassword, trigger: 'blur'}],
         checkPassword: [{required: true, validator: checkCheckPassword, trigger: 'blur'}],
         verifyCode: [{required: true, validator: checkVerifyCode, trigger: 'blur'}]
-      }
+      },
+      // 登录页加载动画
+      loading: false
     }
   },
   mounted() {
@@ -133,6 +136,8 @@ export default {
           setTimeout(() => {
             userRegister(this.registerForm).then(res => {
               if (res.code === 200) {
+                // 展示登录页加载动画
+                this.loading = true
                 this.$router.push("/login")
                 this.$message.success("注册成功，您的昵称为: " + res.data.username + "去登录吧")
               } else {
@@ -147,15 +152,10 @@ export default {
     },
     login() {
       this.$router.push("/login", () => {})
+      setTimeout(() => {
+        window.location.reload();
+      }, 500)
     }
-  },
-  watch: {
-    // 监听路由变化，如果是切换到登录页，则需要刷新一次，清除UI样式缓存
-    $route(to) {
-      if (to.path === '/login') {
-        location.reload();
-      }
-    },
   }
 }
 </script>

@@ -18,8 +18,7 @@ export const userRegister=(params)=>{
 }
 export const userLogout=()=>{
   return axios.post({
-    url: '/user/logout',
-    data: params
+    url: '/user/logout'
   }).then((res) => {
     return res
   })

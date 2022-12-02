@@ -70,6 +70,7 @@
   import { menuLeftOpenWidth, menuLeftShrinkWidth } from "@/config/menu"
   import { fullScreen, exitScreen } from "@/utils/util.js"
   import { mapState } from 'vuex'
+  import {userLogout} from "@/api/userApi";
 
   export default {
     name: 'TopBar',
@@ -84,7 +85,7 @@
         setting: state => state.setting.setting,
       }),
       topBarWidth() {
-        return this.menuOpen ? `calc(100% - ${menuLeftOpenWidth})` : 
+        return this.menuOpen ? `calc(100% - ${menuLeftOpenWidth})` :
         `calc(100% - ${menuLeftShrinkWidth})`
       },
       menuOpen() {
@@ -143,10 +144,21 @@
           cancelButtonText: this.$t('common.cancel'),
           type: 'warning'
         }).then(() => {
-          document.getElementsByTagName("html")[0].removeAttribute('class') // 移除暗黑主题
-          this.$store.dispatch('user/setLoginStatus', false)
-          this.$router.push('/login')
-        }).catch(() => {});
+          setTimeout(() => {
+            userLogout().then(res => {
+              if (res.code === 200) {
+                document.getElementsByTagName("html")[0].removeAttribute('class') // 移除暗黑主题
+                this.$store.dispatch('user/setLoginStatus', false)
+                this.$router.push('/login')
+                this.$message.success(res.description)
+              } else {
+                this.$message.error('注销失败，请联系管理员')
+              }
+            })
+          }, 500)
+        }).catch(() => {
+          this.$message.info('您已取消注销')
+        });
       },
       // 全屏
       fullScreen() {
@@ -201,7 +213,7 @@
         }else {
           this.showNoticeFunc(false)
         }
-        
+
         setTimeout(() => {
           this.showNotice = !this.showNotice
         }, 50)
@@ -379,7 +391,7 @@
           text-align: center;
           cursor: pointer;
           transition: background-color .3s;
-          
+
           i {
             font-size: 16px;
           }
@@ -392,7 +404,7 @@
     }
   }
 
-  @media only screen and (max-width: $device-ipad) { 
+  @media only screen and (max-width: $device-ipad) {
     .topbar {
       width: 100% !important;
 
