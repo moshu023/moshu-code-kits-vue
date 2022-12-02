@@ -57,7 +57,6 @@ import {userLogin} from '@/api/userApi';
 import {getMenuList} from "@/api/menuApi";
 import router from "@/router";
 
-
 export default {
 
   data() {
@@ -130,13 +129,16 @@ export default {
                 this.$store.dispatch('user/setLoginStatus', true)
                 getMenuList()
                 // 根据角色不同展示不同成功登录信息
-                if (res.data.user.userRole === 'super_admin') {
-                  this.$message.success("尊敬的超级管理员：" + res.data.user.username + ", 登录成功")
-                } else if (res.data.user.userRole === 'super_admin') {
-                  this.$message.success("尊敬的管理员：" + res.data.user.username + ", 登录成功")
-                }else {
-                  this.$message.success("尊敬的" + res.data.user.username + ", 登录成功")
-                }
+                const roleList = res.data.roles;
+                roleList.forEach(item => {
+                  if (item.name === 'super_admin') {
+                    this.$message.success("尊敬的超级管理员：" + res.data.user.username + ", 登录成功")
+                  } else if (item.name === 'admin') {
+                    this.$message.success("尊敬的管理员：" + res.data.user.username + ", 登录成功")
+                  } else {
+                    this.$message.success("尊敬的用户：" + res.data.user.username + ", 登录成功")
+                  }
+                })
                 // 登录进入主页
                 setTimeout(() => {
                   this.$router.push('/')
@@ -151,20 +153,13 @@ export default {
       })
     },
     register() {
-      const that = this;
-      // this.$router.push({name: 'register', params: {}});
-      // this.$router.push('/register').catch(err => {})
-      // this.$router.push("/register", () => {})
-      router.push('/register').catch(err => {})
-      // that.$router.push({
-      //   path: '/register',
-      // }, () => {});
+      router.push('/register')
     },
     initLanguage() {
       let sys = JSON.parse(localStorage.getItem("sys"))
-      if(sys) {
-        let { language } = sys.user
-        if(language) {
+      if (sys) {
+        let {language} = sys.user
+        if (language) {
           this.$i18n.locale = language
           this.$store.dispatch('user/setLanguage', language)
         }

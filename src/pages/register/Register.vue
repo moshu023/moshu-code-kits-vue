@@ -130,13 +130,11 @@ export default {
     register() {
       this.$refs.registerForm.validate(valid => {
         if (valid) {
-          this.$loading.show();
           setTimeout(() => {
-            this.$loading.close();
             userRegister(this.registerForm).then(res => {
               if (res.code === 200) {
                 this.$router.push("/login")
-                this.$message.success("注册成功，您的昵称为: " + res.data.username + "去登录吧~")
+                this.$message.success("注册成功，您的昵称为: " + res.data.username + "去登录吧")
               } else {
                 document.getElementById('verifyCode').click();
               }
