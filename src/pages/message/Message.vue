@@ -75,7 +75,7 @@
             userName: '超级管理员',
             sendTime: '2020-12-17 22:06'
           },{
-            title: 'Tao Admin通用后台管理系统开源',
+            title: 'Moshu Code Kits 编程小助手',
             level: '普通',
             type: '公告',
             userName: '超级管理员',
@@ -88,7 +88,7 @@
 
     },
     methods: {
-      
+
     }
   };
 </script>

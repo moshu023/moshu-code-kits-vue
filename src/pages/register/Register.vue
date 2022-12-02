@@ -152,7 +152,7 @@ export default {
   watch: {
     // 监听路由变化，如果是切换到登录页，则需要刷新一次，清除UI样式缓存
     $route(to) {
-      if (to.name === '/login') {
+      if (to.path === '/login') {
         location.reload();
       }
     },
@@ -178,7 +178,7 @@ export default {
 
   .box {
     margin-left: 37%;
-    margin-top: 15%;
+    margin-top: 11%;
     position: fixed;
     width: 400px;
     height: 400px;

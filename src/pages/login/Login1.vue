@@ -172,7 +172,7 @@ export default {
   watch: {
     // 监听路由变化，如果是切换到注册页，则需要刷新一次，清除UI样式缓存
     $route(to) {
-      if (to.name === '/register') {
+      if (to.path === '/register') {
         location.reload();
       }
     },

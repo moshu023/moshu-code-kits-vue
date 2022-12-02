@@ -1,8 +1,8 @@
 const setting = {
-  systemName: 'Tao Admin',        // 系统名称
+  systemName: 'Moshu Code Kits',        // 系统名称
   defaultTheme: 'dark',           // 默认主题
   themeModel: 'white',            // 主题模式
-  themeList: [                    // 菜单主题（选中颜色、hover颜色前往MenuLeft组件修改） 
+  themeList: [                    // 菜单主题（选中颜色、hover颜色前往MenuLeft组件修改）
     {
       theme: 'dark',              // 主题名称
       menuLeftBc: '#191A23',      // 背景色
