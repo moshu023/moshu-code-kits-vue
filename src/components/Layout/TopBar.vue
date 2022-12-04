@@ -24,8 +24,8 @@
         <div class="user">
           <el-dropdown @command="goPage">
             <div>
-              <img class="cover" :src="userInfo.headerImg" style="float: left"/>
-              <span class="name">{{userInfo.nickName}}</span>
+              <img class="cover" :src="this.info.avatarUrl" style="float: left"/>
+              <span class="name">{{this.info.username}}</span>
             </div>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item command="/user/user">
@@ -33,7 +33,7 @@
                 <span class="menu-txt">{{$t('topBar.user[0]')}}</span>
               </el-dropdown-item>
               <el-dropdown-item command="loginOut">
-                <i class="menu-icon iconfont">&#xe678;</i>
+                <i class="menu-icon iconfont">&#xe7a1;</i>
                 <span class="menu-txt">{{$t('topBar.user[1]')}}</span>
               </el-dropdown-item>
             </el-dropdown-menu>
@@ -116,7 +116,8 @@
         showCrumbs: '',
         isFullScreen: false,
         showNotice: false,
-        showLanguage: true
+        showLanguage: true,
+        info: JSON.parse(localStorage.getItem("sys")).user.info
       }
     },
     created() {
@@ -201,7 +202,7 @@
       },
       // 跳转页面
       goPage(path) {
-        if(path == 'loginOut') {
+        if(path === 'loginOut') {
           this.loginOut()
           return
         }

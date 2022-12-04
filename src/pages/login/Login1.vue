@@ -120,33 +120,31 @@ export default {
     login() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          setTimeout(() => {
-            userLogin(this.loginForm).then(res => {
-              if (res.code === 200) {
-                // 展示登录页加载动画
-                this.loading = true
-                this.$store.dispatch('user/setUserInfo', res.data)
-                this.$store.dispatch('user/setLoginStatus', true)
-                getMenuList()
-                // 根据角色不同展示不同成功登录信息
-                const roleList = res.data.roles;
-                roleList.forEach(item => {
-                  if (item.name === 'super_admin') {
-                    this.$message.success("尊敬的超级管理员：" + res.data.user.username + ", 登录成功")
-                  } else if (item.name === 'admin') {
-                    this.$message.success("尊敬的管理员：" + res.data.user.username + ", 登录成功")
-                  } else {
-                    this.$message.success("尊敬的用户：" + res.data.user.username + ", 登录成功")
-                  }
-                })
-                // 登录进入主页
-                this.$router.push('/')
-              } else {
-                document.getElementById('verifyCode').click();
-                this.$message.info('验证码已刷新，请重新输入')
-              }
-            })
-          }, 1000)
+          userLogin(this.loginForm).then(res => {
+            if (res.code === 200) {
+              // 展示登录页加载动画
+              this.loading = true
+              this.$store.dispatch('user/setUserInfo', res.data)
+              this.$store.dispatch('user/setLoginStatus', true)
+              getMenuList()
+              // 根据角色不同展示不同成功登录信息
+              const roleList = res.data.roles;
+              roleList.forEach(item => {
+                if (item.name === 'super_admin') {
+                  this.$message.success("尊敬的超级管理员：" + res.data.user.username + ", 登录成功")
+                } else if (item.name === 'admin') {
+                  this.$message.success("尊敬的管理员：" + res.data.user.username + ", 登录成功")
+                } else {
+                  this.$message.success("尊敬的用户：" + res.data.user.username + ", 登录成功")
+                }
+              })
+              // 登录进入主页
+              this.$router.push('/')
+            } else {
+              document.getElementById('verifyCode').click();
+              this.$message.info('验证码已刷新，请重新输入')
+            }
+          })
         }
       })
     },

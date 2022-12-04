@@ -23,3 +23,12 @@ export const userLogout=()=>{
     return res
   })
 }
+
+export const getUserList=(params)=>{
+  return axios.post({
+    url: '/user/search',
+    data: params
+  }).then((res) => {
+    return res
+  })
+}

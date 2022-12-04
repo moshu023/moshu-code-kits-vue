@@ -65,7 +65,7 @@
       background
       :page-size="page.pageSize"
       :total="page.total"
-      :page-sizes="[14, 20, 30, 40, 50, 60, 70, 80]"
+      :page-sizes="[5, 20, 30, 40, 50, 60, 70, 80]"
       :current-page.sync="page.page"
       @current-change="changePage"
       @size-change="changeSize"
@@ -87,7 +87,7 @@ export default {
       default: function() {
         return {
           page: 1,
-          pageSize: 14,
+          pageSize: 5,
           total: 0
         }
       }
