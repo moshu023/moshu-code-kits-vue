@@ -23,10 +23,70 @@ export const userLogout=()=>{
     return res
   })
 }
-
+/**
+ * 获取所有用户列表信息
+ * @param params
+ * @returns {Promise<unknown>}
+ */
 export const getUserList=(params)=>{
   return axios.post({
     url: '/user/search',
+    data: params
+  }).then((res) => {
+    return res
+  })
+}
+
+/**
+ * 删除用户
+ * @param params
+ * @returns {Promise<unknown>}
+ */
+export const deleteUser=(params)=>{
+  return axios.post({
+    url: '/user/delete',
+    data: params
+  }).then((res) => {
+    return res
+  })
+}
+
+/**
+ * 超级管理员插入用户
+ * @param params
+ * @returns {Promise<unknown>}
+ */
+export const insertUser=(params)=>{
+  return axios.post({
+    url: '/user/insert',
+    data: params
+  }).then((res) => {
+    return res
+  })
+}
+
+/**
+ * 根据id获取用户信息
+ * @param params
+ * @returns {Promise<unknown>}
+ */
+export const getUserInfo=(params)=>{
+  return axios.post({
+    url: '/user/info',
+    data: params
+  }).then((res) => {
+    return res
+  })
+}
+
+/**
+ * 超级管理员更新用户信息
+ * @param params
+ * @returns {Promise<unknown>}
+ */
+export const adminUpdateUser=(params)=>{
+  return axios.post({
+    url: '/user/admin/update',
     data: params
   }).then((res) => {
     return res

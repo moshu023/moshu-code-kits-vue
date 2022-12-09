@@ -9,13 +9,13 @@
       </div>
       <div class="right-wrap">
         <el-button-group>
-          <el-button icon="el-icon-search" @click="isShowSearchWrap()" v-if="layout.indexOf('search') !== -1"/>
-          <el-button icon="el-icon-refresh-right" @click="refresh()" v-if="layout.indexOf('refresh') !== -1"/>
+          <el-button icon="el-icon-search" type="primary" plain @click="isShowSearchWrap()" v-if="layout.indexOf('search') !== -1">高级搜索</el-button>
+          <el-button icon="el-icon-refresh-right" type="success" plain @click="refresh()" v-if="layout.indexOf('refresh') !== -1">页面刷新</el-button>
           <el-popover placement="bottom-end" width="100" trigger="hover" @show="showPopover" v-if="layout.indexOf('column') !== -1">
             <el-checkbox-group v-model="colOptions" :min="1">
               <el-checkbox v-for="(item, index) in colSelect" :label="item" :key="item" @change="changeColumn($event, index)" />
             </el-checkbox-group>
-            <el-button slot="reference" icon="el-icon-s-operation"/>
+            <el-button slot="reference" type="info" plain icon="el-icon-s-operation">视图控制</el-button>
           </el-popover>
         </el-button-group>
       </div>
@@ -79,7 +79,7 @@
       changeColumn(show, index) {
         let columns = this.columns
 
-        columns.map((item, i) => { 
+        columns.map((item, i) => {
           if(index === i) {
             item.show = show
           }
