@@ -85,7 +85,7 @@ axios.interceptors.response.use(
           err.message = "请求超时"
           break
         case 500:
-          err.message = "服务器端出错"
+          err.message = "服务器端出错，请联系管理员"
           break
         case 501:
           err.message = "网络未实现"

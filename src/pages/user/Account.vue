@@ -411,8 +411,6 @@ export default {
         if (res.code === 200) {
           this.$message.success('您已成功删除用户')
           this.getUserList()
-        } else {
-          this.$message.error(res.description)
         }
       })
     },
@@ -438,8 +436,6 @@ export default {
           if (this.totalCount === 0) {
             this.$message.info('没有查询到任何数据')
           }
-        } else {
-          this.$message.error('获取用户列表失败')
         }
       })
     },
@@ -457,11 +453,14 @@ export default {
           this.userForm1.userStatus = res.data.userStatus
           this.userForm1.email = res.data.email
           this.userForm1.phone = res.data.phone
+          setTimeout(
+            () => {
+              this.editUser = true
+            }, 500)
         } else {
-          this.$message.error(res.description)
+          this.editUser = false
         }
       })
-      this.editUser = true
     },
     addUserSubmit() {
       this.$refs.userForm.validate(valid => {
@@ -474,8 +473,6 @@ export default {
               this.userForm.userStatus = ''
               this.userForm.gender = ''
               this.getUserList()
-            } else {
-              this.$message.error(res.description)
             }
           })
         } else {
@@ -508,8 +505,6 @@ export default {
             this.editUser = false
             this.$message.success("成功修改用户信息")
             this.getUserList()
-          } else {
-            this.$message.error(res.description)
           }
         })
       }
