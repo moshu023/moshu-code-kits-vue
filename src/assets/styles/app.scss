@@ -31,3 +31,26 @@
     margin-top: 15px;
   }
 }
+
+*::-webkit-scrollbar {
+  width: 6px !important;
+  height: 8px !important;
+}
+
+*::-webkit-scrollbar-thumb {
+  width: 6px !important;
+  height: 8px !important;
+  border-radius: 10px !important;
+  background-color: rgba($color: #888, $alpha: 0.18) !important;
+}
+//给固定列设置下边距
+* .el-table {
+  .el-table__fixed {
+    height:auto !important;
+    bottom:8px !important; //具体值是多少根据你横向滚动条的高度进行设置
+  }
+  //去掉固定列下方的横线
+  .el-table__fixed::before, .el-table__fixed-right::before {
+    display:none;
+  }
+}

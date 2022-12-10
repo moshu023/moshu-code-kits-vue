@@ -91,8 +91,8 @@
           type="selection"
           width="30">
         </el-table-column>
-        <el-table-column label="用户ID" width="70" prop="id" v-if="columns[0].show" align="center"/>
-        <el-table-column label="用户昵称" width="150" prop="username" v-if="columns[1].show" align="center"/>
+        <el-table-column label="用户ID" fixed="left" prop="id" v-if="columns[0].show" align="center"/>
+        <el-table-column label="用户昵称" width="150" fixed="left" prop="username" v-if="columns[1].show" align="center"/>
         <el-table-column label="用户账号" width="100" prop="userAccount" v-if="columns[2].show" align="center">
           <template slot-scope="scope">
             <el-tag size="mini" type="primary" plain>
@@ -133,9 +133,9 @@
         </el-table-column>
       </el-table>
     </div>
-    <div style="display: flex;justify-content: space-between;text-align: left;margin: 10px 2px 2px 66%;">
       <el-pagination
         background
+        style="margin: 10px 2px 2px 61%;"
         @size-change="sizeChange"
         :page-size="this.userListDTO.pageSize"
         :current-page="this.userListDTO.currentPage"
@@ -143,7 +143,6 @@
         layout="total, sizes, prev, pager, next, jumper"
         :total="totalCount">
       </el-pagination>
-    </div>
     <el-dialog :title="dialogTitle" width="500px" :visible.sync="addUser">
       <el-form ref="userForm" :model="userForm" label-width="80px" :rules="rules">
         <el-form-item label="用户昵称">
@@ -541,6 +540,17 @@ export default {
     height: 30px;
     border-radius: 50%;
   }
+}
+//给固定列设置下边距
+.el-table {
+  .el-table__fixed {
+    height:auto !important;
+    bottom:8px !important; //具体值是多少根据你横向滚动条的高度进行设置
+  }
+}
+//去掉固定列下方的横线
+.el-table__fixed::before, .el-table__fixed-right::before {
+  display:none;
 }
 
 </style>

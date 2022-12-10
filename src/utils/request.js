@@ -45,18 +45,19 @@ axios.interceptors.response.use(
     if (code !== 200) {
       Message.error(description)
     }
-
+    console.log('code', code)
     /**
      * token验证失败，重新登录
      * 注意：在 utils/request.js => router.beforeEach 方法中也有一个登录判断
      */
-    if(code === 7) {
+    if(code === 40202 || code === 40204 || code === 40205) {
+      console.log('code1', code)
       setTimeout(() => {
         document.getElementsByTagName("html")[0].removeAttribute('class') // 移除暗黑主题
         store.dispatch('user/setLoginStatus', false)
         router.replace('/login')
         this.$router.go(0)
-      }, 1500)
+      }, 1000)
     }
 
     if (response) {

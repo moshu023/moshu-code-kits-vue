@@ -72,11 +72,11 @@
       this.saveUserData();
     },
     methods: {
-      // 讲 vuex 中的数据保存到 localStorage 中（在即将离开页面(刷新或关闭)时执行）
+      // 将 vuex 中的数据保存到 localStorage 中（在即将离开页面(刷新或关闭)时执行）
       saveUserData() {
         let _self = this;
         window.addEventListener("beforeunload", () => {
-          _self.$store.dispatch("user/storeStorage");
+          // _self.$store.dispatch("user/storeStorage");
         });
       },
       // 刷新页面
