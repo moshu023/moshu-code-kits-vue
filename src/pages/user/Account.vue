@@ -92,35 +92,35 @@
           width="30">
         </el-table-column>
         <el-table-column label="用户ID" fixed="left" prop="id" v-if="columns[0].show" align="center"/>
-        <el-table-column label="用户昵称" width="150" fixed="left" prop="username" v-if="columns[1].show" align="center"/>
-        <el-table-column label="用户账号" width="100" prop="userAccount" v-if="columns[2].show" align="center">
+        <el-table-column label="用户昵称" fixed="left" prop="username" v-if="columns[1].show" align="center"/>
+        <el-table-column label="用户账号" prop="userAccount" v-if="columns[2].show" align="center">
           <template slot-scope="scope">
             <el-tag size="mini" type="primary" plain>
               {{ scope.row.userAccount }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="头像" width="70" prop="avatarUrl" v-if="columns[3].show" align="center">
+        <el-table-column label="头像" prop="avatarUrl" v-if="columns[3].show" align="center">
           <template slot-scope="scope">
             <img class="avatar" :src="scope.row.avatarUrl"/>
           </template>
         </el-table-column>
-        <el-table-column width="150" label="邮箱" prop="email" v-if="columns[4].show" align="center"/>
-        <el-table-column width="150" label="电话" prop="phone" v-if="columns[5].show" align="center"/>
-        <el-table-column label="性别" width="50" prop="gender" v-if="columns[5].show" align="center">
+        <el-table-column label="邮箱" prop="email" v-if="columns[4].show" align="center"/>
+        <el-table-column label="电话" prop="phone" v-if="columns[5].show" align="center"/>
+        <el-table-column label="性别" prop="gender" v-if="columns[5].show" align="center">
           <template slot-scope="scope">
             {{ scope.row.gender === 'MALE' ? '男' : '女' }}
           </template>
         </el-table-column>
-        <el-table-column width="100" label="状态" prop="userStatus" v-if="columns[6].show" align="center">
+        <el-table-column label="状态" prop="userStatus" v-if="columns[6].show" align="center">
           <template slot-scope="scope">
             <el-tag size="normal" :type="scope.row.userStatus === 'ACTIVE' ? 'success' : 'info'">
               {{ scope.row.userStatus === 'ACTIVE' ? '启用' : '禁用' }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="创建日期" prop="createTime" v-if="columns[7].show" align="center" width="150"/>
-        <el-table-column label="修改日期" prop="updateTime" v-if="columns[8].show" align="center" width="150"/>
+        <el-table-column label="创建日期" prop="createTime" v-if="columns[7].show" align="center"/>
+        <el-table-column label="修改日期" prop="updateTime" v-if="columns[8].show" align="center"/>
         <el-table-column label="操作" width="200px" align="center" fixed="right">
           <template slot-scope="scope">
             <el-button type="primary" size="mini" icon="el-icon-edit" @click="showDialog1(scope)">
@@ -135,7 +135,7 @@
     </div>
       <el-pagination
         background
-        style="margin: 10px 2px 2px 61%;"
+        style="margin: 10px 2px 2px 0;"
         @size-change="sizeChange"
         :page-size="this.userListDTO.pageSize"
         :current-page="this.userListDTO.currentPage"

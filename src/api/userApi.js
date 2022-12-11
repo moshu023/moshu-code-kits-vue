@@ -92,3 +92,46 @@ export const adminUpdateUser=(params)=>{
     return res
   })
 }
+
+// 用户个人中心 API
+
+/**
+ * 获取用户信息
+ * @param params
+ * @returns {Promise<unknown>}
+ */
+export const getCurrentUserInfo=()=>{
+  return axios.get({
+    url: '/user/current'
+  }).then((res) => {
+    return res
+  })
+}
+
+/**
+ * 获取用户信息
+ * @param params
+ * @returns {Promise<unknown>}
+ */
+export const updateCurrentUserInfo=(params)=>{
+  return axios.post({
+    url: '/user/current/update',
+    data: params
+  }).then((res) => {
+    return res
+  })
+}
+
+/**
+ * 用户上传头像
+ * @param params
+ * @returns {Promise<unknown>}
+ */
+export const uploadAvatar=(params)=>{
+  return axios.post({
+    url: '/oss/upload',
+    data: params
+  }).then((res) => {
+    return res
+  })
+}

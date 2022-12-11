@@ -8,7 +8,7 @@ export function uploadFileCheck(file, optionFiles, imageMaxSize) {
   let imgList = ['.jpg', '.png', '.jpeg']
   let type = file.name.substring(file.name.lastIndexOf("."))
 
-  if(optionFiles.indexOf(type) == -1) {
+  if(optionFiles.indexOf(type) === -1) {
     Message.error('文件格式不符合文件上传规范！');
     return false
   }
@@ -62,7 +62,7 @@ export function exitScreen(){
 export function encrypt(word) {
   let key = CryptoJS.enc.Utf8.parse(setting.cryptojs.key);
   let iv = CryptoJS.enc.Utf8.parse(setting.cryptojs.iv);
-  
+
   let srcs = CryptoJS.enc.Utf8.parse(word);
   let encrypted = CryptoJS.AES.encrypt(srcs, key, { iv: iv, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7 });
   return encrypted.ciphertext.toString().toUpperCase();

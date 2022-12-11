@@ -205,10 +205,31 @@ function deleted(config) {
   })
 }
 
+// 上传文件
+function postfile(url, data) {
+  return new Promise((resolve, reject) => {
+    axios({
+      url: config.url,
+      method: 'POST',
+      data: data,
+      headers: {
+        'Content-Type':'multipart/form-data'
+      }
+    })
+      .then(res => {
+        resolve(res.data);
+      })
+      .catch(err => {
+        reject(err.data)
+      })
+  });
+}
+
 export default {
   get,
   post,
   downloadPost,
+  postfile,
   put,
   deleted
 }

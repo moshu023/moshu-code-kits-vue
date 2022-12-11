@@ -25,16 +25,16 @@
           <el-dropdown @command="goPage">
             <div>
               <img class="cover" :src="this.info.avatarUrl" style="float: left"/>
-              <span class="name">{{this.info.username}}</span>
+              <span class="name">{{ this.info.username }}</span>
             </div>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item command="/user/user">
                 <i class="menu-icon iconfont">&#xe725;</i>
-                <span class="menu-txt">{{$t('topBar.user[0]')}}</span>
+                <span class="menu-txt">{{ $t('topBar.user[0]') }}</span>
               </el-dropdown-item>
               <el-dropdown-item command="loginOut">
                 <i class="menu-icon iconfont">&#xe7a1;</i>
-                <span class="menu-txt">{{$t('topBar.user[1]')}}</span>
+                <span class="menu-txt">{{ $t('topBar.user[1]') }}</span>
               </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
@@ -65,371 +65,369 @@
 </template>
 
 <script>
-  import Breadcrumb from "@/components/Layout/Breadcrumb"
-  import Notice from "@/components/Layout/Notice"
-  import { menuLeftOpenWidth, menuLeftShrinkWidth } from "@/config/menu"
-  import { fullScreen, exitScreen } from "@/utils/util.js"
-  import { mapState } from 'vuex'
-  import {userLogout} from "@/api/userApi";
+import Breadcrumb from "@/components/Layout/Breadcrumb"
+import Notice from "@/components/Layout/Notice"
+import {menuLeftOpenWidth, menuLeftShrinkWidth} from "@/config/menu"
+import {fullScreen, exitScreen} from "@/utils/util.js"
+import {mapState} from 'vuex'
+import {userLogout} from "@/api/userApi";
 
-  export default {
-    name: 'TopBar',
-    components: {
-      Breadcrumb,
-      Notice
-    },
-    inject: ['reload'],
-    computed: {
-      ...mapState({
-        userInfo: state => state.user.user.info,
-        setting: state => state.setting.setting,
-      }),
-      topBarWidth() {
-        return this.menuOpen ? `calc(100% - ${menuLeftOpenWidth})` :
+export default {
+  name: 'TopBar',
+  components: {
+    Breadcrumb,
+    Notice
+  },
+  inject: ['reload'],
+  computed: {
+    ...mapState({
+      userInfo: state => state.user.user.info,
+      setting: state => state.setting.setting,
+    }),
+    topBarWidth() {
+      return this.menuOpen ? `calc(100% - ${menuLeftOpenWidth})` :
         `calc(100% - ${menuLeftShrinkWidth})`
-      },
-      menuOpen() {
-        return this.$store.state.menu.menuOpen;
-      },
     },
-    watch: {
-      'setting.menuButton'(show) {
-        this.showMenuButton = show
-      },
-      'setting.showRefreshButton'(show) {
-        this.showRefreshButton = show
-      },
-      'setting.showCrumbs'(show) {
-        this.showCrumbs = show
-      },
-      'setting.showLanguage': {
-        handler(show) {
-          this.showLanguage = show
-        },
-        immediate: true
-      }
+    menuOpen() {
+      return this.$store.state.menu.menuOpen;
     },
-    data () {
-      return {
-        showMenuButton: '',
-        showRefreshButton: '',
-        showCrumbs: '',
-        isFullScreen: false,
-        showNotice: false,
-        showLanguage: true,
-        info: JSON.parse(localStorage.getItem("sys")).user.info
-      }
+  },
+  watch: {
+    'setting.menuButton'(show) {
+      this.showMenuButton = show
     },
-    created() {
-      this.initLanguage()
+    'setting.showRefreshButton'(show) {
+      this.showRefreshButton = show
     },
-    mounted() {
-      this.initSetting()
-      document.addEventListener("click", this.bodyCloseNotice)
+    'setting.showCrumbs'(show) {
+      this.showCrumbs = show
     },
-    beforeDestroy() {
-      document.removeEventListener("click", this.bodyCloseNotice)
+    'setting.showLanguage': {
+      handler(show) {
+        this.showLanguage = show
+      },
+      immediate: true
+    }
+  },
+  data() {
+    return {
+      showMenuButton: '',
+      showRefreshButton: '',
+      showCrumbs: '',
+      isFullScreen: false,
+      showNotice: false,
+      showLanguage: true,
+      info: JSON.parse(localStorage.getItem("sys")).user.info
+    }
+  },
+  created() {
+    this.initLanguage()
+  },
+  mounted() {
+    this.initSetting()
+    document.addEventListener("click", this.bodyCloseNotice)
+  },
+  beforeDestroy() {
+    document.removeEventListener("click", this.bodyCloseNotice)
+  },
+  methods: {
+    // 初始化个性设置
+    initSetting() {
+      let {menuButton, showRefreshButton, showCrumbs} = this.setting
+      this.showMenuButton = menuButton
+      this.showRefreshButton = showRefreshButton
+      this.showCrumbs = showCrumbs
     },
-    methods: {
-      // 初始化个性设置
-      initSetting() {
-        let { menuButton, showRefreshButton, showCrumbs } = this.setting
-        this.showMenuButton = menuButton
-        this.showRefreshButton = showRefreshButton
-        this.showCrumbs = showCrumbs
-      },
-      // 退出登录
-      loginOut() {
-        this.$confirm(this.$t('common.logOutTips'), this.$t('common.tips'), {
-          confirmButtonText: this.$t('common.define'),
-          cancelButtonText: this.$t('common.cancel'),
-          type: 'warning'
-        }).then(() => {
-          setTimeout(() => {
-            userLogout().then(res => {
-              if (res.code === 200) {
-                document.getElementsByTagName("html")[0].removeAttribute('class') // 移除暗黑主题
-                this.$store.dispatch('user/setLoginStatus', false)
-                this.$router.push('/login')
-                this.$message.success(res.description)
-              } else {
-                this.$message.error('注销失败，请联系管理员')
-              }
-            })
-          }, 500)
-        }).catch(() => {
-          this.$message.info('您已取消注销')
-        });
-      },
-      // 全屏
-      fullScreen() {
-        fullScreen()
-        this.isFullScreen = true
-      },
-      // 退出全屏
-      exitScreen() {
-        exitScreen()
-        this.isFullScreen = false
-      },
-      // 初始化语言
-      initLanguage() {
-        let sys = JSON.parse(localStorage.getItem("sys"))
-        if(sys) {
-          let { language } = sys.user
-          if(language) {
-            this.changeLanguage(language)
+    // 退出登录
+    loginOut() {
+      this.$confirm(this.$t('common.logOutTips'), this.$t('common.tips'), {
+        confirmButtonText: this.$t('common.define'),
+        cancelButtonText: this.$t('common.cancel'),
+        type: 'warning'
+      }).then(() => {
+        userLogout().then(res => {
+          if (res.code === 200) {
+            document.getElementsByTagName("html")[0].removeAttribute('class') // 移除暗黑主题
+            this.$store.dispatch('user/setLoginStatus', false)
+            this.$router.push('/login')
+            this.$message.success(res.description)
+          } else {
+            this.$message.error('注销失败，请联系管理员')
           }
+        })
+      }).catch(() => {
+        this.$message.info('您已取消注销')
+      });
+    },
+    // 全屏
+    fullScreen() {
+      fullScreen()
+      this.isFullScreen = true
+    },
+    // 退出全屏
+    exitScreen() {
+      exitScreen()
+      this.isFullScreen = false
+    },
+    // 初始化语言
+    initLanguage() {
+      let sys = JSON.parse(localStorage.getItem("sys"))
+      if (sys) {
+        let {language} = sys.user
+        if (language) {
+          this.changeLanguage(language)
         }
-      },
-      // 改变语言
-      changeLanguage(lang) {
-        let { locale } = this.$i18n
-
-        if(lang === locale) {
-          return
-        }
-
-        this.$i18n.locale = lang
-        this.$store.dispatch('user/setLanguage', lang)
-      },
-      // 左侧菜单展开|缩小
-      visibleMenu() {
-        this.$store.commit("menu/setMenuOpen", !this.menuOpen);
-      },
-      // 打开个性化设置
-      openSetting() {
-        this.$emit('openSetting')
-      },
-      // 跳转页面
-      goPage(path) {
-        if(path === 'loginOut') {
-          this.loginOut()
-          return
-        }
-        this.$router.push({path})
-      },
-      visibleNotice() {
-        if(!this.showNotice) {
-          this.showNoticeFunc(true)
-        }else {
-          this.showNoticeFunc(false)
-        }
-
-        setTimeout(() => {
-          this.showNotice = !this.showNotice
-        }, 50)
-      },
-      bodyCloseNotice(e) {
-        if(this.showNotice && e.target.className.indexOf('notice-btn') === -1) {
-          this.showNotice = false
-          this.showNoticeFunc(false)
-        }
-      },
-      showNoticeFunc(show) {
-        this.$refs.notice.showNoticeFunc(show)
       }
+    },
+    // 改变语言
+    changeLanguage(lang) {
+      let {locale} = this.$i18n
+
+      if (lang === locale) {
+        return
+      }
+
+      this.$i18n.locale = lang
+      this.$store.dispatch('user/setLanguage', lang)
+    },
+    // 左侧菜单展开|缩小
+    visibleMenu() {
+      this.$store.commit("menu/setMenuOpen", !this.menuOpen);
+    },
+    // 打开个性化设置
+    openSetting() {
+      this.$emit('openSetting')
+    },
+    // 跳转页面
+    goPage(path) {
+      if (path === 'loginOut') {
+        this.loginOut()
+        return
+      }
+      this.$router.push({path})
+    },
+    visibleNotice() {
+      if (!this.showNotice) {
+        this.showNoticeFunc(true)
+      } else {
+        this.showNoticeFunc(false)
+      }
+
+      setTimeout(() => {
+        this.showNotice = !this.showNotice
+      }, 50)
+    },
+    bodyCloseNotice(e) {
+      if (this.showNotice && e.target.className.indexOf('notice-btn') === -1) {
+        this.showNotice = false
+        this.showNoticeFunc(false)
+      }
+    },
+    showNoticeFunc(show) {
+      this.$refs.notice.showNoticeFunc(show)
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>
-  $hover-color: #f8f8f8;
+$hover-color: #f8f8f8;
 
-  .topbar {
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 1000;
-    transition: all .3s ease-in-out;
-    background: $default-background;
-    background: transparent !important;
+.topbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  transition: all .3s ease-in-out;
+  background: $default-background;
+  background: transparent !important;
 
-    .menu {
-      height: 60px;
+  .menu {
+    height: 60px;
+    line-height: 60px;
+    background: $theme-menu-color;
+    box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+
+    .left {
       line-height: 60px;
-      background: $theme-menu-color;
-      box-shadow: 0 1px 4px rgba(0,21,41,.08);
-      box-sizing: border-box;
-      display: flex;
-      justify-content: space-between;
-      user-select: none;
-      -moz-user-select: none;
-      -webkit-user-select: none;
 
-      .left {
+      .svg-icon {
+        width: 25px;
+        vertical-align: -0.15em;
+        fill: currentColor;
+        overflow: hidden;
+        padding-left: 15px;
+        display: none;
+      }
+
+      i {
+        display: inline-block;
+        width: 50px;
+        height: 60px;
         line-height: 60px;
+        text-align: center;
+        cursor: pointer;
+        transition: all .2s;
+        font-size: 16px;
 
-        .svg-icon {
-          width: 25px;
-          vertical-align: -0.15em;
-          fill: currentColor;
-          overflow: hidden;
-          padding-left: 15px;
-          display: none;
+        &:hover {
+          background: $hover-color;
         }
+      }
+
+      .el-route {
+        line-height: 60px;
+        margin-left: 10px;
+      }
+    }
+
+    .right {
+      display: flex;
+
+      .screen {
+        cursor: pointer;
+        padding: 0 15px;
+        transition: background-color .3s;
 
         i {
-          display: inline-block;
-          width: 50px;
-          height: 60px;
-          line-height: 60px;
-          text-align: center;
-          cursor: pointer;
-          transition: all .2s;
-          font-size: 16px;
-
-          &:hover {
-            background: $hover-color;
-          }
+          color: #777;
+          font-size: 20px;
         }
 
-        .el-route {
-          line-height: 60px;
-          margin-left: 10px;
+        &:hover {
+          background: $hover-color;
+        }
+      }
+
+      .notice {
+        cursor: pointer;
+        padding: 0 15px;
+        transition: background-color .3s;
+        position: relative;
+
+        i {
+          color: #777;
+          font-size: 17px;
+        }
+
+        .count {
+          display: block;
+          width: 6px;
+          height: 6px;
+          background: red;
+          border-radius: 50%;
+          position: absolute;
+          top: 20px;
+          right: 15px;
+        }
+
+        &:hover {
+          background: $hover-color;
+        }
+      }
+
+      .user {
+        height: 60px;
+        line-height: 60px;
+        display: flex;
+        padding: 0 10px;
+        transition: background-color .3s;
+
+        &:hover {
+          background: $hover-color;
+        }
+
+        &:hover ul {
+          height: 80px;
+        }
+
+        .cover {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          background: #eee;
+          margin: 15px 10px 0 0;
+          overflow: hidden;
+          cursor: pointer;
+        }
+
+        .name {
+          font-size: 13px;
+          cursor: pointer;
+        }
+      }
+
+      .lang {
+        height: 60px;
+        line-height: 60px;
+        display: flex;
+        text-align: center;
+        transition: background-color .3s;
+
+        .btn {
+          width: 45px;
+        }
+
+        &:hover {
+          background: $hover-color;
+        }
+
+        &:hover ul {
+          height: 80px;
+        }
+      }
+
+      .gxh {
+        width: 45px;
+        height: 60px;
+        line-height: 60px;
+        text-align: center;
+        cursor: pointer;
+        transition: background-color .3s;
+
+        i {
+          font-size: 16px;
+        }
+
+        &:hover {
+          background: #f8f8f8;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $device-ipad) {
+  .topbar {
+    width: 100% !important;
+
+    .menu {
+      .left {
+        .svg-icon {
+          display: block;
         }
       }
 
       .right {
-        display: flex;
-
         .screen {
-          cursor: pointer;
-          padding: 0 15px;
-          transition: background-color .3s;
-
-          i {
-            color: #777;
-            font-size: 20px;
-          }
-
-          &:hover {
-            background: $hover-color;
-          }
-        }
-
-        .notice {
-          cursor: pointer;
-          padding: 0 15px;
-          transition: background-color .3s;
-          position: relative;
-
-          i {
-            color: #777;
-            font-size: 17px;
-          }
-
-          .count {
-            display: block;
-            width: 6px;
-            height: 6px;
-            background: red;
-            border-radius: 50%;
-            position: absolute;
-            top: 20px;
-            right: 15px;
-          }
-
-          &:hover {
-            background: $hover-color;
-          }
+          display: none;
         }
 
         .user {
-          height: 60px;
-          line-height: 60px;
-          display: flex;
-          padding: 0 10px;
-          transition: background-color .3s;
-
-          &:hover {
-            background: $hover-color;
-          }
-
-          &:hover ul {
-            height: 80px;
-          }
-
-          .cover {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: #eee;
-            margin: 15px 10px 0 0;
-            overflow: hidden;
-            cursor: pointer;
-          }
+          padding-right: 0;
 
           .name {
-            font-size: 13px;
-            cursor: pointer;
-          }
-        }
-
-        .lang {
-          height: 60px;
-          line-height: 60px;
-          display: flex;
-          text-align: center;
-          transition: background-color .3s;
-
-          .btn {
-            width: 45px;
-          }
-
-          &:hover {
-            background: $hover-color;
-          }
-
-          &:hover ul {
-            height: 80px;
-          }
-        }
-
-        .gxh {
-          width: 45px;
-          height: 60px;
-          line-height: 60px;
-          text-align: center;
-          cursor: pointer;
-          transition: background-color .3s;
-
-          i {
-            font-size: 16px;
-          }
-
-          &:hover {
-            background: #f8f8f8;
-          }
-        }
-      }
-    }
-  }
-
-  @media only screen and (max-width: $device-ipad) {
-    .topbar {
-      width: 100% !important;
-
-      .menu {
-        .left {
-          .svg-icon {
-            display: block;
-          }
-        }
-
-        .right {
-          .screen {
             display: none;
           }
-
-          .user {
-            padding-right: 0;
-
-            .name {
-              display: none;
-            }
-          }
         }
       }
     }
   }
+}
 </style>
